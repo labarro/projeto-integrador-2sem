@@ -1,7 +1,7 @@
 # Projeto Integrador 2º Semestre Banco de Dados FATEC
 Repositório hospedar o projeto integrador do segundo semestre de banco de dados
 
-Integrantes <br><br>
+Integrantes Grupo 4
 
 Lucas Aparecido <br>
 Luiz Augusto <br>
