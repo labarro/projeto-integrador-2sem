@@ -1,10 +1,22 @@
 # Projeto Integrador 2º Semestre Banco de Dados FATEC
-Repositório hospedar o projeto integrador do segundo semestre de banco de dados
+Repositório para hospedar o projeto integrador do segundo semestre de banco de dados
 
-Integrantes Grupo 4
+### Scrum Master:
 
-Lucas Aparecido <br>
-Luiz Augusto <br>
-Mateus de Senne <br>
-Maximiles Barcelos <br>
-Rodrigo Amancio <br>
+- Maximiles Barcelos -
+
+### Integrantes:
+
+- Lucas Aparecido -
+- Luís Augusto -
+- Mateus de Senne -
+- Rodrigo Amancio -
+
+## TecSus:
+
+- Descrição do Projeto
+
+### Funcionalidades do TecSus:
+-
+## Sprint 1
+-
