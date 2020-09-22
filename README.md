@@ -1,28 +1,21 @@
-# Projeto Integrador 2º Semestre Banco de Dados FATEC
+# Projeto Integrador GRUPO 4 do 2º Semestre Banco de Dados FATEC
 Repositório para hospedar o projeto integrador do segundo semestre de banco de dados
 
-### Scrum Master:
-
-- Maximiles Barcelos -
 
 ### Integrantes:
 
-- Lucas Aparecido -
-- Luís Augusto -
-- Mateus de Senne -
-- Rodrigo Amancio -
+- Maximiles Barcelos - Scrum Master
+- Mateus de Senne - Project Owner
+- Lucas Aparecido
+- Luís Augusto
+- Rodrigo Amancio
 
-## TecSus:
+## Proposta:
 
-- Descrição do Projeto
-
-### Funcionalidades do TecSus:
-- Registro das contas de energia;
-- Registro das contas de água;
-- Relatório de consumo de energia agrupado por cliente;
-- Relatório de custo de energia agrupado por cliente;
-- Relatório de consumo de água agrupado por cliente;
-- Relatório de custo de água agrupado por clientes;
+  Em contato com a empresa TecSUS descobrimos que a principal dificuldade da mesma está no cadastro manual de faturas, que por falta de padronização por parte das concessionarias responsaveis, acarretam em dados que não podem ser lidos automaticamente pelo sistema ja implementado na empresa. 
+  Tendo em vista esse obstáculo, desenvolvemos este projeto visando um sistema simples e intuitivo, que reduza a chance de erros na hora de inserção de dados por parte do operador, proporcionando redução no tempo de digitação, retrabalho e minimizando assim tempo de execução dessas operações.
 
 ## Sprint 1
--
+
+  Na primeira primeira entrega do nosso programa, confeccionamos wireframes e story cards baseados nos requisitos solicitados pela TecSUS. Mostrando assim a proposta do grupo para melhorias ou sugestões por parte do cliente.
+  Segue abaixo links para acesso aos read.md:
