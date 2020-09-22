@@ -19,3 +19,6 @@ Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dado
 
   Na primeira primeira entrega do nosso programa, confeccionamos wireframes e story cards baseados nos requisitos solicitados pela TecSUS. Mostrando assim a proposta do grupo para melhorias ou sugestões por parte do cliente.
   Segue abaixo links para acesso aos arquivos:
+  
+ - [Story Cards](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%201/Story%20Cards)
+ - [Wireframes](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%201/Wireframes)
