@@ -18,4 +18,4 @@ Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dado
 ## Sprint 1:
 
   Na primeira primeira entrega do nosso programa, confeccionamos wireframes e story cards baseados nos requisitos solicitados pela TecSUS. Mostrando assim a proposta do grupo para melhorias ou sugestões por parte do cliente.
-  Segue abaixo links para acesso aos read.md:
+  Segue abaixo links para acesso aos arquivos:
