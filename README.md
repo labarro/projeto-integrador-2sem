@@ -1,5 +1,5 @@
-# Projeto Integrador GRUPO 4 do 2º Semestre Banco de Dados FATEC
-Repositório para hospedar o projeto integrador do segundo semestre de banco de dados
+# Projeto Integrador Grupo 4
+Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dados - FATEC
 
 
 ### Integrantes:
