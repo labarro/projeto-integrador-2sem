@@ -1,5 +1,4 @@
 # Story Cards - 1ª Sprint
-# Wireframes - 1ª Sprint
 ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Story%20Cards/Card%201.png)            |  ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Story%20Cards/Card%202.png) 
 :-------------------------:|:-------------------------:
 ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Story%20Cards/Card%203.png) | ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Story%20Cards/Card%204.png)
