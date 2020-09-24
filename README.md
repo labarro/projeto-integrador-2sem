@@ -1,5 +1,8 @@
 ### Projeto Integrador Grupo 4
+
 Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dados - FATEC
+
+![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/LogoYCad.png)
 
 
 ## Integrantes:
