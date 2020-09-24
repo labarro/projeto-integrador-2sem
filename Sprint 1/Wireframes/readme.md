@@ -1,6 +1,5 @@
 # Wireframes - 1ª Sprint
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide1.JPG)
-![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide2.JPG)
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide3.JPG)
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide4.JPG)
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide5.JPG)
