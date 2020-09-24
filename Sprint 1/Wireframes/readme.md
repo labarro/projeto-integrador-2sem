@@ -10,6 +10,5 @@
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide11.JPG)
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide13.JPG)
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide15.JPG)
-![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide16.JPG)
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide17.JPG)
 ![alt text](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/Sprint%201/Wireframes/Slide19.JPG)
