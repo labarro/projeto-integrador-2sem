@@ -4,6 +4,8 @@ Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dado
 
 ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/LogoYCad.png)
 
+## Vídeo de apresentação do sistema YourCAD:
+https://youtu.be/LgQM_Gnv-NM
 
 ## Integrantes:
 
