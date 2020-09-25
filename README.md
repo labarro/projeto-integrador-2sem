@@ -4,9 +4,6 @@ Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dado
 
 ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/LogoYCad.png)
 
-## Vídeo de apresentação do sistema YourCAD:
-https://youtu.be/LgQM_Gnv-NM
-
 ## Integrantes:
 
 - Maximiles Barcelos - Scrum Master
@@ -28,3 +25,5 @@ https://youtu.be/LgQM_Gnv-NM
  - [Story Cards](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%201/Story%20Cards)
  - [Wireframes](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%201/Wireframes)
  - [Modelagem BD](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%201/Modelagem)
+ - [Vídeo de apresentação do sistema YourCAD](https://youtu.be/LgQM_Gnv-NM)
+ 
