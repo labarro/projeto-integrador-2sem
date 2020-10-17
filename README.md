@@ -27,3 +27,12 @@ Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dado
  - [Modelagem BD](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%201/Modelagem)
  - [Vídeo de apresentação do sistema YourCAD](https://youtu.be/LgQM_Gnv-NM)
  
+ ## Sprint 2:
+ 
+ Nesta segunda Sprint do nosso projeto criamos as telas do sistema seguindo modelo dos wireframes apresentados. 
+Foi implementado um CRUD para o modulo de clientes, onde é possivel cadastra-los, altera-los, pesquisa-los e deleta-los.
+Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto final, porem para esta entrega temos um script sql menor onde implementamos as funções.
+  Segue abaixo links para acesso aos arquivos:
+  
+  - [Codigo-Fonte YourCad 1.0](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%202/Codigo/YourCadBD)
+  - [Arquivos Banco de Dados](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%202/Database)
