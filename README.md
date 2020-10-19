@@ -36,3 +36,4 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
   
   - [Codigo-Fonte YourCad 1.0](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%202/Codigo/YourCadBD)
   - [Arquivos Banco de Dados](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%202/Database)
+  - [Vídeo demonstração do CRUD do sistema YourCAD](https://youtu.be/7Z75vC8O-2Y)
