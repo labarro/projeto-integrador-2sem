@@ -3,11 +3,12 @@ CREATE DATABASE yourcad;
 USE yourcad;
 
 CREATE TABLE concessionaria (
-concessionaria_id int(11),
+concessionaria_id int(11) AUTO_INCREMENT,
 concessionaria_cnpj VARCHAR(20),
 concessionaria_nome VARCHAR(80),
 concessionaria_inscricao_estadual VARCHAR(20),
 concessionaria_endereco VARCHAR(40),
+concessionaria_bairro VARCHAR(40),
 concessionaria_numero_endereco INT(8),
 concessionaria_complemento_endereco VARCHAR(50),
 concessionaria_cep VARCHAR(12),
@@ -15,7 +16,7 @@ concessionaria_cidade VARCHAR(30),
 concessionaria_uf VARCHAR(20),
 concessionaria_email VARCHAR(30),
 concessionaria_site VARCHAR(30),
-PRIMARY KEY(concessionaria_cnpj)
+PRIMARY KEY(concessionaria_id)
 );
 
 INSERT INTO concessionaria (
@@ -23,6 +24,7 @@ concessionaria_cnpj,
 concessionaria_nome,
 concessionaria_inscricao_estadual,
 concessionaria_endereco,
+concessionaria_bairro,
 concessionaria_numero_endereco,
 concessionaria_complemento_endereco,
 concessionaria_cep,
@@ -35,6 +37,7 @@ VALUES
 "EDP Distribuição de Energia",
 "Isento",
 "Rua Gomes de Carvalho",
+"Jardim Prima velma",
 "1996",
 "8º Andar",
 "04547-006",
@@ -46,16 +49,42 @@ VALUES
 CREATE TABLE cliente (
 cliente_id int(11) AUTO_INCREMENT,
 cliente_nome VARCHAR(100),
+cliente_apelido VARCHAR(50),
 cliente_documento VARCHAR(50),
+cliente_endereco VARCHAR(150),
+cliente_complemento_endereco VARCHAR(100),
+cliente_numero_endereco VARCHAR(20),
+cliente_bairro VARCHAR(100),
+cliente_cep VARCHAR(20),
+cliente_cidade VARCHAR(100),
+cliente_uf VARCHAR(50),
 PRIMARY KEY(cliente_id)
 );
 
 INSERT INTO cliente (
 cliente_nome,
-cliente_documento)
+cliente_apelido,
+cliente_documento,
+cliente_endereco,
+cliente_complemento_endereco,
+cliente_numero_endereco,
+cliente_bairro,
+cliente_cep,
+cliente_cidade,
+cliente_uf
+)
 VALUES
 ("Mateus de Senne",
-"472.244.598-28");
+"Rogerinho",
+"472.244.598-28",
+"Rua Pedro Raxixe",
+"Não possui",
+"18004",
+"Jd ReUnião",
+"12658-32",
+"São José dos Campos",
+"São Paulo");
+
 
 CREATE TABLE instalacao_agua (
 instalacao_agua_id int(11) AUTO_INCREMENT,
