@@ -340,9 +340,12 @@ public class Form_CadClienteController implements Initializable {
         txtFld_cepCliente.setText("");
         
     }
-
+    
+    static String clienteInstalacao;
     @FXML
     private void cadInstalacao(ActionEvent event) throws IOException {
+        clienteInstalacao = txtFld_idCliente.getText();
+        
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadInstalacoes.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

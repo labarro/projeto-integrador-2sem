@@ -34,9 +34,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import yourcad.DBConexao.*;
 import yourcad.Form_instalacaoAguaController.*;
 import yourcad.Form_instalacaoEnergiaController.*;
+import yourcad.Concessionaria;
 
 /**
  * FXML Controller class
@@ -76,7 +78,7 @@ public class Form_CadInstalacoesController implements Initializable {
     @FXML
     private TextField txt_idInstalacao;
     @FXML
-    private ComboBox<String> cbox_concessionariaInstalacao;
+    private ComboBox<Concessionaria> cbox_concessionariaInstalacao;
     @FXML
     private Button btn_limparInstalacao;
     @FXML
@@ -86,28 +88,47 @@ public class Form_CadInstalacoesController implements Initializable {
      * Initializes the controller class.
      */
     private ObservableList<Concessionaria> linhas_banco;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb){
         // TODO
+        
+        //Campo que recebe ID do cliente
+         String clienteInstalacao = Form_CadClienteController.clienteInstalacao;
+         txt_idCliente.setText(clienteInstalacao);
+         
+         
         // ComboBox Tipo de Instalação
         ObservableList<String> lista = FXCollections.observableArrayList("Agua e Esgoto","Energia");
         cbox_tipoInstalacao.setItems(lista);
+        
      
         // ComboBox Concessionaria
         try{
+                        
             Connection conn = null;
             ResultSet resultadoBanco = null;
             conn = DBConexao.abrirConexao();
             Statement stm = conn.createStatement();
             resultadoBanco = stm.executeQuery("SELECT * FROM concessionaria;");
             
-            cbox_concessionariaInstalacao.setValue("------------------");
-            while(resultadoBanco.next()){
-                    String name = resultadoBanco.getString("concessionaria_nome");
-                    cbox_concessionariaInstalacao.setValue(name);
+            linhas_banco = FXCollections.observableArrayList();
+
+
+
+            while(resultadoBanco.next())
+            {                
+                linhas_banco.add(new Concessionaria(resultadoBanco.getInt(1), resultadoBanco.getString(2), resultadoBanco.getString(3),
+                  resultadoBanco.getString(4), resultadoBanco.getString(5), resultadoBanco.getString(6), resultadoBanco.getString(7),
+                  resultadoBanco.getString(8), resultadoBanco.getString(9), resultadoBanco.getString(10), resultadoBanco.getString(11), 
+                  resultadoBanco.getString(12), resultadoBanco.getString(13)));
             }
-        }catch (Exception ex) {
-                Logger.getLogger(Form_CadClienteController.class.getName()).log(Level.SEVERE, null, ex);
+                
+                cbox_concessionariaInstalacao.setItems(null);
+                cbox_concessionariaInstalacao.setItems(linhas_banco);
+     
+            }   catch (Exception ex) {
+                Logger.getLogger(Form_CadInstalacoesController.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
     
@@ -192,10 +213,70 @@ public class Form_CadInstalacoesController implements Initializable {
     }
 
     @FXML
-    private void salvarInstalacao(ActionEvent event) {
+    private void salvarInstalacao(ActionEvent event) throws SQLException, Exception {
         
+        String cliente_id = txt_idCliente.getText();
+        String apelido_instalacao = txt_apelidoInstalacao.getText();
+        String numero_Instalacao = txt_numeroInstalacao.getText();
+        String tipo_instalacao = cbox_tipoInstalacao.getValue();
         
+        //Concessionaria conc = (Concessionaria) cbox_concessionariaInstalacao.getSelectionModel().getSelectedItem();
+        //int concessionaria_id = conc.getConcessionaria_id();
+        //int concessionaria_id = cbox_concessionariaInstalacao.getSelectionModel().getSelectedItem().getConcessionaria_id();
+        System.out.println(cbox_concessionariaInstalacao.getSelectionModel());
+        
+        int concessionaria_id = 0;
+        
+            Connection conn = null;
+            conn = DBConexao.abrirConexao();
+            Statement stm = conn.createStatement();
+            String query;
+            query = "INSERT INTO instalacao(instalacao_numero,\n" +
+                    "instalacao_apelido, instalacao_tipo, concessionaria_id, cliente_id) VALUES "
+                + "('"+ numero_Instalacao +"','"
+                    + apelido_instalacao +"','"
+                    + tipo_instalacao +"','"
+                    + concessionaria_id +"','"
+                    + cliente_id + "');";
+            System.out.println(query);
+            stm.executeUpdate(query);
+            
+            Statement stm0 = conn.createStatement();
+            String query0;
+            query0 = "SELECT LAST_INSERT_ID;";
+            int instalacao_id = stm.executeUpdate(query0);
+            System.out.println(instalacao_id);
+            
+        if(tipo_instalacao == "Agua e Esgoto"){
+            String hidrometro = Form_instalacaoAguaController.txt_hidrometroAgua.getText();
+            String codigoCliente = Form_instalacaoAguaController.txt_codclienteAgua.getText();
+            String codigoSabesp = Form_instalacaoAguaController.txt_codsabespAgua.getText();
+            String economias = Form_instalacaoAguaController.txt_economiasAgua.getText();
+            String tipoLigacao = Form_instalacaoAguaController.txt_tipoLigacao.getText();
+            
+           
+            Statement stm1 = conn.createStatement();
+            String query1;
+            query1 = "INSERT INTO instalacao_agua(instalacao_id" +
+                     "instalacao_agua_hidrometro,\n" +
+                     "instalacao_agua_cod_sabesp,\n" +
+                     "instalacao_agua_cod_cliente,\n" +
+                     "instalacao_agua_economias,\n" +
+                     "instalacao_agua_tipo_ligacao) VALUES "
+                    + "('"+ instalacao_id +"','"
+                    + hidrometro +"','"
+                    + codigoCliente +"','"
+                    + economias +"','"
+                    + tipo_instalacao +"');";
+            System.out.println(query1);
+            stm.executeUpdate(query1);
+        
+        }
+            
+        
+//          System.out.println(query);  // TESTE DE FUNCIONAMENTO
+            
+            System.out.println("Dados Cadastrados com sucesso!!!");
     }
-        
-    
+
 }
