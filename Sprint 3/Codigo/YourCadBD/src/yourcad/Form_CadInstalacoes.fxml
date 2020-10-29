@@ -47,17 +47,17 @@
             <Label layoutX="20.0" layoutY="26.0" prefHeight="17.0" prefWidth="73.0" text="Nº Instalação:" />
             <Label layoutX="321.0" layoutY="26.0" text="Apelido:" />
             <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" onAction="#chama_painel" prefWidth="150.0" />
-            <ComboBox fx:id="cbox_concessionariaInstalacao" editable="true" layoutX="370.0" layoutY="64.0" prefWidth="150.0" />
+            <ComboBox fx:id="cbox_concessionariaInstalacao" disable="true" editable="true" layoutX="370.0" layoutY="64.0" prefWidth="150.0" visible="false" />
             <Label layoutX="20.0" layoutY="68.0" />
-            <Label layoutX="280.0" layoutY="68.0" text="Concessionaria:" />
+            <Label disable="true" layoutX="280.0" layoutY="68.0" text="Concessionaria:" visible="false" />
             <Label layoutX="24.0" layoutY="68.0" text="Tipo:" />
-            <ScrollPane layoutX="20.0" layoutY="122.0" pannable="true" prefViewportHeight="218.0" prefViewportWidth="644.0">
+            <ScrollPane layoutX="20.0" layoutY="158.0" pannable="true" prefHeight="258.0" prefViewportHeight="218.0" prefViewportWidth="644.0" prefWidth="646.0">
                <content>
-                  <Pane fx:id="panel_01" layoutX="20.0" layoutY="10.0" prefHeight="570.0" prefWidth="644.0" />
+                  <Pane fx:id="panel_01" layoutX="20.0" layoutY="10.0" prefHeight="256.0" prefWidth="644.0" />
                </content>
             </ScrollPane>
-            <Button fx:id="btn_limparInstalacao" layoutX="345.0" layoutY="373.0" mnemonicParsing="false" text="Limpar" />
-            <Button fx:id="btn_salvarInstalacao" layoutX="262.0" layoutY="373.0" mnemonicParsing="false" onAction="#salvarInstalacao" text="Salvar" />
+            <Button fx:id="btn_limparInstalacao" layoutX="335.0" layoutY="102.0" mnemonicParsing="false" text="Limpar" />
+            <Button fx:id="btn_salvarInstalacao" layoutX="280.0" layoutY="102.0" mnemonicParsing="false" onAction="#salvarInstalacao" text="Salvar" />
          </children>
       </Pane>
    </center>

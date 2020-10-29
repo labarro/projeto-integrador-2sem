@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="panel_instAgua" prefHeight="228.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.Form_instalacaoAguaController">
+   <children>
+      <TextField fx:id="txt_hidrometroAgua" layoutX="119.0" layoutY="10.0" prefHeight="25.0" prefWidth="134.0" />
+      <TextField fx:id="txt_codsabespAgua" layoutX="119.0" layoutY="47.0" prefHeight="25.0" prefWidth="282.0" />
+      <TextField fx:id="txt_economiasAgua" layoutX="119.0" layoutY="134.0" />
+      <TextField fx:id="txt_codclienteAgua" layoutX="119.0" layoutY="91.0" prefHeight="25.0" prefWidth="116.0" />
+      <TextField fx:id="txt_tipoLigacao" layoutX="119.0" layoutY="173.0" prefHeight="25.0" prefWidth="116.0" />
+      <Label layoutX="24.0" layoutY="14.0" text="Hidrometro:" />
+      <Label layoutX="24.0" layoutY="51.0" text="Codigo Sabesp:" />
+      <Label layoutX="24.0" layoutY="95.0" text="Codigo Cliente:" />
+      <Label layoutX="24.0" layoutY="138.0" text="Economias:" />
+      <Label layoutX="24.0" layoutY="177.0" text="Tipo de Ligação:" />
+      <Button fx:id="btn_salvarInstAgua" layoutX="300.0" layoutY="194.0" mnemonicParsing="false" onAction="#salvarInstAgua" text="Salvar" />
+   </children>
+</Pane>
