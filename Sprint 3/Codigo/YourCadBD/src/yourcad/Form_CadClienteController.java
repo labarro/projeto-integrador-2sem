@@ -389,7 +389,10 @@ public class Form_CadClienteController implements Initializable {
         
     }
     
+<<<<<<< HEAD
     //Variavel para levar o id do cliente para pagina de cadastro de instalacao
+=======
+>>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
     static String clienteInstalacao;
     @FXML
     private void cadInstalacao(ActionEvent event) throws IOException {
