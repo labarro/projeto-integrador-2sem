@@ -11,7 +11,9 @@ package yourcad;
  */
 public class Concessionaria {
 
-    
+    Concessionaria() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     public int getConcessionaria_id() {
         return concessionaria_id;
@@ -145,7 +147,11 @@ public class Concessionaria {
     String concessionaria_estado;
     String concessionaria_email;
     String concessionaria_site;
-    
-                                            
+
+    @Override
+    public String toString() {
+        return getConcessionaria_nome(); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }
