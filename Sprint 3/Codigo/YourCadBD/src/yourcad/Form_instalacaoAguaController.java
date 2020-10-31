@@ -7,18 +7,12 @@ package yourcad;
 
 import java.net.URL;
 import java.sql.Connection;
-<<<<<<< HEAD
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-=======
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ResourceBundle;
->>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,11 +48,8 @@ public class Form_instalacaoAguaController implements Initializable {
     static String tipoLigacao;
     @FXML
     private Button btn_salvarInstAgua;
-<<<<<<< HEAD
     @FXML
     private TextField txt_idInstalacao;
-=======
->>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
 
     /**
      * Initializes the controller class.
@@ -66,7 +57,6 @@ public class Form_instalacaoAguaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-<<<<<<< HEAD
         int instalacao_id = Form_CadClienteController.alterInstalacaoId;
         
         if(instalacao_id != 0)
@@ -110,8 +100,6 @@ public class Form_instalacaoAguaController implements Initializable {
                                 
             }catch (Exception ex) { Logger.getLogger(Form_CadClienteController.class.getName()).log(Level.SEVERE, null, ex);}
         }
-=======
->>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
                 
     }    
         
@@ -211,25 +199,18 @@ public class Form_instalacaoAguaController implements Initializable {
 
     @FXML
     private void salvarInstAgua(ActionEvent event) throws SQLException, Exception {
-<<<<<<< HEAD
         
         int inst_id = Form_CadClienteController.alterInstalacaoId;
         
-=======
->>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
         String hidrometro = txt_hidrometroAgua.getText();
         String codigoCliente = txt_codclienteAgua.getText();
         String codigoSabesp = txt_codsabespAgua.getText();
         String economias = txt_economiasAgua.getText();
         String tipoLigacao = txt_tipoLigacao.getText();  
-<<<<<<< HEAD
         String idInstalacao = txt_idInstalacao.getText();
         
       if(inst_id == 0)
       {  
-=======
-        
->>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
         Connection conn = null;
         conn = DBConexao.abrirConexao();
         Statement stm = conn.createStatement();
@@ -246,7 +227,6 @@ public class Form_instalacaoAguaController implements Initializable {
                     + codigoCliente +"','"
                     + economias +"','"
                     + tipoLigacao +"');";
-<<<<<<< HEAD
             stm.executeUpdate(query1);
       }else
         {
@@ -267,12 +247,6 @@ public class Form_instalacaoAguaController implements Initializable {
             
             stm.executeUpdate(sql);
         }
-=======
-            System.out.println(query1);
-            stm.executeUpdate(query1);
-            
-            System.out.println("Salvo");
->>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
         
     }
 

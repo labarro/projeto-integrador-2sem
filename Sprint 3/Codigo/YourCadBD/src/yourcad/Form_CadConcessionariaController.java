@@ -163,6 +163,7 @@ public class Form_CadConcessionariaController implements Initializable {
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
     @FXML
     public void gotoCliente(ActionEvent event) throws IOException{ 
+        PesqClienteController.alterClienteId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadCliente.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -183,6 +184,7 @@ public class Form_CadConcessionariaController implements Initializable {
 
     @FXML
     private void gotoConcessionaria(ActionEvent event) throws IOException {
+        PesqConcessionariaController.alterConcessionariaId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConcessionaria.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  

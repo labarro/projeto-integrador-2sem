@@ -28,6 +28,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -108,7 +109,8 @@ public class PesqClienteController implements Initializable {
     // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
     @FXML
-    public void gotoCliente(ActionEvent event) throws IOException{ 
+    public void gotoCliente(ActionEvent event) throws IOException{
+        PesqClienteController.alterClienteId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadCliente.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -127,6 +129,7 @@ public class PesqClienteController implements Initializable {
     }
     @FXML
     private void gotoConcessionaria(ActionEvent event) throws IOException {
+        PesqConcessionariaController.alterConcessionariaId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConcessionaria.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  

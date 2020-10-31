@@ -7,6 +7,9 @@ package yourcad;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +17,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 /*import javafx.scene.control.TextField;*/
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -48,69 +53,15 @@ public class Form_CadContaController implements Initializable {
     @FXML
     private MenuItem menuItem_PesqConcessionaria;
     @FXML
-    private TextField txtPesqNInstalacao;
+    private Pane panel_contas;
     @FXML
-    private TextField txt_EnergiaDescricao;
+    private TextField txt_pesqInstalacao;
     @FXML
-    private TextField txt_EnergiaConsumoLeituraAtual;
+    private Button btn_pesqInstalacao;
     @FXML
-    private TextField txt_EnergiaNMedidor;
+    private TextField txt_apelido;
     @FXML
-    private TextField txt_EnergiaConstMult;
-    @FXML
-    private TextField txt_EnergiaConsumoLeituraAnterior;
-    @FXML
-    private TextField txt_EnergiaKwhMes;
-    @FXML
-    private TextField txt_EnergiaCci;
-    @FXML
-    private TextField txt_EnergiaTarifaAplicada;
-    @FXML
-    private TextField txt_EnergiaBaseICMS;
-    @FXML
-    private TextField txt_EnergiaBasePisCofins;
-    @FXML
-    private TextField txt_EnergiaDescricaoProduto;
-    @FXML
-    private TextField txt_EnergiaValorFornecedor;
-    @FXML
-    private TextField txt_EnergiaAliquotaIcms;
-    @FXML
-    private TextField txt_EnergiaAliquotaPis;
-    @FXML
-    private TextField txt_EnergiaValorPis;
-    @FXML
-    private TextField txt_EnergiaValorIcms;
-    @FXML
-    private TextField txt_EnergiaTarifaImposto;
-    @FXML
-    private TextField txt_EnergiaQuantidade;
-    @FXML
-    private TextField txt_EnergiaNConta;
-    @FXML
-    private TextField txt_EnergiaValor;
-    @FXML
-    private TextField txt_EnergiaCompetencia;
-    @FXML
-    private TextField txt_EnergiaConsumoMes;
-    @FXML
-    private TextField txt_EnergiaVencimento;
-    @FXML
-    private TextField txt_EnergiaPeriodo2;
-    @FXML
-    private TextField txt_EnergiaPeriodo;
-    @FXML
-    private TextField txt_EnergiaCor;
-    @FXML
-    private TextField txt_EnergiaDiasFaturamento;
-    @FXML
-    private TextField txt_EnergiaPrevisãoLeitura;
-    @FXML
-    private TextField txt_EnergiaLeituraAtual;
-    @FXML
-    private TextField txt_EnergiaLeituraAnterior;
-    @FXML
-    private TextField txt_EnergiaEmissao;
+    private TextField txt_tipoInstalacao;
 
     /**
      * Initializes the controller class.
@@ -123,7 +74,8 @@ public class Form_CadContaController implements Initializable {
         // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
     @FXML
-    public void gotoCliente(ActionEvent event) throws IOException{ 
+    public void gotoCliente(ActionEvent event) throws IOException{
+        PesqClienteController.alterClienteId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadCliente.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -144,6 +96,7 @@ public class Form_CadContaController implements Initializable {
 
     @FXML
     private void gotoConcessionaria(ActionEvent event) throws IOException {
+        PesqConcessionariaController.alterConcessionariaId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConcessionaria.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -183,6 +136,60 @@ public class Form_CadContaController implements Initializable {
     }
     
     // FIM MENU BAR //
+    static String contaInstalacaoId;
+    static String contaInstalacaoNum;
+    static String clienteId;
+    @FXML
+    private void pesquisarInstalacao(ActionEvent event) throws Exception {
+        
+        String numInstalacao = txt_pesqInstalacao.getText();
+        
+        Connection conn = null;
+        ResultSet resultadoBanco = null;
+        conn = DBConexao.abrirConexao();
+        Statement stm = conn.createStatement();
+                
+        String sql0;
+        sql0 = "SELECT * FROM instalacao WHERE instalacao_numero = " + numInstalacao +";";
+        resultadoBanco = stm.executeQuery(sql0);
+        String inst_apelido = null;
+        String inst_tipo = null;
+        String inst_id = null;
+        String inst_num = null;
+        String inst_cliente = null;
+
+                while(resultadoBanco.next())
+                { 
+                    inst_apelido = resultadoBanco.getString("instalacao_apelido"); 
+                    inst_tipo = resultadoBanco.getString("instalacao_tipo"); 
+                    inst_id = resultadoBanco.getString("instalacao_id");
+                    inst_num = resultadoBanco.getString("instalacao_numero");
+                    inst_cliente = resultadoBanco.getString("cliente_id");
+
+                }
+                txt_apelido.setText(inst_apelido);
+                txt_tipoInstalacao.setText(inst_tipo);
+                
+        if("Agua e Esgoto".equals(inst_tipo))
+        {
+           contaInstalacaoId = inst_id;
+           contaInstalacaoNum = inst_num;
+           clienteId = inst_cliente;
+           panel_contas.getChildren().clear();
+           Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("Form_cadContaAgua.fxml"));
+           panel_contas.getChildren().add(newLoadedPane); 
+        }
+        // ***** Se for de energia deleta instalacao de energia
+        if("Energia".equals(inst_tipo))
+        {
+            contaInstalacaoId = inst_id;
+            contaInstalacaoNum = inst_num;
+            clienteId = inst_cliente;
+            panel_contas.getChildren().clear();
+            Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("Form_cadContaEnergia.fxml"));
+            panel_contas.getChildren().add(newLoadedPane);
+        }
+    }
 
    
     

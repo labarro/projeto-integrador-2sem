@@ -208,7 +208,8 @@ public class Form_CadClienteController implements Initializable {
         // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
     @FXML
-    public void gotoCliente(ActionEvent event) throws IOException{ 
+    public void gotoCliente(ActionEvent event) throws IOException{
+        PesqClienteController.alterClienteId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadCliente.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -229,6 +230,7 @@ public class Form_CadClienteController implements Initializable {
 
     @FXML
     private void gotoConcessionaria(ActionEvent event) throws IOException {
+        PesqConcessionariaController.alterConcessionariaId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConcessionaria.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -363,10 +365,7 @@ public class Form_CadClienteController implements Initializable {
                     + cliente_cidade +"','"
                     + cliente_bairro +"','"
                     + cliente_cep +"');";
-            System.out.println(query);
-            System.out.println("ENTROU NO INSERT");
         
-//          System.out.println(query);  // TESTE DE FUNCIONAMENTO
             stm.executeUpdate(query);
             System.out.println("Dados Cadastrados com sucesso!!!");
         }
@@ -389,10 +388,7 @@ public class Form_CadClienteController implements Initializable {
         
     }
     
-<<<<<<< HEAD
     //Variavel para levar o id do cliente para pagina de cadastro de instalacao
-=======
->>>>>>> 22435b5a1474e789c226635ff30337f8cc5cd3f6
     static String clienteInstalacao;
     @FXML
     private void cadInstalacao(ActionEvent event) throws IOException {
