@@ -120,6 +120,7 @@ public class PesqClienteController implements Initializable {
     }
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
+        PesqContaEnergiaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -170,19 +171,31 @@ public class PesqClienteController implements Initializable {
     
     @FXML
     private void PesqCliente(ActionEvent event) throws Exception {
-            
+
+        String nome_cliente = txtFld_NomeCliente.getText();
+        String doc_cliente = txtFld_DocCliente.getText();
+        
         Connection conn = null;
         ResultSet resultadoBanco = null;
-
         conn = DBConexao.abrirConexao();
         Statement stm = conn.createStatement();
         
         List<Cliente> clientes = new ArrayList<>();
         
-        resultadoBanco = stm.executeQuery("SELECT cliente_id, cliente_nome, cliente_documento, cliente_apelido,"
+        String sql;
+        String sql1 = null;
+        if(!"".equals(nome_cliente)){ sql1 = " WHERE cliente_nome LIKE '%"+ nome_cliente +"%' ";}
+        else if(!"".equals(doc_cliente)){ sql1 = " WHERE cliente_documento LIKE '%"+ doc_cliente +"%' ";}
+        else if(!"".equals(nome_cliente) && !"".equals(doc_cliente)){ sql1 = " WHERE cliente_nome LIKE '%"+nome_cliente+"%' && cliente_documento LIKE '%"+ doc_cliente +"%' ";}
+        else{sql1 = "";}
+        sql = "SELECT cliente_id, cliente_nome, cliente_documento, cliente_apelido,"
                 + " cliente_endereco, cliente_complemento_endereco, cliente_numero_endereco, cliente_bairro,"
-                + " cliente_cep, cliente_cidade, cliente_uf FROM cliente;");
-
+                + " cliente_cep, cliente_cidade, cliente_uf FROM cliente "
+                + sql1 
+                + " ;";
+        
+        System.out.println(sql);
+        resultadoBanco = stm.executeQuery(sql);
        
         linhas_banco = FXCollections.observableArrayList();
         

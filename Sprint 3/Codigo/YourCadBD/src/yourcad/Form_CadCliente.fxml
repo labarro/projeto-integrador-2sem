@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -14,7 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="mainPane" prefHeight="522.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.Form_CadClienteController">
+<BorderPane fx:id="mainPane" prefHeight="522.0" prefWidth="585.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.Form_CadClienteController">
    <center>
       <AnchorPane prefHeight="506.0" prefWidth="585.0" BorderPane.alignment="CENTER">
          <children>
@@ -42,7 +45,7 @@
                      </content>
                   </ScrollPane>
                   <Button fx:id="btn_NovoInstalacao" layoutX="50.0" layoutY="489.0" mnemonicParsing="false" onAction="#cadInstalacao" prefHeight="25.0" prefWidth="126.0" text="NOVA INSTALAÇÃO" />
-                  <TextField fx:id="txtFld_idCliente" layoutX="522.0" layoutY="28.0" prefHeight="25.0" prefWidth="34.0" text="0" />
+                  <TextField fx:id="txtFld_idCliente" layoutX="522.0" layoutY="28.0" prefHeight="25.0" prefWidth="34.0" text="0" visible="false" />
                   <TextField fx:id="txtFld_apelidoCliente" layoutX="69.0" layoutY="68.0" />
                   <TextField fx:id="txtFld_numEndCliente" layoutX="378.0" layoutY="103.0" prefHeight="25.0" prefWidth="88.0" />
                   <TextField fx:id="txtFld_ufCliente" layoutX="448.0" layoutY="175.0" prefHeight="25.0" prefWidth="46.0" />

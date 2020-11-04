@@ -40,10 +40,10 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="txt_idCliente" layoutX="637.0" layoutY="14.0" prefHeight="25.0" prefWidth="35.0" />
+            <TextField fx:id="txt_idCliente" layoutX="637.0" layoutY="14.0" prefHeight="25.0" prefWidth="35.0" visible="false" />
             <TextField fx:id="txt_numeroInstalacao" layoutX="97.0" layoutY="22.0" prefHeight="25.0" prefWidth="217.0" />
             <TextField fx:id="txt_apelidoInstalacao" layoutX="371.0" layoutY="22.0" />
-            <TextField fx:id="txt_idInstalacao" layoutX="638.0" layoutY="51.0" prefHeight="25.0" prefWidth="34.0" />
+            <TextField fx:id="txt_idInstalacao" layoutX="638.0" layoutY="51.0" prefHeight="25.0" prefWidth="34.0" visible="false" />
             <Label layoutX="20.0" layoutY="26.0" prefHeight="17.0" prefWidth="73.0" text="Nº Instalação:" />
             <Label layoutX="321.0" layoutY="26.0" text="Apelido:" />
             <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" onAction="#chama_painel" prefWidth="150.0" />

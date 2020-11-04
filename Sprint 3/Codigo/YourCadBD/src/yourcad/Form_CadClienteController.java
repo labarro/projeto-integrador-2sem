@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -31,6 +33,7 @@ import javafx.stage.Stage;
 import yourcad.DBConexao.*;
 import yourcad.Cliente;
 import yourcad.Form_CadInstalacoesController;
+import static yourcad.Form_CadInstalacoesController.instalacao_id;
 
 //import yourcad.PesqClienteController.*;
 
@@ -129,14 +132,23 @@ public class Form_CadClienteController implements Initializable {
        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        btnAlterarInstalacao.setVisible(false);
+        btnDeletarInstalacao.setVisible(false);
+        btn_NovoInstalacao.setVisible(false);
+        
         try {
             // TODO
             // Pega id co cliente vindo da pagina de pesquisa clientes
             int id = PesqClienteController.alterClienteId;
             
-            // verifica se existe id do cliente se sim ele popula os textfields da pagina para fazer aletração dos daos senão ele traz vazio para uma nova inserção.
+            // verifica se existe id do cliente se sim ele popula os textfields da pagina para fazer aletração dos dados senão ele traz vazio para uma nova inserção.
             if(id != 0)
             {
+                btnAlterarInstalacao.setVisible(true);
+                btnDeletarInstalacao.setVisible(true);
+                btn_NovoInstalacao.setVisible(true);
+                
                 try {
                     
                     String cliente_id = null;
@@ -220,6 +232,7 @@ public class Form_CadClienteController implements Initializable {
 
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
+        PesqContaEnergiaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -346,8 +359,6 @@ public class Form_CadClienteController implements Initializable {
         }
         if (Integer.parseInt(cliente_id) == 0){           
        
-
-            
             Connection conn = null;
             conn = DBConexao.abrirConexao();
             Statement stm = conn.createStatement();
@@ -365,9 +376,27 @@ public class Form_CadClienteController implements Initializable {
                     + cliente_cidade +"','"
                     + cliente_bairro +"','"
                     + cliente_cep +"');";
-        
             stm.executeUpdate(query);
-            System.out.println("Dados Cadastrados com sucesso!!!");
+            
+            Statement stm0 = conn.createStatement();
+            String query0;
+            query0 = "SELECT LAST_INSERT_ID();";
+            ResultSet resultado = stm.executeQuery(query0);
+            int cliente = 0;
+            while(resultado.next())
+            {
+                cliente = resultado.getInt("LAST_INSERT_ID()"); 
+            }
+            
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados salvos com sucesso !");
+            alert.showAndWait();
+            
+            btnAlterarInstalacao.setVisible(true);
+            btnDeletarInstalacao.setVisible(true);
+            btn_NovoInstalacao.setVisible(true);
+            txtFld_idCliente.setText(Integer.toString(cliente));
         }
     }
 
@@ -461,8 +490,6 @@ public class Form_CadClienteController implements Initializable {
         // ***** Chama a função de listagem de instalações novamente
         int id = Integer.parseInt(txtFld_idCliente.getText());
         tableView_Instalacoes(id);
-    }
-     
-    
+    }       
     
 }

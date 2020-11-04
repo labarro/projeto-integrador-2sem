@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,10 +68,72 @@ public class Form_CadContaController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    static int conta_Id = 0;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+        
+        int contaId = PesqContaEnergiaController.contaAlterId;
+        if(contaId != 0)
+        {
+            try{
+
+                Connection conn = null;
+                ResultSet resultadoBanco = null;
+                conn = DBConexao.abrirConexao();
+                Statement stm = conn.createStatement();
+
+                    //****** Selecionando tipo de instalação
+                    String sql0;              
+                    sql0 = "SELECT conta_energia.conta_id, conta_numero_instalacao, instalacao_numero, instalacao_apelido, cliente_nome, "
+                      + " conta_energia_valor, conta_tipo, conta_energia_competencia FROM conta " 
+                      + " INNER JOIN conta_energia ON conta.conta_id = conta_energia.conta_id "
+                      + " INNER JOIN instalacao ON conta.instalacao_id = instalacao.instalacao_id "
+                      + " INNER JOIN cliente ON conta.cliente_id = cliente.cliente_id "
+                      + " WHERE conta.conta_id = " + contaId +";";
+
+                    resultadoBanco = stm.executeQuery(sql0);
+
+                    String conta_id = null;
+                    String instalacao_apelido = null;
+                    //String cliente = null;
+                    String conta_numero_instalacao = null;
+                    String conta_tipo = null;
+
+                    while(resultadoBanco.next())
+                    { 
+                        conta_id = resultadoBanco.getString("conta_id"); 
+                        instalacao_apelido = resultadoBanco.getString("instalacao_apelido"); 
+                        //cliente = resultadoBanco.getString("cliente_id"); 
+                        conta_numero_instalacao = resultadoBanco.getString("conta_numero_instalacao"); 
+                        conta_tipo = resultadoBanco.getString("conta_tipo"); 
+                    }
+                    txt_apelido.setText(instalacao_apelido);
+                    txt_pesqInstalacao.setText(conta_numero_instalacao);
+                    txt_tipoInstalacao.setText(conta_tipo);
+
+            if("Agua e Esgoto".equals(conta_tipo))
+            {
+               conta_Id = Integer.parseInt(conta_id);
+
+               panel_contas.getChildren().clear();
+               Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("Form_cadContaAgua.fxml"));
+               panel_contas.getChildren().add(newLoadedPane); 
+            }
+            // ***** Se for de energia deleta instalacao de energia
+            if("Energia".equals(conta_tipo))
+            {
+                conta_Id = Integer.parseInt(conta_id);
+
+                panel_contas.getChildren().clear();
+                Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("Form_cadContaEnergia.fxml"));
+                panel_contas.getChildren().add(newLoadedPane);
+            }
+            } catch(Exception ex) { Logger.getLogger(Form_CadClienteController.class.getName()).log(Level.SEVERE, null, ex);}
+        }
+        
+    }
     
         // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
@@ -86,6 +150,7 @@ public class Form_CadContaController implements Initializable {
 
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
+        PesqContaEnergiaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -141,7 +206,7 @@ public class Form_CadContaController implements Initializable {
     static String clienteId;
     @FXML
     private void pesquisarInstalacao(ActionEvent event) throws Exception {
-        
+               
         String numInstalacao = txt_pesqInstalacao.getText();
         
         Connection conn = null;

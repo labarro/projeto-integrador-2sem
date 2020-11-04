@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -87,23 +89,133 @@ public class Form_cadContaEnergiaController implements Initializable {
     private Button btn_salvarContaEnergia;
     @FXML
     private Button btn_limparContaEnergia;
+    @FXML
+    private TextField txt_contaId;
 
     /**
      * Initializes the controller class.
      */
+    int contaID = 0;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        contaID = Form_CadContaController.conta_Id;
         
+        if(contaID != 0)
+        {
+            try{
+                Connection conn = null;
+                ResultSet resultadoBanco = null;
+                conn = DBConexao.abrirConexao();
+                Statement stm = conn.createStatement();
+
+                    //****** Selecionando tipo de instalação
+                    String sql0;
+                    sql0 = "SELECT * FROM conta_energia WHERE conta_id = " + contaID +";";
+                    resultadoBanco = stm.executeQuery(sql0);
+
+                    String conta_id = null;
+                    String conta_aliqIcms = null;
+                    String conta_aliqPis = null;
+                    String conta_baseIcms = null;
+                    String conta_basePis = null;
+                    String conta_cci = null;
+                    String conta_competencia = null;
+                    String conta_constMult = null;
+                    String conta_consLeitAtual = null;
+                    String conta_consMes = null;
+                    String conta_bandCor = null;
+                    String conta_consDescricao = null;
+                    String conta_fatDescProduto = null;
+                    String conta_fatDias = null;
+                    String conta_fatEmissao = null;
+                    String conta_consKwh = null;
+                    String conta_fatLeitAtual = null;
+                    String conta_consMedidor = null;
+                    String conta_bandInicio = null;
+                    String conta_bandFim  = null;
+                    String conta_fatQtd  = null;
+                    String conta_fatTariAplicada  = null;
+                    String conta_fatTariImposto = null;
+                    String conta_valor = null;
+                    String conta_valorFornecido = null;
+                    String conta_valorIcms = null;
+                    String conta_valorPis = null;
+                    String conta_Vencimento = null;
+
+                    while(resultadoBanco.next())
+                    { 
+                        conta_id = resultadoBanco.getString("conta_id"); 
+                        conta_aliqIcms = resultadoBanco.getString("conta_energia_faturamento_aliqicms"); 
+                        conta_aliqPis = resultadoBanco.getString("conta_energia_faturamento_aliqpis"); 
+                        conta_baseIcms = resultadoBanco.getString("conta_energia_faturamento_baseicms"); 
+                        conta_basePis = resultadoBanco.getString("conta_energia_faturamento_basepis"); 
+                        conta_cci = resultadoBanco.getString("conta_energia_faturamento_cci"); 
+                        conta_competencia = resultadoBanco.getString("conta_energia_competencia"); 
+                        conta_constMult = resultadoBanco.getString("conta_energia_consumo_constmult"); 
+                        conta_consLeitAtual = resultadoBanco.getString("conta_energia_consumo_leitatual"); 
+                        conta_consMes = resultadoBanco.getString("conta_energia_consumo_mes"); 
+                        conta_bandCor = resultadoBanco.getString("conta_energia_bandeira_cor"); 
+                        conta_consDescricao = resultadoBanco.getString("conta_energia_consumo_descricao"); 
+                        conta_fatDescProduto = resultadoBanco.getString("conta_energia_faturamento_produto"); 
+                        conta_fatDias = resultadoBanco.getString("conta_energia_faturamento_dias"); 
+                        conta_fatEmissao = resultadoBanco.getString("conta_energia_faturamento_emissao"); 
+                        conta_consKwh = resultadoBanco.getString("conta_energia_consumo_kwh"); 
+                        conta_fatLeitAtual = resultadoBanco.getString("conta_energia_faturamento_leitatual"); 
+                        conta_consMedidor = resultadoBanco.getString("conta_energia_consumo_medidor"); 
+                        conta_bandInicio = resultadoBanco.getString("conta_energia_bandeira_periodoini"); 
+                        conta_bandFim = resultadoBanco.getString("conta_energia_bandeira_periodo_fim"); 
+                        conta_fatQtd = resultadoBanco.getString("conta_energia_faturamento_qtd"); 
+                        conta_fatTariAplicada = resultadoBanco.getString("conta_energia_faturamento_tarifa"); 
+                        conta_fatTariImposto = resultadoBanco.getString("conta_energia_faturamento_tarifaimposto"); 
+                        conta_valor = resultadoBanco.getString("conta_energia_valor"); 
+                        conta_valorFornecido = resultadoBanco.getString("conta_energia_faturamento_valorfornecido"); 
+                        conta_valorIcms = resultadoBanco.getString("conta_energia_faturamento_valoricms"); 
+                        conta_valorPis = resultadoBanco.getString("conta_energia_faturamento_valorpis"); 
+                        conta_Vencimento = resultadoBanco.getString("conta_energia_vencimento"); 
+                    }
+                    txt_contaId.setText(conta_id);
+                    txt_EnergiaAliquotaIcms.setText(conta_aliqIcms);
+                    txt_EnergiaAliquotaPis.setText(conta_aliqPis);
+                    txt_EnergiaBaseICMS.setText(conta_baseIcms);
+                    txt_EnergiaBasePisCofins.setText(conta_basePis);
+                    txt_EnergiaCci.setText(conta_cci);
+                    txt_EnergiaCompetencia.setText(conta_competencia);
+                    txt_EnergiaConstMult.setText(conta_constMult);
+                    txt_EnergiaConsumoLeituraAtual.setText(conta_consLeitAtual);
+                    txt_EnergiaConsumoMes.setText(conta_consMes);
+                    txt_EnergiaCor.setText(conta_bandCor);
+                    txt_EnergiaDescricao.setText(conta_consDescricao);
+                    txt_EnergiaDescricaoProduto.setText(conta_fatDescProduto);
+                    txt_EnergiaDiasFaturamento.setText(conta_fatDias);
+                    txt_EnergiaEmissao.setText(conta_fatEmissao);
+                    txt_EnergiaKwhMes.setText(conta_consKwh);
+                    txt_EnergiaLeituraAtual.setText(conta_fatLeitAtual);
+                    txt_EnergiaNMedidor.setText(conta_consMedidor);
+                    txt_EnergiaPeriodo.setText(conta_bandInicio);
+                    txt_EnergiaPeriodo2.setText(conta_bandFim);
+                    txt_EnergiaQuantidade.setText(conta_fatQtd);
+                    txt_EnergiaTarifaAplicada.setText(conta_fatTariAplicada);
+                    txt_EnergiaTarifaImposto.setText(conta_fatTariImposto);
+                    txt_EnergiaValor.setText(conta_valor);
+                    txt_EnergiaValorFornecedor.setText(conta_valorFornecido);
+                    txt_EnergiaValorIcms.setText(conta_valorIcms);
+                    txt_EnergiaValorPis.setText(conta_valorPis);
+                    txt_EnergiaVencimento.setText(conta_Vencimento);
+            
+            }catch(Exception ex) { Logger.getLogger(Form_CadClienteController.class.getName()).log(Level.SEVERE, null, ex);}
+            
+        }else{ limparContaEnergia();}
         
     }    
 
     @FXML
     private void salvarEnergia(ActionEvent event) throws Exception {
-        
+
         String instalacao_id = Form_CadContaController.contaInstalacaoId;
         String instalacao_numero = Form_CadContaController.contaInstalacaoNum;
         String cliente_id = Form_CadContaController.clienteId;
+        String conta_Id = txt_contaId.getText();
         String conta_aliqIcms = txt_EnergiaAliquotaIcms.getText();
         String conta_aliqPis = txt_EnergiaAliquotaPis.getText();
         String conta_baseIcms = txt_EnergiaBaseICMS.getText();
@@ -131,7 +243,53 @@ public class Form_cadContaEnergiaController implements Initializable {
         String conta_valorIcms = txt_EnergiaValorIcms.getText();
         String conta_valorPis = txt_EnergiaValorPis.getText();
         String conta_Vencimento = txt_EnergiaVencimento.getText();
+        
+        if(Integer.parseInt(conta_Id) != 0)
+        {
+            
+            Connection conn = null;
+            ResultSet resultadoBanco = null;
+            conn = DBConexao.abrirConexao();
+            Statement stm = conn.createStatement();
+                        
+            String sql;
+            sql = "UPDATE conta_energia SET "
+                    + "conta_energia_valor = '"+ conta_valor +"', "
+                    + "conta_energia_competencia = '"+ conta_competencia +"', "
+                    + "conta_energia_consumo_mes = '"+ conta_consMes +"', "
+                    + "conta_energia_vencimento = '"+ conta_Vencimento +"', "
+                    + "conta_energia_bandeira_cor = '"+ conta_bandCor +"', "
+                    + "conta_energia_bandeira_periodoini = '"+ conta_bandInicio +"', "
+                    + "conta_energia_bandeira_periodo_fim = '"+ conta_bandFim +"', "
+                    + "conta_energia_faturamento_emissao = '"+ conta_fatEmissao +"', "
+                    + "conta_energia_faturamento_leitatual = '"+ conta_fatLeitAtual +"', "
+                    + "conta_energia_faturamento_dias = '"+ conta_fatDias +"', "
+                    + "conta_energia_faturamento_cci = '"+ conta_cci +"', "
+                    + "conta_energia_faturamento_produto = '"+ conta_fatDescProduto +"', "
+                    + "conta_energia_faturamento_qtd = '"+ conta_fatQtd +"', "
+                    + "conta_energia_faturamento_tarifa = '"+ conta_fatTariAplicada +"', "
+                    + "conta_energia_faturamento_valorfornecido = '"+ conta_valorFornecido +"', "
+                    + "conta_energia_faturamento_tarifaimposto = '"+ conta_fatTariImposto +"', "
+                    + "conta_energia_faturamento_baseicms = '"+ conta_baseIcms +"', "
+                    + "conta_energia_faturamento_aliqicms = '"+ conta_aliqIcms +"', "
+                    + "conta_energia_faturamento_valoricms = '"+ conta_valorIcms +"', "
+                    + "conta_energia_faturamento_basepis = '"+ conta_basePis +"', "
+                    + "conta_energia_faturamento_aliqpis = '"+ conta_aliqPis +"', "
+                    + "conta_energia_faturamento_valorpis = '"+ conta_valorPis +"', "
+                    + "conta_energia_consumo_descricao = '"+ conta_consDescricao +"', "
+                    + "conta_energia_consumo_medidor = '"+ conta_consMedidor +"', "
+                    + "conta_energia_consumo_leitatual = '"+ conta_consLeitAtual +"', "
+                    + "conta_energia_consumo_constmult = '"+ conta_constMult +"', "
+                    + "conta_energia_consumo_kwh = '"+ conta_consKwh +"' "                  
+                    + "WHERE conta_id = "+ conta_Id +";";        
+            stm.executeUpdate(sql);
+            
+            System.out.println("Deu certo");
+            
+        }else{
+        
         int conta_id = 0;
+        
         
         Connection conn = null;
         conn = DBConexao.abrirConexao();
@@ -195,11 +353,40 @@ public class Form_cadContaEnergiaController implements Initializable {
             stm.executeUpdate(query);
             System.out.println("Dados Cadastrados com sucesso!!!");
               
-        
+        }
     }
 
     @FXML
-    private void limparContaEnergia(ActionEvent event) {
+    private void limparContaEnergia()
+    {
+         txt_contaId.setText("");
+            txt_EnergiaAliquotaIcms.setText("");
+            txt_EnergiaAliquotaPis.setText("");
+            txt_EnergiaBaseICMS.setText("");
+            txt_EnergiaBasePisCofins.setText("");
+            txt_EnergiaCci.setText("");
+            txt_EnergiaCompetencia.setText("");
+            txt_EnergiaConstMult.setText("");
+            txt_EnergiaConsumoLeituraAtual.setText("");
+            txt_EnergiaConsumoMes.setText("");
+            txt_EnergiaCor.setText("");
+            txt_EnergiaDescricao.setText("");
+            txt_EnergiaDescricaoProduto.setText("");
+            txt_EnergiaDiasFaturamento.setText("");
+            txt_EnergiaEmissao.setText("");
+            txt_EnergiaKwhMes.setText("");
+            txt_EnergiaLeituraAtual.setText("");
+            txt_EnergiaNMedidor.setText("");
+            txt_EnergiaPeriodo.setText("");
+            txt_EnergiaPeriodo2.setText("");
+            txt_EnergiaQuantidade.setText("");
+            txt_EnergiaTarifaAplicada.setText("");
+            txt_EnergiaTarifaImposto.setText("");
+            txt_EnergiaValor.setText("");
+            txt_EnergiaValorFornecedor.setText("");
+            txt_EnergiaValorIcms.setText("");
+            txt_EnergiaValorPis.setText("");
+            txt_EnergiaVencimento.setText("");
     }
     
 }

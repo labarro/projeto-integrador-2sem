@@ -77,5 +77,6 @@
       <TextField fx:id="txt_EnergiaDescricao" layoutX="79.0" layoutY="264.0" prefHeight="25.0" prefWidth="128.0" />
       <Button fx:id="btn_salvarContaEnergia" layoutX="268.0" layoutY="543.0" mnemonicParsing="false" onAction="#salvarEnergia" text="Salvar" />
       <Button fx:id="btn_limparContaEnergia" layoutX="354.0" layoutY="543.0" mnemonicParsing="false" onAction="#limparContaEnergia" text="Limpar" />
+      <TextField fx:id="txt_contaId" layoutX="610.0" layoutY="37.0" prefHeight="25.0" prefWidth="21.0" text="0" visible="false" />
    </children>
 </Pane>

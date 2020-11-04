@@ -11,6 +11,79 @@ package yourcad;
  */
 public class ContaEnergia {
 
+    private int conta_energiaId;
+    private String instalacao_id;
+    private String cliente_id;
+    private String numeroInstalacao;
+    private String apelidoInstalacao;
+    private String conta_aliqIcms;
+    private String conta_aliqPis;
+    private String conta_baseIcms;
+    private String conta_basePis;
+    private String conta_cci;
+    private String conta_competencia;
+    private String conta_constMult;
+    private String conta_consLeitAtual;
+    private String conta_consMes;
+    private String conta_bandCor;
+    private String conta_consDescricao;
+    private String conta_fatDescProduto;
+    private String conta_fatDias;
+    private String conta_fatEmissao;
+    private String conta_consKwh;
+    private String conta_fatLeitAtual;
+    private String conta_consMedidor;
+    private String conta_bandInicio;
+    private String conta_bandFim;
+    private String conta_fatQtd;
+    private String conta_fatTariAplicada;
+    private String conta_fatTariImposto;
+    private String conta_valor;
+    private String conta_valorFornecido;
+    private String conta_valorIcms;
+    private String conta_valorPis;
+    private String conta_Vencimento;
+
+    public int getConta_energiaId() {
+        return conta_energiaId;
+    }
+
+    public void setConta_energiaId(int conta_energiaId) {
+        this.conta_energiaId = conta_energiaId;
+    }
+
+    public String getInstalacao_id() {
+        return instalacao_id;
+    }
+
+    public void setInstalacao_id(String instalacao_id) {
+        this.instalacao_id = instalacao_id;
+    }
+
+    public String getCliente_id() {
+        return cliente_id;
+    }
+
+    public void setCliente_id(String cliente_id) {
+        this.cliente_id = cliente_id;
+    }
+
+    public String getNumeroInstalacao() {
+        return numeroInstalacao;
+    }
+
+    public void setNumeroInstalacao(String numeroInstalacao) {
+        this.numeroInstalacao = numeroInstalacao;
+    }
+
+    public String getApelidoInstalacao() {
+        return apelidoInstalacao;
+    }
+
+    public void setApelidoInstalacao(String apelidoInstalacao) {
+        this.apelidoInstalacao = apelidoInstalacao;
+    }
+
     public String getConta_aliqIcms() {
         return conta_aliqIcms;
     }
@@ -105,37 +178,6 @@ public class ContaEnergia {
 
     public void setConta_fatDescProduto(String conta_fatDescProduto) {
         this.conta_fatDescProduto = conta_fatDescProduto;
-    }
-
-    public ContaEnergia(int conta_energiaId, String conta_aliqIcms, String conta_aliqPis, String conta_baseIcms, String conta_basePis, String conta_cci, String conta_competencia, String conta_constMult, String conta_consLeitAtual, String conta_consMes, String conta_bandCor, String conta_consDescricao, String conta_fatDescProduto, String conta_fatDias, String conta_fatEmissao, String conta_consKwh, String conta_fatLeitAtual, String conta_consMedidor, String conta_bandInicio, String conta_bandFim, String conta_fatQtd, String conta_fatTariAplicada, String conta_fatTariImposto, String conta_valor, String conta_valorFornecido, String conta_valorIcms, String conta_valorPis, String conta_Vencimento) {
-        this.conta_energiaId = conta_energiaId;
-        this.conta_aliqIcms = conta_aliqIcms;
-        this.conta_aliqPis = conta_aliqPis;
-        this.conta_baseIcms = conta_baseIcms;
-        this.conta_basePis = conta_basePis;
-        this.conta_cci = conta_cci;
-        this.conta_competencia = conta_competencia;
-        this.conta_constMult = conta_constMult;
-        this.conta_consLeitAtual = conta_consLeitAtual;
-        this.conta_consMes = conta_consMes;
-        this.conta_bandCor = conta_bandCor;
-        this.conta_consDescricao = conta_consDescricao;
-        this.conta_fatDescProduto = conta_fatDescProduto;
-        this.conta_fatDias = conta_fatDias;
-        this.conta_fatEmissao = conta_fatEmissao;
-        this.conta_consKwh = conta_consKwh;
-        this.conta_fatLeitAtual = conta_fatLeitAtual;
-        this.conta_consMedidor = conta_consMedidor;
-        this.conta_bandInicio = conta_bandInicio;
-        this.conta_bandFim = conta_bandFim;
-        this.conta_fatQtd = conta_fatQtd;
-        this.conta_fatTariAplicada = conta_fatTariAplicada;
-        this.conta_fatTariImposto = conta_fatTariImposto;
-        this.conta_valor = conta_valor;
-        this.conta_valorFornecido = conta_valorFornecido;
-        this.conta_valorIcms = conta_valorIcms;
-        this.conta_valorPis = conta_valorPis;
-        this.conta_Vencimento = conta_Vencimento;
     }
 
     public String getConta_fatDias() {
@@ -257,44 +299,17 @@ public class ContaEnergia {
     public void setConta_Vencimento(String conta_Vencimento) {
         this.conta_Vencimento = conta_Vencimento;
     }
-    
-    
 
-    public int getConta_energiaId() {
-        return conta_energiaId;
-    }
-
-    public void setConta_energiaId(int conta_energiaId) {
+    public ContaEnergia(int conta_energiaId, String numeroInstalacao, String apelidoInstalacao, String cliente_id, String conta_valor, String conta_competencia) {
         this.conta_energiaId = conta_energiaId;
+        this.cliente_id = cliente_id;
+        this.numeroInstalacao = numeroInstalacao;
+        this.apelidoInstalacao = apelidoInstalacao;
+        this.conta_competencia = conta_competencia;
+        this.conta_valor = conta_valor;
     }
 
-   
-    int conta_energiaId;
-    String conta_aliqIcms;
-    String conta_aliqPis;
-    String conta_baseIcms;
-    String conta_basePis;
-    String conta_cci;
-    String conta_competencia;
-    String conta_constMult;
-    String conta_consLeitAtual;
-    String conta_consMes;
-    String conta_bandCor;
-    String conta_consDescricao;
-    String conta_fatDescProduto;
-    String conta_fatDias;
-    String conta_fatEmissao;
-    String conta_consKwh;
-    String conta_fatLeitAtual;
-    String conta_consMedidor;
-    String conta_bandInicio;
-    String conta_bandFim;
-    String conta_fatQtd;
-    String conta_fatTariAplicada;
-    String conta_fatTariImposto;
-    String conta_valor;
-    String conta_valorFornecido;
-    String conta_valorIcms;
-    String conta_valorPis;
-    String conta_Vencimento;
+
+    
+    
 }

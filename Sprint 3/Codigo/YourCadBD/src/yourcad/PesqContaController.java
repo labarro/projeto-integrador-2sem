@@ -63,22 +63,19 @@ public class PesqContaController implements Initializable {
     private MenuItem menuItem_PesqConcessionaria;
     @FXML
     private Button btn_PesquisarCliente;
+    private TableColumn<ContaEnergia, String> col_NInstalacao;
+    private TableColumn<ContaEnergia,String> col_ApelidoInstalacao;
+    private TableColumn<ContaEnergia,String> col_cliente;
+    private TableColumn<ContaEnergia,String> col_ValorConta;
+    private TableColumn<ContaEnergia,String> col_CompetenciaConta;
+    @FXML
+    private TextField txt_NumInstalacao;
+    private TableView<ContaEnergia> tbview_Contas;
+    private ScrollPane sPane_01;
     @FXML
     private ScrollPane tbview_PesqContas;
     @FXML
-    private TableColumn<String, ContaEnergia> col_NInstalacao;
-    @FXML
-    private TableColumn<String, ContaEnergia> col_ApelidoInstalacao;
-    @FXML
-    private TableColumn<String, ContaEnergia> col_cliente;
-    @FXML
-    private TableColumn<String, ContaEnergia> col_ValorConta;
-    @FXML
-    private TableColumn<String, ContaEnergia> col_CompetenciaConta;
-    @FXML
-    private TextField txt_NumInstalacao;
-    @FXML
-    private TableView<ContaEnergia> tbview_Contas;
+    private Pane pane01;
 
 
     /**
@@ -105,6 +102,7 @@ public class PesqContaController implements Initializable {
 
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
+        PesqContaEnergiaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -155,71 +153,41 @@ public class PesqContaController implements Initializable {
     }
     // FIM MENU BAR //
     
+    static String numInstalacao = "0";
     private ObservableList<ContaEnergia> linhas_banco;
     @FXML
-    private void pesquisarConta(ActionEvent event) throws Exception {
+    public void pesquisarConta(ActionEvent event) throws Exception {
 
-        String numInstalacao = txt_NumInstalacao.getText();
+        numInstalacao = txt_NumInstalacao.getText();
         String tipoConta = null;
-        String contaId = null;
+        //String contaId = null;
         
         Connection conn = null;
+        ResultSet resultadoBanco0 = null;
         ResultSet resultadoBanco = null;
         conn = DBConexao.abrirConexao();
         Statement stm = conn.createStatement();
                 
         String sql0;
         sql0 = "SELECT * FROM conta WHERE conta_numero_instalacao = " + numInstalacao +";";
-        resultadoBanco = stm.executeQuery(sql0);
-        while(resultadoBanco.next())
+        resultadoBanco0 = stm.executeQuery(sql0);
+        while(resultadoBanco0.next())
         { 
-            contaId = resultadoBanco.getString("conta_id"); 
-            tipoConta = resultadoBanco.getString("conta_tipo"); 
+            //contaId = resultadoBanco0.getString("conta_id"); 
+            tipoConta = resultadoBanco0.getString("conta_tipo"); 
         }
-        
+         
         if("Energia".equals(tipoConta))
         {
-            //List<ContaEnergia> linhas_banco = new ArrayList<>();
-            linhas_banco = FXCollections.observableArrayList();
-              
-            String sql1;
-            sql1 = "SELECT conta.instalacao_id, instalacao.instalacao_apelido, cliente.cliente_nome, conta_energia_valor,"
-                  + " conta_energia_competencia, conta_energia_consumo_mes, conta_energia_vencimento, conta_energia_bandeira_cor, "
-                  + " conta_energia_bandeira_periodoini, conta_energia_bandeira_periodo_fim, conta_energia_faturamento_emissao, "
-                  + " conta_energia_faturamento_leitatual, conta_energia_faturamento_dias, conta_energia_faturamento_cci, "
-                  + " conta_energia_faturamento_produto, conta_energia_faturamento_qtd, conta_energia_faturamento_tarifa, "
-                  + " conta_energia_faturamento_valorfornecido, conta_energia_faturamento_tarifaimposto, conta_energia_faturamento_baseicms, "
-                  + " conta_energia_faturamento_aliqicms, conta_energia_faturamento_valoricms, conta_energia_faturamento_basepis, "  
-                  + " conta_energia_faturamento_aliqpis, conta_energia_faturamento_valorpis, conta_energia_consumo_descricao, "
-                  + " conta_energia_consumo_medidor FROM conta " 
-                  + " INNER JOIN conta_energia ON conta.conta_id = conta_energia.conta_id "
-                  + " INNER JOIN instalacao ON conta.instalacao_id = instalacao.instalacao_id "
-                  + " INNER JOIN cliente ON conta.cliente_id = cliente.cliente_id "
-                  + " WHERE conta.conta_id = " + contaId +";";
-            resultadoBanco = stm.executeQuery(sql1);
-           
-            while(resultadoBanco.next())
-            {
-                linhas_banco.add(new ContaEnergia(resultadoBanco.getInt(1),resultadoBanco.getString(1),resultadoBanco.getString(2),resultadoBanco.getString(3),resultadoBanco.getString(4),
-                resultadoBanco.getString(5),resultadoBanco.getString(6),resultadoBanco.getString(7),resultadoBanco.getString(8),
-                resultadoBanco.getString(9),resultadoBanco.getString(10),resultadoBanco.getString(11),resultadoBanco.getString(12),
-                resultadoBanco.getString(13),resultadoBanco.getString(14),resultadoBanco.getString(15),resultadoBanco.getString(16),
-                resultadoBanco.getString(17),resultadoBanco.getString(18),resultadoBanco.getString(19),resultadoBanco.getString(20),
-                resultadoBanco.getString(21),resultadoBanco.getString(22),resultadoBanco.getString(23),resultadoBanco.getString(24),
-                resultadoBanco.getString(25),resultadoBanco.getString(26),resultadoBanco.getString(27)));
-            }
-            
-            System.out.println(linhas_banco);
-            
-            col_NInstalacao.setCellValueFactory(new PropertyValueFactory<>("conta.instalacao_id"));
-            col_ApelidoInstalacao.setCellValueFactory(new PropertyValueFactory<>("instalacao.instalacao_apelido"));
-            col_cliente.setCellValueFactory(new PropertyValueFactory<>("cliente.cliente_nome"));
-            col_ValorConta.setCellValueFactory(new PropertyValueFactory<>("conta_energia_valor"));
-            col_CompetenciaConta.setCellValueFactory(new PropertyValueFactory<>("conta_energia_competencia"));
-
-            tbview_Contas.setItems(null);
-            tbview_Contas.setItems(linhas_banco);
-            
+            pane01.getChildren().clear();
+            Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("PesqContaEnergia.fxml"));
+            pane01.getChildren().add(newLoadedPane);          
+        }
+        if("Agua e Esgoto".equals(tipoConta))
+        {
+            pane01.getChildren().clear();
+            Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("PesqContaAgua.fxml"));
+            pane01.getChildren().add(newLoadedPane);          
         }
         
     }
