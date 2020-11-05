@@ -5,9 +5,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane prefHeight="317.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.PesqContaEnergiaController">
+<Pane prefHeight="317.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.PesqContaEnergiaController">
    <children>
+      <Button fx:id="btn_alterarConta" layoutX="230.0" layoutY="14.0" mnemonicParsing="false" onAction="#AlterarConta" text="Alterar Conta" />
+      <Button fx:id="btn_deletarConta" layoutX="354.0" layoutY="14.0" mnemonicParsing="false" onAction="#deletarConta" text="Deletar Conta" />
       <TableView fx:id="tbview_Contas" layoutY="52.0" prefHeight="265.0" prefWidth="655.0">
          <columns>
             <TableColumn fx:id="col_NInstalacao" prefWidth="104.0" text="Nº INSTALAÇÃO" />
@@ -17,7 +18,5 @@
             <TableColumn fx:id="col_CompetenciaConta" prefWidth="113.0" text="COMPETENCIA" />
          </columns>
       </TableView>
-      <Button fx:id="btn_alterarConta" layoutX="230.0" layoutY="14.0" mnemonicParsing="false" onAction="#AlterarConta" text="Alterar Conta" />
-      <Button fx:id="btn_deletarConta" layoutX="354.0" layoutY="14.0" mnemonicParsing="false" onAction="#deletarConta" text="Deletar Conta" />
    </children>
 </Pane>

@@ -25,9 +25,13 @@ import yourcad.DBConexao.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -121,6 +125,7 @@ public class PesqClienteController implements Initializable {
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
         PesqContaEnergiaController.contaAlterId = 0;
+        PesqContaAguaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -194,7 +199,6 @@ public class PesqClienteController implements Initializable {
                 + sql1 
                 + " ;";
         
-        System.out.println(sql);
         resultadoBanco = stm.executeQuery(sql);
        
         linhas_banco = FXCollections.observableArrayList();
@@ -241,18 +245,29 @@ public class PesqClienteController implements Initializable {
     @FXML
     public void DeletarCliente(ActionEvent event)throws IOException, SQLException, Exception{
         alterClienteId = table_lista_clientes.getSelectionModel().getSelectedItem().getCliente_id();
-        
-        Connection conn = null;
-        ResultSet resultadoBanco = null;
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusao");
+        alert.setHeaderText("Deseja realmente excluir este cliente?");
+        //alert.setContentText("Ao excluir não há como recuperar os dados");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+            Connection conn = null;
+            ResultSet resultadoBanco = null;
                      
-        conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
-            
-        String sql;
-        sql = "DELETE FROM cliente WHERE cliente_id = " +alterClienteId+";";
-        stm.executeUpdate(sql);
-        
-        PesqCliente(event);
+            conn = DBConexao.abrirConexao();
+            Statement stm = conn.createStatement();
+
+            String sql;
+            sql = "DELETE FROM cliente WHERE cliente_id = " +alterClienteId+";";
+            stm.executeUpdate(sql);
+
+            PesqCliente(event);
+        } 
+        else{ PesqCliente(event);}
+  
     }
 }
  

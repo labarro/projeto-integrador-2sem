@@ -24,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuBar;
@@ -60,45 +61,6 @@ public class Form_CadInstalacoesController implements Initializable {
     @FXML
     private AnchorPane ancPane_TelaInicio;
 
-    public ComboBox<String> getCbox_tipoInstalacao() {
-        return cbox_tipoInstalacao;
-    }
-
-    public void setCbox_tipoInstalacao(ComboBox<String> cbox_tipoInstalacao) {
-        this.cbox_tipoInstalacao = cbox_tipoInstalacao;
-    }
-
-    public TextField getTxt_idCliente() {
-        return txt_idCliente;
-    }
-
-    public void setTxt_idCliente(TextField txt_idCliente) {
-        this.txt_idCliente = txt_idCliente;
-    }
-
-    public TextField getTxt_numeroInstalacao() {
-        return txt_numeroInstalacao;
-    }
-
-    public void setTxt_numeroInstalacao(TextField txt_numeroInstalacao) {
-        this.txt_numeroInstalacao = txt_numeroInstalacao;
-    }
-
-    public TextField getTxt_apelidoInstalacao() {
-        return txt_apelidoInstalacao;
-    }
-
-    public void setTxt_apelidoInstalacao(TextField txt_apelidoInstalacao) {
-        this.txt_apelidoInstalacao = txt_apelidoInstalacao;
-    }
-
-    public TextField getTxt_idInstalacao() {
-        return txt_idInstalacao;
-    }
-
-    public void setTxt_idInstalacao(TextField txt_idInstalacao) {
-        this.txt_idInstalacao = txt_idInstalacao;
-    }
     @FXML
     private MenuItem menuItem_CadCliente;
     @FXML
@@ -139,6 +101,7 @@ public class Form_CadInstalacoesController implements Initializable {
         
         if(instalacao_id != 0)
         {
+            btn_limparInstalacao.setVisible(false);
             try{
                 Connection conn = null;
                 ResultSet resultadoBanco = null;
@@ -200,29 +163,29 @@ public class Form_CadInstalacoesController implements Initializable {
 
 
             // ComboBox Concessionaria
-            try{          
-                Connection conn = null;
-                ResultSet resultadoBanco = null;
-                conn = DBConexao.abrirConexao();
-                Statement stm = conn.createStatement();
-                resultadoBanco = stm.executeQuery("SELECT * FROM concessionaria;");
-
-                linhas_banco = FXCollections.observableArrayList();
-
-                while(resultadoBanco.next())
-                {                
-                    linhas_banco.add(new Concessionaria(resultadoBanco.getInt(1), resultadoBanco.getString(2), resultadoBanco.getString(3),
-                      resultadoBanco.getString(4), resultadoBanco.getString(5), resultadoBanco.getString(6), resultadoBanco.getString(7),
-                      resultadoBanco.getString(8), resultadoBanco.getString(9), resultadoBanco.getString(10), resultadoBanco.getString(11), 
-                      resultadoBanco.getString(12), resultadoBanco.getString(13)));
-                }
-
-                    cbox_concessionariaInstalacao.setItems(null);
-                    cbox_concessionariaInstalacao.setItems(linhas_banco);
-
-                }   catch (Exception ex) {
-                    Logger.getLogger(Form_CadInstalacoesController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//            try{          
+//                Connection conn = null;
+//                ResultSet resultadoBanco = null;
+//                conn = DBConexao.abrirConexao();
+//                Statement stm = conn.createStatement();
+//                resultadoBanco = stm.executeQuery("SELECT * FROM concessionaria;");
+//
+//                linhas_banco = FXCollections.observableArrayList();
+//
+//                while(resultadoBanco.next())
+//                {                
+//                    linhas_banco.add(new Concessionaria(resultadoBanco.getInt(1), resultadoBanco.getString(2), resultadoBanco.getString(3),
+//                      resultadoBanco.getString(4), resultadoBanco.getString(5), resultadoBanco.getString(6), resultadoBanco.getString(7),
+//                      resultadoBanco.getString(8), resultadoBanco.getString(9), resultadoBanco.getString(10), resultadoBanco.getString(11), 
+//                      resultadoBanco.getString(12), resultadoBanco.getString(13)));
+//                }
+//
+//                    cbox_concessionariaInstalacao.setItems(null);
+//                    cbox_concessionariaInstalacao.setItems(linhas_banco);
+//
+//                }   catch (Exception ex) {
+//                    Logger.getLogger(Form_CadInstalacoesController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
         
         }
     }
@@ -242,6 +205,7 @@ public class Form_CadInstalacoesController implements Initializable {
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
         PesqContaEnergiaController.contaAlterId = 0;
+        PesqContaAguaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -288,7 +252,7 @@ public class Form_CadInstalacoesController implements Initializable {
     }
     // FIM MENU BAR //
     @FXML
-    private void chama_painel(ActionEvent event) throws IOException {
+    private void chama_painel() throws IOException {
         String tipo = cbox_tipoInstalacao.getValue();
         
         if(tipo == "Agua e Esgoto")
@@ -315,30 +279,49 @@ public class Form_CadInstalacoesController implements Initializable {
         String numero_Instalacao = txt_numeroInstalacao.getText();
         String tipo_instalacao = cbox_tipoInstalacao.getValue();
         String id_instalacao = txt_idInstalacao.getText();
-        
+
         if(inst_id == 0)
         {
             Connection conn = null;
+            ResultSet resultadoBanco = null;
             conn = DBConexao.abrirConexao();
-            Statement stm = conn.createStatement();
-            String query;
-            query = "INSERT INTO instalacao(instalacao_numero, instalacao_apelido, instalacao_tipo, cliente_id) VALUES "
-                + "('"+ numero_Instalacao +"','"
-                    + apelido_instalacao +"','"
-                    + tipo_instalacao +"','"
-                    + cliente_id + "');";
-            System.out.println(query);
-            stm.executeUpdate(query);
             
-            Statement stm0 = conn.createStatement();
-            String query0;
-            query0 = "SELECT LAST_INSERT_ID();";
-            ResultSet resultado = stm.executeQuery(query0);
+            String query3;
+            String inst_num = null;
+            query3 = "SELECT * FROM instalacao WHERE instalacao_numero = '"+numero_Instalacao+"'";
+            Statement stm3 = conn.createStatement();
+            resultadoBanco = stm3.executeQuery(query3);
+            while(resultadoBanco.next()){ inst_num = resultadoBanco.getString("instalacao_numero");}
             
-            while(resultado.next())
+            if(inst_num != null)
             {
-                instalacao_id = resultado.getInt("LAST_INSERT_ID()");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERRO");
+                alert.setHeaderText("Instalação ja cadastrada !");
+                alert.showAndWait();
+                
+                txt_numeroInstalacao.requestFocus();
             }
+            else{
+                Statement stm = conn.createStatement();
+                String query;
+                query = "INSERT INTO instalacao(instalacao_numero, instalacao_apelido, instalacao_tipo, cliente_id) VALUES "
+                    + "('"+ numero_Instalacao +"','"
+                        + apelido_instalacao +"','"
+                        + tipo_instalacao +"','"
+                        + cliente_id + "');";
+                stm.executeUpdate(query);
+
+                Statement stm0 = conn.createStatement();
+                String query0;
+                query0 = "SELECT LAST_INSERT_ID();";
+                ResultSet resultado = stm.executeQuery(query0);
+
+                while(resultado.next()){ instalacao_id = resultado.getInt("LAST_INSERT_ID()");}
+
+                chama_painel();
+            }
+            
         }else
         {
             Connection conn = null;
@@ -354,6 +337,8 @@ public class Form_CadInstalacoesController implements Initializable {
                     + "instalacao_tipo = '"+ tipo_instalacao +"' "            
                     + "WHERE instalacao_id = "+ id_instalacao +";";
             stm.executeUpdate(sql);
+                        
+
         }
         
     }

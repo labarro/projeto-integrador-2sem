@@ -9,6 +9,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -139,34 +142,44 @@ public class PesqContaEnergiaController implements Initializable {
             conta_tipo = resultadoBanco.getString("conta_tipo");
         }
             
-        System.out.println(conta_tipo);
-        System.out.println(contaAlterId);
-        if("Energia".equals(conta_tipo))
-        {
-            Statement stm1 = conn.createStatement();
-            String sql1;
-            sql1 = "DELETE FROM conta WHERE conta_id = " +contaAlterId+";";
-            stm1.executeUpdate(sql1);
-            
-            Statement stm2 = conn.createStatement();
-            String sql2;
-            sql2 = "DELETE FROM conta_energia WHERE conta_id = "+contaAlterId+";";
-            stm2.executeUpdate(sql2);
-        }
-        if("Agua e Esgoto".equals(conta_tipo))
-        {
-            Statement stm1 = conn.createStatement();
-            String sql1;
-            sql1 = "DELETE FROM conta WHERE conta_id = " +contaAlterId+";";
-            stm1.executeUpdate(sql1);
-            
-            Statement stm2 = conn.createStatement();
-            String sql2;
-            sql2 = "DELETE FROM conta_agua WHERE conta_id = "+contaAlterId+";";
-            stm2.executeUpdate(sql2);
-        }     
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusao");
+        alert.setHeaderText("Deseja realmente excluir este cliente?");
+        //alert.setContentText("Ao excluir não há como recuperar os dados");  
         
-        popular_tbView();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+            if("Energia".equals(conta_tipo))
+            {
+                Statement stm1 = conn.createStatement();
+                String sql1;
+                sql1 = "DELETE FROM conta WHERE conta_id = " +contaAlterId+";";
+                stm1.executeUpdate(sql1);
+
+                Statement stm2 = conn.createStatement();
+                String sql2;
+                sql2 = "DELETE FROM conta_energia WHERE conta_id = "+contaAlterId+";";
+                stm2.executeUpdate(sql2);
+            }
+            if("Agua e Esgoto".equals(conta_tipo))
+            {
+                Statement stm1 = conn.createStatement();
+                String sql1;
+                sql1 = "DELETE FROM conta WHERE conta_id = " +contaAlterId+";";
+                stm1.executeUpdate(sql1);
+
+                Statement stm2 = conn.createStatement();
+                String sql2;
+                sql2 = "DELETE FROM conta_agua WHERE conta_id = "+contaAlterId+";";
+                stm2.executeUpdate(sql2);
+            }     
+            popular_tbView();
+        } 
+        else{ popular_tbView();}
+        
+        
+        
         
     }
    

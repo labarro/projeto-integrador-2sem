@@ -26,6 +26,7 @@ import yourcad.DBConexao.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -175,6 +176,7 @@ public class Form_CadConcessionariaController implements Initializable {
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
         PesqContaEnergiaController.contaAlterId = 0;
+        PesqContaAguaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -227,7 +229,7 @@ public class Form_CadConcessionariaController implements Initializable {
     // FIM MENU BAR //
     
     @FXML
-    private void btn_Limpar(ActionEvent event) {
+    private void btn_Limpar() {
         txtFld_NomeConcessionaria.setText("");
         txtFld_CnpjConcessionaria.setText("");
         txtFld_InscEstadualConcessionaria.setText("");
@@ -285,6 +287,11 @@ public class Form_CadConcessionariaController implements Initializable {
                     + "WHERE concessionaria_id = "+ idconcessionaria +";";
                        
             stm.executeUpdate(sql);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados alterados com sucesso !");
+            alert.showAndWait();
             
         }else{
             //Declarando os campos de texto para variaveis
@@ -345,9 +352,13 @@ public class Form_CadConcessionariaController implements Initializable {
                 + EmailConcessionaria +"','"
                 + SiteConcessionaria +"');";
         
-        System.out.println(query);  // TESTE DE FUNCIONAMENTO
         stm.executeUpdate(query);
-        System.out.println("Dados Cadastrados com sucesso!!!");
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados salvos com sucesso !");
+            alert.showAndWait();
+            btn_Limpar();
         }
     }
                     

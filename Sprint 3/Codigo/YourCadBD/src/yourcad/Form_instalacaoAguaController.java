@@ -15,11 +15,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import static yourcad.Form_CadClienteController.alterInstalacaoId;
+import static yourcad.Form_CadClienteController.clienteInstalacao;
 
 /**
  * FXML Controller class
@@ -102,100 +109,6 @@ public class Form_instalacaoAguaController implements Initializable {
         }
                 
     }    
-        
-        
-    public Form_instalacaoAguaController() {
-        
-        
-    }
-
-    public Pane getPanel_instAgua() {
-        return panel_instAgua;
-    }
-
-    public void setPanel_instAgua(Pane panel_instAgua) {
-        this.panel_instAgua = panel_instAgua;
-    }
-
-    public TextField getTxt_hidrometroAgua() {
-        return txt_hidrometroAgua;
-    }
-
-    public void setTxt_hidrometroAgua(TextField txt_hidrometroAgua) {
-        this.txt_hidrometroAgua = txt_hidrometroAgua;
-    }
-
-    public TextField getTxt_codsabespAgua() {
-        return txt_codsabespAgua;
-    }
-
-    public void setTxt_codsabespAgua(TextField txt_codsabespAgua) {
-        this.txt_codsabespAgua = txt_codsabespAgua;
-    }
-
-    public TextField getTxt_economiasAgua() {
-        return txt_economiasAgua;
-    }
-
-    public void setTxt_economiasAgua(TextField txt_economiasAgua) {
-        this.txt_economiasAgua = txt_economiasAgua;
-    }
-
-    public TextField getTxt_codclienteAgua() {
-        return txt_codclienteAgua;
-    }
-
-    public void setTxt_codclienteAgua(TextField txt_codclienteAgua) {
-        this.txt_codclienteAgua = txt_codclienteAgua;
-    }
-
-    public TextField getTxt_tipoLigacao() {
-        return txt_tipoLigacao;
-    }
-
-    public void setTxt_tipoLigacao(TextField txt_tipoLigacao) {
-        this.txt_tipoLigacao = txt_tipoLigacao;
-    }
-
-    public static String getHidrometro() {
-        return hidrometro;
-    }
-
-    public static void setHidrometro(String hidrometro) {
-        Form_instalacaoAguaController.hidrometro = hidrometro;
-    }
-
-    public static String getCodigoCliente() {
-        return codigoCliente;
-    }
-
-    public static void setCodigoCliente(String codigoCliente) {
-        Form_instalacaoAguaController.codigoCliente = codigoCliente;
-    }
-
-    public static String getCodigoSabesp() {
-        return codigoSabesp;
-    }
-
-    public static void setCodigoSabesp(String codigoSabesp) {
-        Form_instalacaoAguaController.codigoSabesp = codigoSabesp;
-    }
-
-    public static String getEconomias() {
-        return economias;
-    }
-
-    public static void setEconomias(String economias) {
-        Form_instalacaoAguaController.economias = economias;
-    }
-
-    public static String getTipoLigacao() {
-        return tipoLigacao;
-    }
-
-    public static void setTipoLigacao(String tipoLigacao) {
-        Form_instalacaoAguaController.tipoLigacao = tipoLigacao;
-    }
 
     @FXML
     private void salvarInstAgua(ActionEvent event) throws SQLException, Exception {
@@ -228,6 +141,22 @@ public class Form_instalacaoAguaController implements Initializable {
                     + economias +"','"
                     + tipoLigacao +"');";
             stm.executeUpdate(query1);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados salvos com sucesso !");
+            alert.showAndWait();
+            
+            Form_CadClienteController.alterInstalacaoId = 0;
+        
+            Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadInstalacoes.fxml"));
+            Scene home_page_scene = new Scene(home_page_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.hide();
+            app_stage.setScene(home_page_scene);
+            app_stage.show();
+            
+            
       }else
         {
             Connection conn = null;
@@ -246,6 +175,12 @@ public class Form_instalacaoAguaController implements Initializable {
                     + "WHERE instalacao_id = "+ inst_id +";";
             
             stm.executeUpdate(sql);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados alterados com sucesso !");
+            alert.showAndWait();
+            
         }
         
     }

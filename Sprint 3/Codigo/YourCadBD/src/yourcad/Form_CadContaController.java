@@ -70,13 +70,39 @@ public class Form_CadContaController implements Initializable {
      */
     
     static int conta_Id = 0;
+    public int contaId = 0;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        int contaId = PesqContaEnergiaController.contaAlterId;
+        String sql0 = null;
+        
+        if (PesqContaEnergiaController.contaAlterId != 0)
+        { 
+            contaId = PesqContaEnergiaController.contaAlterId;
+            
+            sql0 = "SELECT conta_energia.conta_id, conta_numero_instalacao, instalacao_numero, instalacao_apelido, cliente_nome, "
+            + " conta_energia_valor, conta_tipo, conta_energia_competencia FROM conta " 
+            + " INNER JOIN conta_energia ON conta.conta_id = conta_energia.conta_id "
+            + " INNER JOIN instalacao ON conta.instalacao_id = instalacao.instalacao_id "
+            + " INNER JOIN cliente ON conta.cliente_id = cliente.cliente_id "
+            + " WHERE conta.conta_id = " + contaId +";";
+        } 
+        else if (PesqContaAguaController.contaAlterId != 0)
+        { 
+            contaId = PesqContaAguaController.contaAlterId;
+            sql0 = "SELECT conta_agua.conta_id, conta_numero_instalacao, instalacao_numero, instalacao_apelido, cliente_nome, "
+            + " conta_agua_valor_atual_leitura, conta_tipo, conta_agua_mes FROM conta " 
+            + " INNER JOIN conta_agua ON conta.conta_id = conta_agua.conta_id "
+            + " INNER JOIN instalacao ON conta.instalacao_id = instalacao.instalacao_id "
+            + " INNER JOIN cliente ON conta.cliente_id = cliente.cliente_id "
+            + " WHERE conta.conta_id = " + contaId +";";
+        } else {txt_pesqInstalacao.setText("");}
+        
+                
         if(contaId != 0)
         {
+            btn_pesqInstalacao.setVisible(false);
             try{
 
                 Connection conn = null;
@@ -85,14 +111,8 @@ public class Form_CadContaController implements Initializable {
                 Statement stm = conn.createStatement();
 
                     //****** Selecionando tipo de instalação
-                    String sql0;              
-                    sql0 = "SELECT conta_energia.conta_id, conta_numero_instalacao, instalacao_numero, instalacao_apelido, cliente_nome, "
-                      + " conta_energia_valor, conta_tipo, conta_energia_competencia FROM conta " 
-                      + " INNER JOIN conta_energia ON conta.conta_id = conta_energia.conta_id "
-                      + " INNER JOIN instalacao ON conta.instalacao_id = instalacao.instalacao_id "
-                      + " INNER JOIN cliente ON conta.cliente_id = cliente.cliente_id "
-                      + " WHERE conta.conta_id = " + contaId +";";
 
+                    System.out.println(sql0);
                     resultadoBanco = stm.executeQuery(sql0);
 
                     String conta_id = null;
@@ -112,7 +132,7 @@ public class Form_CadContaController implements Initializable {
                     txt_apelido.setText(instalacao_apelido);
                     txt_pesqInstalacao.setText(conta_numero_instalacao);
                     txt_tipoInstalacao.setText(conta_tipo);
-
+            
             if("Agua e Esgoto".equals(conta_tipo))
             {
                conta_Id = Integer.parseInt(conta_id);
@@ -151,6 +171,7 @@ public class Form_CadContaController implements Initializable {
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
         PesqContaEnergiaController.contaAlterId = 0;
+        PesqContaAguaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -206,7 +227,9 @@ public class Form_CadContaController implements Initializable {
     static String clienteId;
     @FXML
     private void pesquisarInstalacao(ActionEvent event) throws Exception {
-               
+        
+
+        
         String numInstalacao = txt_pesqInstalacao.getText();
         
         Connection conn = null;
@@ -240,6 +263,7 @@ public class Form_CadContaController implements Initializable {
            contaInstalacaoId = inst_id;
            contaInstalacaoNum = inst_num;
            clienteId = inst_cliente;
+           conta_Id = Integer.parseInt("0");
            panel_contas.getChildren().clear();
            Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("Form_cadContaAgua.fxml"));
            panel_contas.getChildren().add(newLoadedPane); 
@@ -250,6 +274,7 @@ public class Form_CadContaController implements Initializable {
             contaInstalacaoId = inst_id;
             contaInstalacaoNum = inst_num;
             clienteId = inst_cliente;
+            conta_Id = Integer.parseInt("0");
             panel_contas.getChildren().clear();
             Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("Form_cadContaEnergia.fxml"));
             panel_contas.getChildren().add(newLoadedPane);

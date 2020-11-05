@@ -15,10 +15,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import static yourcad.Form_CadClienteController.alterInstalacaoId;
 
 /**
@@ -120,86 +126,6 @@ public class Form_instalacaoEnergiaController implements Initializable {
         
     }    
 
-    public TextField getTxt_codFiscalEnergia() {
-        return txt_codFiscalEnergia;
-    }
-
-    public void setTxt_codFiscalEnergia(TextField txt_codFiscalEnergia) {
-        this.txt_codFiscalEnergia = txt_codFiscalEnergia;
-    }
-
-    public TextField getTxt_codIdentificacaoEnergia() {
-        return txt_codIdentificacaoEnergia;
-    }
-
-    public void setTxt_codIdentificacaoEnergia(TextField txt_codIdentificacaoEnergia) {
-        this.txt_codIdentificacaoEnergia = txt_codIdentificacaoEnergia;
-    }
-
-    public TextField getTxt_grupoEnergia() {
-        return txt_grupoEnergia;
-    }
-
-    public void setTxt_grupoEnergia(TextField txt_grupoEnergia) {
-        this.txt_grupoEnergia = txt_grupoEnergia;
-    }
-
-    public TextField getTxt_subgrupoEnergia() {
-        return txt_subgrupoEnergia;
-    }
-
-    public void setTxt_subgrupoEnergia(TextField txt_subgrupoEnergia) {
-        this.txt_subgrupoEnergia = txt_subgrupoEnergia;
-    }
-
-    public TextField getTxt_classeEnergia() {
-        return txt_classeEnergia;
-    }
-
-    public void setTxt_classeEnergia(TextField txt_classeEnergia) {
-        this.txt_classeEnergia = txt_classeEnergia;
-    }
-
-    public TextField getTxt_tipofornecimentoEnergia() {
-        return txt_tipofornecimentoEnergia;
-    }
-
-    public void setTxt_tipofornecimentoEnergia(TextField txt_tipofornecimentoEnergia) {
-        this.txt_tipofornecimentoEnergia = txt_tipofornecimentoEnergia;
-    }
-
-    public TextField getTxt_modalidadeEnergia() {
-        return txt_modalidadeEnergia;
-    }
-
-    public void setTxt_modalidadeEnergia(TextField txt_modalidadeEnergia) {
-        this.txt_modalidadeEnergia = txt_modalidadeEnergia;
-    }
-
-    public TextField getTxt_roteiroEnergia() {
-        return txt_roteiroEnergia;
-    }
-
-    public void setTxt_roteiroEnergia(TextField txt_roteiroEnergia) {
-        this.txt_roteiroEnergia = txt_roteiroEnergia;
-    }
-
-    public TextField getTxt_tensaoEnergia() {
-        return txt_tensaoEnergia;
-    }
-
-    public void setTxt_tensaoEnergia(TextField txt_tensaoEnergia) {
-        this.txt_tensaoEnergia = txt_tensaoEnergia;
-    }
-
-    public TextField getTxt_medidorEnergia() {
-        return txt_medidorEnergia;
-    }
-
-    public void setTxt_medidorEnergia(TextField txt_medidorEnergia) {
-        this.txt_medidorEnergia = txt_medidorEnergia;
-    }
-
     @FXML
     private void salvarInstEnergia(ActionEvent event) throws SQLException, Exception {
         
@@ -246,6 +172,21 @@ public class Form_instalacaoEnergiaController implements Initializable {
                         + roteiro +"','"
                         + medidor +"');";
                 stm.executeUpdate(query1);
+                
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados salvos com sucesso !");
+            alert.showAndWait();
+            
+            Form_CadClienteController.alterInstalacaoId = 0;
+        
+            Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadInstalacoes.fxml"));
+            Scene home_page_scene = new Scene(home_page_parent);
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.hide();
+            app_stage.setScene(home_page_scene);
+            app_stage.show();
+            
         }else
         {
             Connection conn = null;
@@ -269,6 +210,11 @@ public class Form_instalacaoEnergiaController implements Initializable {
                     + "WHERE instalacao_id = "+ id_inst +";";
 
             stm.executeUpdate(sql);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados alterados com sucesso !");
+            alert.showAndWait();
         }
     }
     

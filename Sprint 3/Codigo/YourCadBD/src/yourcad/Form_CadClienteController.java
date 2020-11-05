@@ -233,6 +233,7 @@ public class Form_CadClienteController implements Initializable {
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
         PesqContaEnergiaController.contaAlterId = 0;
+        PesqContaAguaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -336,7 +337,6 @@ public class Form_CadClienteController implements Initializable {
             Connection conn = null;
             ResultSet resultadoBanco = null;
                      
-            DBConexao c = new DBConexao();
             conn = DBConexao.abrirConexao();
             Statement stm = conn.createStatement();
                         
@@ -355,6 +355,11 @@ public class Form_CadClienteController implements Initializable {
                     + "WHERE cliente_id = "+ cliente_id +";";
                        
             stm.executeUpdate(sql);
+            
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados alterados com sucesso !");
+            alert.showAndWait();
             
         }
         if (Integer.parseInt(cliente_id) == 0){           
@@ -420,7 +425,8 @@ public class Form_CadClienteController implements Initializable {
     //Variavel para levar o id do cliente para pagina de cadastro de instalacao
     static String clienteInstalacao;
     @FXML
-    private void cadInstalacao(ActionEvent event) throws IOException {
+    private void cadInstalacao(ActionEvent event) throws IOException 
+    {
         clienteInstalacao = txtFld_idCliente.getText();
         
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadInstalacoes.fxml"));

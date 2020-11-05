@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -284,7 +285,11 @@ public class Form_cadContaEnergiaController implements Initializable {
                     + "WHERE conta_id = "+ conta_Id +";";        
             stm.executeUpdate(sql);
             
-            System.out.println("Deu certo");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados alterados com sucesso !");
+            alert.showAndWait();
+
             
         }else{
         
@@ -349,17 +354,22 @@ public class Form_cadContaEnergiaController implements Initializable {
                         + conta_constMult +"','"
                         + conta_consKwh +"');";
         
-//          System.out.println(query);  // TESTE DE FUNCIONAMENTO
             stm.executeUpdate(query);
-            System.out.println("Dados Cadastrados com sucesso!!!");
+            
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Mensagem");
+            alert.setHeaderText("Dados salvos com sucesso !");
+            alert.showAndWait();
+            limparContaEnergia();
               
         }
     }
 
     @FXML
-    private void limparContaEnergia()
+    public void limparContaEnergia()
     {
-         txt_contaId.setText("");
+            txt_contaId.setText("0");
             txt_EnergiaAliquotaIcms.setText("");
             txt_EnergiaAliquotaPis.setText("");
             txt_EnergiaBaseICMS.setText("");

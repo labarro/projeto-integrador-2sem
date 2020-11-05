@@ -82,10 +82,8 @@ CREATE TABLE conta_agua (
 conta_id int(11),
 conta_agua_mes VARCHAR(10),
 conta_agua_vencimento VARCHAR(20),
-conta_agua_data_anterior_leitura VARCHAR(20),
 conta_agua_data_atual_leitura VARCHAR(20),
 conta_agua_data_previsao_proxima_leitura VARCHAR(20),
-conta_agua_valor_anterior VARCHAR(20),
 conta_agua_valor_atual_leitura VARCHAR(20),
 conta_agua_valor_agua VARCHAR(20),
 conta_agua_valor_esgoto VARCHAR(20),
@@ -93,7 +91,7 @@ conta_agua_multa VARCHAR(20),
 conta_agua_trcf VARCHAR(20),
 conta_agua_base_pis_cofins VARCHAR(20),
 conta_agua_aliquota_pis_cofins VARCHAR(20),
-PRIMARY KEY(conta_agua_id)
+PRIMARY KEY(conta_id)
 );
 
 CREATE TABLE conta_energia (
@@ -127,35 +125,3 @@ conta_energia_consumo_constmult VARCHAR(20),
 conta_energia_consumo_kwh VARCHAR(20),
 PRIMARY KEY(conta_id)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

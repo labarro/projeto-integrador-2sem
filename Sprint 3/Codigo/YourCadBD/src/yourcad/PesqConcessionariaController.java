@@ -38,6 +38,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import yourcad.DBConexao.*;
 import java.sql.*;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import yourcad.Form_CadConcessionariaController;
 import static yourcad.PesqClienteController.alterClienteId;
 import static yourcad.PesqClienteController.alterClienteNome;
@@ -112,6 +115,7 @@ public class PesqConcessionariaController implements Initializable {
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
         PesqContaEnergiaController.contaAlterId = 0;
+        PesqContaAguaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -165,6 +169,10 @@ public class PesqConcessionariaController implements Initializable {
     @FXML
     private void pesquisar_Concessionaria(ActionEvent event) throws SQLException, Exception {
         
+        String nome_concessionaria = txtFld_Concessionaria.getText();
+        String doc_concessionaria = txtFld_CnpjConcessionara.getText();
+        
+        
         Connection conn = null;
         ResultSet resultadoBanco = null;
         
@@ -173,7 +181,18 @@ public class PesqConcessionariaController implements Initializable {
         
         //List<Concessionaria> concessionaria = new ArrayList<>();
         
-        resultadoBanco = stm.executeQuery("SELECT * FROM concessionaria;");
+        
+        String sql;
+        String sql1 = null;
+        if(!"".equals(nome_concessionaria)){ sql1 = " WHERE concessionaria_nome LIKE '%"+ nome_concessionaria +"%' ";}
+        else if(!"".equals(doc_concessionaria)){ sql1 = " WHERE concessionaria_cnpj LIKE '%"+ doc_concessionaria +"%' ";}
+        else if(!"".equals(nome_concessionaria) && !"".equals(doc_concessionaria)){ sql1 = " WHERE concessionaria_nome LIKE '%"+nome_concessionaria+"%' && concessionaria_cnpj LIKE '%"+ doc_concessionaria +"%' ";}
+        else{sql1 = "";}
+        sql = "SELECT * FROM concessionaria "
+                + sql1 
+                + " ;";
+
+        resultadoBanco = stm.executeQuery(sql);
 
        
         linhas_banco = FXCollections.observableArrayList();
@@ -215,18 +234,29 @@ public class PesqConcessionariaController implements Initializable {
     @FXML
     private void deletar_concessionaria(ActionEvent event) throws Exception {
         alterConcessionariaId = tbview_PesqConcessionaria.getSelectionModel().getSelectedItem().getConcessionaria_id();
+  
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusao");
+        alert.setHeaderText("Deseja realmente excluir este cliente?");
+        //alert.setContentText("Ao excluir não há como recuperar os dados");
         
-        Connection conn = null;
-        ResultSet resultadoBanco = null;
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+            Connection conn = null;
+            ResultSet resultadoBanco = null;
                      
-        conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
-            
-        String sql;
-        sql = "DELETE FROM concessionaria WHERE concessionaria_id = " +alterConcessionariaId+";";
-        stm.executeUpdate(sql);
+            conn = DBConexao.abrirConexao();
+            Statement stm = conn.createStatement();
+
+            String sql;
+            sql = "DELETE FROM concessionaria WHERE concessionaria_id = " +alterConcessionariaId+";";
+            stm.executeUpdate(sql);
+
+            pesquisar_Concessionaria(event);
+        }
+        else{ pesquisar_Concessionaria(event);}
         
-        pesquisar_Concessionaria(event);
     }
 }
  

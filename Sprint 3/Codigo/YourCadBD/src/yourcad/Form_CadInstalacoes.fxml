@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="mainPane" prefHeight="458.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.Form_CadInstalacoesController">
+<BorderPane fx:id="mainPane" prefHeight="458.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.Form_CadInstalacoesController">
    <top>
       <AnchorPane fx:id="ancPane_TelaInicio" prefHeight="28.0" prefWidth="686.0" BorderPane.alignment="CENTER">
          <children>
@@ -41,16 +45,15 @@
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="txt_idCliente" layoutX="637.0" layoutY="14.0" prefHeight="25.0" prefWidth="35.0" visible="false" />
-            <TextField fx:id="txt_numeroInstalacao" layoutX="97.0" layoutY="22.0" prefHeight="25.0" prefWidth="217.0" />
-            <TextField fx:id="txt_apelidoInstalacao" layoutX="371.0" layoutY="22.0" />
-            <TextField fx:id="txt_idInstalacao" layoutX="638.0" layoutY="51.0" prefHeight="25.0" prefWidth="34.0" visible="false" />
             <Label layoutX="20.0" layoutY="26.0" prefHeight="17.0" prefWidth="73.0" text="Nº Instalação:" />
+            <TextField fx:id="txt_numeroInstalacao" layoutX="97.0" layoutY="22.0" prefHeight="25.0" prefWidth="217.0" />
             <Label layoutX="321.0" layoutY="26.0" text="Apelido:" />
-            <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" onAction="#chama_painel" prefWidth="150.0" />
-            <ComboBox fx:id="cbox_concessionariaInstalacao" disable="true" editable="true" layoutX="370.0" layoutY="64.0" prefWidth="150.0" visible="false" />
-            <Label layoutX="20.0" layoutY="68.0" />
-            <Label disable="true" layoutX="280.0" layoutY="68.0" text="Concessionaria:" visible="false" />
+            <TextField fx:id="txt_apelidoInstalacao" layoutX="371.0" layoutY="22.0" />
             <Label layoutX="24.0" layoutY="68.0" text="Tipo:" />
+            <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" prefWidth="150.0" />
+            <TextField fx:id="txt_idInstalacao" layoutX="638.0" layoutY="51.0" prefHeight="25.0" prefWidth="34.0" visible="false" />
+            <ComboBox fx:id="cbox_concessionariaInstalacao" disable="true" editable="true" layoutX="370.0" layoutY="64.0" prefWidth="150.0" visible="false" />
+            <Label disable="true" layoutX="280.0" layoutY="68.0" text="Concessionaria:" visible="false" />
             <ScrollPane layoutX="20.0" layoutY="158.0" pannable="true" prefHeight="258.0" prefViewportHeight="218.0" prefViewportWidth="644.0" prefWidth="646.0">
                <content>
                   <Pane fx:id="panel_01" layoutX="20.0" layoutY="10.0" prefHeight="256.0" prefWidth="644.0" />

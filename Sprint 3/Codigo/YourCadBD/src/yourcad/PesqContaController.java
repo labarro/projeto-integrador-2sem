@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -103,6 +104,7 @@ public class PesqContaController implements Initializable {
     @FXML
     private void gotoConta(ActionEvent event) throws IOException {
         PesqContaEnergiaController.contaAlterId = 0;
+        PesqContaAguaController.contaAlterId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConta.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -161,35 +163,45 @@ public class PesqContaController implements Initializable {
         numInstalacao = txt_NumInstalacao.getText();
         String tipoConta = null;
         //String contaId = null;
-        
-        Connection conn = null;
-        ResultSet resultadoBanco0 = null;
-        ResultSet resultadoBanco = null;
-        conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
-                
-        String sql0;
-        sql0 = "SELECT * FROM conta WHERE conta_numero_instalacao = " + numInstalacao +";";
-        resultadoBanco0 = stm.executeQuery(sql0);
-        while(resultadoBanco0.next())
-        { 
-            //contaId = resultadoBanco0.getString("conta_id"); 
-            tipoConta = resultadoBanco0.getString("conta_tipo"); 
-        }
-         
-        if("Energia".equals(tipoConta))
+            
+        if("".equals(numInstalacao))
         {
-            pane01.getChildren().clear();
-            Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("PesqContaEnergia.fxml"));
-            pane01.getChildren().add(newLoadedPane);          
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRO");
+            alert.setHeaderText("Digite uma Instalação para pesquisa !");
+            alert.showAndWait();
+            
+            txt_NumInstalacao.requestFocus();
         }
-        if("Agua e Esgoto".equals(tipoConta))
-        {
-            pane01.getChildren().clear();
-            Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("PesqContaAgua.fxml"));
-            pane01.getChildren().add(newLoadedPane);          
+        else{
+            Connection conn = null;
+            ResultSet resultadoBanco0 = null;
+            ResultSet resultadoBanco = null;
+            conn = DBConexao.abrirConexao();
+            Statement stm = conn.createStatement();
+
+            String sql0;
+            sql0 = "SELECT * FROM conta WHERE conta_numero_instalacao = " + numInstalacao +";";
+            resultadoBanco0 = stm.executeQuery(sql0);
+            while(resultadoBanco0.next())
+            { 
+                //contaId = resultadoBanco0.getString("conta_id"); 
+                tipoConta = resultadoBanco0.getString("conta_tipo"); 
+            }
+
+            if("Energia".equals(tipoConta))
+            {
+                pane01.getChildren().clear();
+                Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("PesqContaEnergia.fxml"));
+                pane01.getChildren().add(newLoadedPane);          
+            }
+            if("Agua e Esgoto".equals(tipoConta))
+            {
+                pane01.getChildren().clear();
+                Pane newLoadedPane =  FXMLLoader.load(getClass().getResource("PesqContaAgua.fxml"));
+                pane01.getChildren().add(newLoadedPane);          
+            }
         }
-        
     }
 }
  
