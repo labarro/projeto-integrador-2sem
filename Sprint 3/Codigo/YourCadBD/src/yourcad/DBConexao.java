@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class DBConexao { 
     
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "m1m2m3m4m5";
+    private static final String PASSWORD = "root";
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/yourcad";
     
     public static Connection abrirConexao() throws Exception
