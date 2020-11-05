@@ -54,11 +54,12 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
   #### Requisitos de Sistema:
 
   Java SE versão 1.8.0_271;
+  
   MySQL versão 5.7.31.
 
   #### Fazendo download do github:
 
-  - [No repositório do github](https://github.com/labarro/projeto-integrador-2sem), faça download do projeto clicando nos botões destacados na imagem abaixo. Agora, extraia o arquivo "projeto-integrador-2sem-master.zip" onde você tenha selecionado para salva-lo em seu dispositivo.
+  [No repositório do github](https://github.com/labarro/projeto-integrador-2sem), faça download do projeto clicando nos botões destacados na imagem abaixo. Agora, extraia o arquivo "projeto-integrador-2sem-master.zip" onde você tenha selecionado para salva-lo em seu dispositivo.
 
   ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/YCad_Instalacao.png)
   
