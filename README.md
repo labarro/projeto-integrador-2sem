@@ -43,32 +43,11 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
   #### Proposta:
       
   - [Story Cards para esta Sprint](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%203/Story%20Cards)
-  - [Vídeo demonstração do CRUD de Contas - YourCAD](https://youtu.be/w4OWx9PUwqo)
     
   #### Entrega:
-  
-  - [Codigo-Fonte YourCad 2.0](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%203/Codigo/YourCadBD)
+
+  - [Codigo-Fonte YourCad 4.3](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%203/Codigo/YourCadBD)
   - [Arquivos Banco de Dados](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%203/Database)
-
-  ## Instalação e Requisitos:
-
-  #### Requisitos de Sistema:
-
-  Java SE versão 1.8.0_271;
-  
-  MySQL versão 5.7.31.
-
-  #### Fazendo download do github:
-
-  [No repositório do github](https://github.com/labarro/projeto-integrador-2sem), faça download do projeto clicando nos botões destacados na imagem abaixo. Agora, extraia o arquivo "projeto-integrador-2sem-master.zip" onde você tenha selecionado para salva-lo em seu dispositivo.
-
-  ![](https://raw.githubusercontent.com/labarro/projeto-integrador-2sem/master/YCad_Instalacao.png)
-  
-  #### Como Instalar o Banco de Dados:
-  
-  Abra o arquivo "script3.1.sql" no bloco de notas, na pasta "Sprint 3\Database", dentro da pasta do projeto que foi extraida. Copie todo seu conteúdo e execute no "MySQL Command Line Client".
-
-  #### Como Executar a Aplicação:
-
-  Execute o arquivo "YourCad.jar" na pasta "Sprint 3" dentro da pasta do projeto, e então estará pronto para ser utilizado.
+  - [Documentação](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%203/Documentacao)
+  - [Vídeo demonstração do CRUD de Contas - YourCAD](https://youtu.be/w4OWx9PUwqo)
 
