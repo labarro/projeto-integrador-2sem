@@ -40,6 +40,8 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
   
   ## Sprint 3:
   
+  Na terceira Sprint o foco foi o CRUD para cadastro e pesquisa de instalações, possibilitando assim o CRUD de contas,  com isso o usuário consegue utilizar integralmente o sistema. Foi criada a documentação para auxiliar o usuário a fazer a instalação e execução do programa.
+  
   #### Proposta:
       
   - [Story Cards para esta Sprint](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%203/Story%20Cards)
