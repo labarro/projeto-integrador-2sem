@@ -134,6 +134,7 @@ usuario_login VARCHAR(100),
 usuario_senha VARCHAR(255),
 usuario_email VARCHAR(150),
 usuario_nivel_acesso VARCHAR(50),
+usuario_status VARCHAR(50),
 PRIMARY KEY(usuario_id)
 );
 
@@ -142,12 +143,14 @@ usuario_nome,
 usuario_login, 
 usuario_senha, 
 usuario_email, 
-usuario_nivel_acesso )
+usuario_nivel_acesso,
+usuario_status )
 VALUES (
 "Administrador",
 "admin",
 "123456",
 "a.a@a.com",
-"Administrador");
+"Administrador",
+"Ativo");
 
 

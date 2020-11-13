@@ -80,7 +80,21 @@ public class Form_LoginController implements Initializable {
             usuario_Login = resultadoBanco.getString("usuario_login");
             usuario_Nivel_Acesso = resultadoBanco.getString("usuario_nivel_acesso");
             usuario_Email = resultadoBanco.getString("usuario_email");
-            autenticado = true;
+            String usuario_Status = resultadoBanco.getString("usuario_status");
+            
+            if("Inativo".equals(usuario_Status))
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erro");
+                alert.setHeaderText("Usuario desativado, não é possivel fazer login");
+                alert.setContentText("Contate o administrador do sistema");
+                alert.showAndWait();
+                txt_Login.requestFocus();
+                
+                autenticado = false;
+            }
+            else{ autenticado = true; }
+            
         }
         
         if(autenticado == true)
@@ -91,7 +105,8 @@ public class Form_LoginController implements Initializable {
             app_stage.hide();
             app_stage.setScene(home_page_scene);
             app_stage.show();
-        }else
+        }
+        else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");

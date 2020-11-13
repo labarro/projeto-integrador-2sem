@@ -32,6 +32,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -59,35 +60,20 @@ public class PesqClienteController implements Initializable {
     @FXML
     private TextField txtFld_DocCliente;
     @FXML
-    private Button btn_PesquisarCliente;
-    @FXML
-    private TableColumn<String, Cliente> table_cliente_acao;
-    @FXML
-    private Button btn_alterarCliente;
-    @FXML
-    private Button btn_ExcluirCliente;
-    @FXML
     private Menu menu_Configuracao;
     @FXML
     private MenuItem menuItem_CadUsuarios;
     @FXML
     private MenuItem menuItem_PesqUsuarios;
+    @FXML
+    private Button btn_PesquisarCliente;
+    @FXML
+    private Button btn_alterarCliente;
+    @FXML
+    private Button btn_ExcluirCliente;
+    @FXML
+    private TableColumn<?, ?> table_cliente_acao;
 
-    public Form_CadClienteController getEnviaId() {
-        return enviaId;
-    }
-
-    public void setEnviaId(Form_CadClienteController enviaId) {
-        this.enviaId = enviaId;
-    }
-
-    public static String getAlterClienteNome() {
-        return alterClienteNome;
-    }
-
-    public static void setAlterClienteNome(String alterClienteNome) {
-        PesqClienteController.alterClienteNome = alterClienteNome;
-    }
     @FXML
     private MenuItem menuItem_CadConta;
     @FXML

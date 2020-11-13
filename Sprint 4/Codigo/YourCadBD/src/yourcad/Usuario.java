@@ -11,18 +11,27 @@ package yourcad;
  */
 public class Usuario 
 {
-    private String usuario_Id;
+    private int usuario_Id;
     private String usuario_Nome;
     private String usuario_Login;
     private String usuario_Senha;
     private String usuario_Email;
     private String usuario_Nivel_Acesso;
+    private String usuario_status;
 
-    public String getUsuario_Id() {
+    
+    public String getUsuario_status() {
+        return usuario_status;
+    }
+
+    public void setUsuario_status(String usuario_status) {
+        this.usuario_status = usuario_status;
+    }
+    public int getUsuario_Id() {
         return usuario_Id;
     }
 
-    public void setUsuario_Id(String usuario_Id) {
+    public void setUsuario_Id(int usuario_Id) {
         this.usuario_Id = usuario_Id;
     }
 
@@ -66,14 +75,18 @@ public class Usuario
         this.usuario_Nivel_Acesso = usuario_Nivel_Acesso;
     }
 
-    public Usuario(String usuario_Id, String usuario_Nome, String usuario_Login, String usuario_Senha, String usuario_Email, String usuario_Nivel_Acesso) {
+    public Usuario(int usuario_Id, String usuario_Nome, String usuario_Login, String usuario_Senha, String usuario_Email, String usuario_Nivel_Acesso, String usuario_status) 
+    {
         this.usuario_Id = usuario_Id;
         this.usuario_Nome = usuario_Nome;
         this.usuario_Login = usuario_Login;
         this.usuario_Senha = usuario_Senha;
         this.usuario_Email = usuario_Email;
         this.usuario_Nivel_Acesso = usuario_Nivel_Acesso;
+        this.usuario_status = usuario_status;
     }
+
+    
     
     
     

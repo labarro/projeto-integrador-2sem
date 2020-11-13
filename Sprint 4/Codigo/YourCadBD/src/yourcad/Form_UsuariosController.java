@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -76,6 +78,8 @@ public class Form_UsuariosController implements Initializable {
     private Button btn_usuario_Limpar;
     @FXML
     private Button btn_usuario_Salvar;
+    @FXML
+    private ComboBox<String> cbox_usuario_status;
 
     /**
      * Initializes the controller class.
@@ -87,9 +91,61 @@ public class Form_UsuariosController implements Initializable {
        //Definindo que somente Administradores podem vizualizar meno de Configuração
         if("Administrador".equals(Form_LoginController.usuario_Nivel_Acesso)){ menu_Configuracao.setVisible(true);}
 
-        popular_cbox_Nivel_Acesso();
-        
-    }    
+        // TODO
+            // Pega id co cliente vindo da pagina de pesquisa clientes
+            int id = PesqUsuariosController.alter_UsuarioId;
+            
+            // verifica se existe id do cliente se sim ele popula os textfields da pagina para fazer aletração dos dados senão ele traz vazio para uma nova inserção.
+            if(id != 0)
+            {
+                try {
+                    
+                    String usuario_id = null;
+                    String usuario_nome = null;
+                    String usuario_login = null;
+                    String usuario_senha = null;
+                    String usuario_email = null;
+                    String usuario_nivel_acesso = null;
+                    String usuario_status = null;
+                    
+                    
+                    Connection conn = null;
+                    ResultSet resultadoBanco = null;
+                    conn = DBConexao.abrirConexao();
+                    Statement stm = conn.createStatement();
+                    
+                    String sql = "SELECT usuario_id, usuario_nome, usuario_login, usuario_senha, usuario_email, usuario_nivel_acesso, usuario_status FROM usuarios WHERE usuario_id = "+ id +";";
+                    resultadoBanco = stm.executeQuery(sql);
+                    
+                    while(resultadoBanco.next())
+                    {
+                        //System.out.printf(resultadoBanco.getString("cliente_nome"));
+                        usuario_id  = resultadoBanco.getString("usuario_id");
+                        usuario_nome = resultadoBanco.getString("usuario_nome");
+                        usuario_login = resultadoBanco.getString("usuario_login");
+                        usuario_senha = resultadoBanco.getString("usuario_senha");
+                        usuario_email = resultadoBanco.getString("usuario_email");
+                        usuario_nivel_acesso = resultadoBanco.getString("usuario_nivel_acesso"); 
+                        usuario_status = resultadoBanco.getString("usuario_status"); 
+                    }
+                    txt_usuario_Id.setText(usuario_id);
+                    txt_usuario_Nome.setText(usuario_nome);
+                    txt_usuario_Senha.setText(usuario_senha);
+                    txt_usuario_Email.setText(usuario_email);
+                    txt_usuario_Login.setText(usuario_login);
+                    cbox_nivel_Acesso.setValue(usuario_nivel_acesso);
+                    cbox_usuario_status.setValue(usuario_status);
+                    
+                    
+                    
+                } 
+                catch (Exception ex) {Logger.getLogger(Form_CadClienteController.class.getName()).log(Level.SEVERE, null, ex);}
+                
+                //private ObservableList<Instalacao> linhas_banco;
+            } 
+            popular_cbox_Nivel_Acesso();
+            popular_cbox_Status();
+    }
 
     // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
@@ -186,8 +242,9 @@ public class Form_UsuariosController implements Initializable {
         String usuario_Senha2 = txt_usuario_Senha2.getText();
         String usuario_Email = txt_usuario_Email.getText();
         String usuario_Nivel_Acesso = cbox_nivel_Acesso.getValue();
+        String usuario_status = cbox_usuario_status.getValue();
         
-        
+        //Conferindo se Senha e confimação de senha correspondem
         if(!usuario_Senha.equals(usuario_Senha2))
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -199,26 +256,54 @@ public class Form_UsuariosController implements Initializable {
         }
         else
         {
-            Connection conn = null;
-            ResultSet resultadoBanco = null;
-            conn = DBConexao.abrirConexao();
-            
-            Statement stm = conn.createStatement();
-            String query;
-            query = "INSERT INTO usuarios(usuario_nome, usuario_login, usuario_senha, usuario_email, usuario_nivel_acesso) VALUES "
-                   + "('"+ usuario_Nome +"','"
-                    + usuario_Login +"','"
-                    + usuario_Senha +"','"
-                    + usuario_Email +"','"
-                    + usuario_Nivel_Acesso + "');";
-   
-            stm.executeUpdate(query);
-                        
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Mensagem");
-            alert.setHeaderText("Dados inseridos com sucesso");
-            alert.showAndWait();         
+            if("0".equals(usuario_Id))
+            {
+                Connection conn = null;
+                ResultSet resultadoBanco = null;
+                conn = DBConexao.abrirConexao();
 
+                Statement stm = conn.createStatement();
+                String query;
+                query = "INSERT INTO usuarios(usuario_nome, usuario_login, usuario_senha, usuario_email, usuario_nivel_acesso, usuario_status) VALUES "
+                       + "('"+ usuario_Nome +"','"
+                        + usuario_Login +"','"
+                        + usuario_Senha +"','"
+                        + usuario_Email +"','"
+                        + usuario_Nivel_Acesso +"','"
+                        + usuario_status +"');";
+
+                stm.executeUpdate(query);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Mensagem");
+                alert.setHeaderText("Dados inseridos com sucesso");
+                alert.showAndWait();    
+            }
+            else
+            {
+                Connection conn = null;
+                ResultSet resultadoBanco = null;
+                conn = DBConexao.abrirConexao();
+
+                Statement stm = conn.createStatement();
+                String query;
+                
+                String sql;
+                sql = "UPDATE usuarios SET "
+                    + "usuario_nivel_acesso = '"+ usuario_Nivel_Acesso +"', "
+                    + "usuario_nome = '"+ usuario_Nome +"', "
+                    + "usuario_login = '"+ usuario_Login +"', "
+                    + "usuario_senha = '"+ usuario_Senha +"', "
+                    + "usuario_email = '"+ usuario_Email +"', "
+                    + "usuario_status = '"+ usuario_status +"' "    
+                    + "WHERE usuario_id = "+ usuario_Id +";";
+                stm.executeUpdate(sql);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Mensagem");
+                alert.setHeaderText("Dados alterados com sucesso !");
+                alert.showAndWait();
+            }
         }
     }
     
@@ -229,5 +314,11 @@ public class Form_UsuariosController implements Initializable {
         cbox_nivel_Acesso.setItems(lista);
     }
     
+    private void popular_cbox_Status()
+    {
+        // ComboBox Tipo de Instalação
+        ObservableList<String> lista = FXCollections.observableArrayList("Ativo", "Inativo");
+        cbox_usuario_status.setItems(lista);
+    }
     
 }
