@@ -64,7 +64,7 @@
             <Label layoutX="321.0" layoutY="26.0" text="Apelido:" />
             <TextField fx:id="txt_apelidoInstalacao" layoutX="371.0" layoutY="22.0" />
             <Label layoutX="24.0" layoutY="68.0" text="Tipo:" />
-            <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" prefWidth="150.0" />
+            <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" prefWidth="150.0" onAction="#chama_painel" />
             <TextField fx:id="txt_idInstalacao" layoutX="638.0" layoutY="51.0" prefHeight="25.0" prefWidth="34.0" visible="false" />
             <ComboBox fx:id="cbox_concessionariaInstalacao" disable="true" editable="true" layoutX="370.0" layoutY="64.0" prefWidth="150.0" visible="false" />
             <Label disable="true" layoutX="280.0" layoutY="68.0" text="Concessionaria:" visible="false" />
