@@ -27,7 +27,7 @@
          <TextField fx:id="txt_roteiroEnergia" layoutX="135.0" layoutY="152.0" prefHeight="25.0" prefWidth="174.0" />
          <Label layoutX="316.0" layoutY="156.0" text="Medidor:" />
          <TextField fx:id="txt_medidorEnergia" layoutX="371.0" layoutY="152.0" />
-      <Button fx:id="btn_salvarInstEnergia" layoutX="276.0" layoutY="195.0" mnemonicParsing="false" onAction="#salvarInstEnergia" text="Salvar" visible="false" />
+      <Button fx:id="btn_salvarInstEnergia" layoutX="276.0" layoutY="195.0" mnemonicParsing="false" onAction="#salvarInstEnergia" text="Salvar" />
       <TextField fx:id="txt_idInstalacao" layoutX="569.0" layoutY="14.0" prefHeight="25.0" prefWidth="25.0" visible="false" />
    </children>
 </AnchorPane>

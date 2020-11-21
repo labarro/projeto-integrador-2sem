@@ -244,7 +244,9 @@ public class Form_cadContaEnergiaController implements Initializable {
         String conta_valorIcms = txt_EnergiaValorIcms.getText();
         String conta_valorPis = txt_EnergiaValorPis.getText();
         String conta_Vencimento = txt_EnergiaVencimento.getText();
-        
+        boolean validar =  validacao();
+            
+        if (validar == true){
         if(Integer.parseInt(conta_Id) != 0)
         {
             
@@ -364,6 +366,7 @@ public class Form_cadContaEnergiaController implements Initializable {
             limparContaEnergia();
               
         }
+       }
     }
 
     @FXML
@@ -397,6 +400,254 @@ public class Form_cadContaEnergiaController implements Initializable {
             txt_EnergiaValorIcms.setText("");
             txt_EnergiaValorPis.setText("");
             txt_EnergiaVencimento.setText("");
+    }
+    
+    private boolean validacao (){
+
+        
+        if ("".equals(txt_EnergiaValor.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Valor não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaValor.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaCompetencia.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Competencia não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaCompetencia.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaConsumoMes.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Consumo Mês não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaConsumoMes.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaVencimento.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Vencimento não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaVencimento.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaCor.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Cor não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaCor.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaPeriodo.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Periodo (início) não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaPeriodo.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaPeriodo2.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Periodo (final) não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaPeriodo2.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaEmissao.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Emissão não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaEmissao.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaLeituraAtual.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Leitura Atual não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaLeituraAtual.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaDiasFaturamento.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Nº Dias Faturamento não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaDiasFaturamento.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaDescricao.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Descrição não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaDescricao.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaNMedidor.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Nº Medidor não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaNMedidor.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaConsumoLeituraAtual.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Leitura Atual não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaConsumoLeituraAtual.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaConstMult.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Const. Mult. não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaConstMult.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaKwhMes.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Qtd kWh/Mês não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaKwhMes.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaCci.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo CCI não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaCci.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaDescricaoProduto.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Descrição Produto não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaDescricaoProduto.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaQuantidade.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Quantidade não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaQuantidade.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaTarifaAplicada.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Tarifa Aplicada não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaTarifaAplicada.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaValorFornecedor.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Valor Fornec. não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaValorFornecedor.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaTarifaImposto.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Tarifa c/ Imposto não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaTarifaImposto.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaBaseICMS.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo B. Calc. ICMS não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaBaseICMS.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaAliquotaIcms.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Aliq. ICMS não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaAliquotaIcms.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaValorIcms.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Valor ICMS não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaValorIcms.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaBasePisCofins.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo B. Calc. PIS/COFINS não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaBasePisCofins.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaAliquotaPis.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Aliq. PIS não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaAliquotaPis.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_EnergiaValorPis.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Valor PIS não pode ser vazio");
+            alert.showAndWait();
+            txt_EnergiaValorPis.requestFocus();
+            return false;
+        } else {return true;} 
     }
     
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -16,11 +19,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="mainPane" prefHeight="458.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.PesqUsuariosController">
+<BorderPane fx:id="mainPane" prefHeight="458.0" prefWidth="686.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.PesqUsuariosController">
    <top>
       <AnchorPane>
          <children>
-            <MenuBar fx:id="menuBar_TelaInicial" prefHeight="14.0" prefWidth="686.0">
+            <MenuBar fx:id="menuBar_TelaInicial" prefHeight="25.0" prefWidth="686.0">
                <menus>
                   <Menu mnemonicParsing="false" text="Cadastro">
                      <items>
@@ -38,13 +41,20 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Relatórios">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem fx:id="menuItem_RelatAcessos" mnemonicParsing="false" onAction="#gotoRelatAcessos" text="Relatório de Acessos" />
+                        <MenuItem fx:id="menuItem_RelatClientes" mnemonicParsing="false" onAction="#gotoRelatClientes" text="Relatório por Clientes" />
+                        <MenuItem fx:id="menuItem_RelatDigitador" mnemonicParsing="false" onAction="#gotoRelatDigitador" text="Relatório de Digitador" />
                      </items>
                   </Menu>
                   <Menu fx:id="menu_Configuracao" mnemonicParsing="false" text="Configuração" visible="false">
                      <items>
                         <MenuItem fx:id="menuItem_CadUsuarios" mnemonicParsing="false" onAction="#gotoUsuarios" text="Cadastrar Usuários" />
                         <MenuItem fx:id="menuItem_PesqUsuarios" mnemonicParsing="false" onAction="#gotoPesqUsuarios" text="Pesquisar Usuários" />
+                     </items>
+                  </Menu>
+                  <Menu fx:id="menu_Sair" mnemonicParsing="false" text="Sair">
+                     <items>
+                        <MenuItem fx:id="menuItem_SairSistema" mnemonicParsing="false" onAction="#gotoSair" text="Sair do Sistema" />
                      </items>
                   </Menu>
                </menus>

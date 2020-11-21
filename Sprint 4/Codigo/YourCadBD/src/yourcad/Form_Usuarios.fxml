@@ -11,11 +11,30 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.Form_UsuariosController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yourcad.Form_UsuariosController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <MenuBar fx:id="menuBar_TelaInicial" prefHeight="25.0" prefWidth="600.0">
+            <Separator layoutY="30.0" prefHeight="33.0" prefWidth="600.0" />
+            <Label layoutX="253.0" layoutY="29.0" text="Cadastro de Usuários" />
+            <TextField fx:id="txt_usuario_Id" editable="false" layoutX="34.0" layoutY="63.0" prefHeight="25.0" prefWidth="25.0" text="0" visible="false" />
+            <TextField fx:id="txt_usuario_Nome" layoutX="104.0" layoutY="101.0" prefHeight="25.0" prefWidth="303.0" />
+            <TextField fx:id="txt_usuario_Login" layoutX="104.0" layoutY="146.0" prefHeight="25.0" prefWidth="193.0" />
+            <PasswordField fx:id="txt_usuario_Senha" layoutX="104.0" layoutY="184.0" />
+            <PasswordField fx:id="txt_usuario_Senha2" layoutX="372.0" layoutY="184.0" />
+            <TextField fx:id="txt_usuario_Email" layoutX="104.0" layoutY="222.0" prefHeight="25.0" prefWidth="239.0" />
+            <Label layoutX="273.0" layoutY="188.0" text="Confirmar Senha:" />
+            <Label layoutX="30.0" layoutY="150.0" prefHeight="17.0" prefWidth="33.0" text="Login:" />
+            <Label layoutX="29.0" layoutY="105.0" text="Nome:" />
+            <Label layoutX="29.0" layoutY="188.0" text="Senha:" />
+            <Label layoutX="31.0" layoutY="226.0" text="Email:" />
+            <Label layoutX="31.0" layoutY="271.0" text="Nivel de Acesso:" />
+            <ComboBox fx:id="cbox_nivel_Acesso" layoutX="126.0" layoutY="267.0" prefWidth="150.0" />
+            <Button fx:id="btn_usuario_Limpar" layoutX="175.0" layoutY="345.0" mnemonicParsing="false" text="Limpar" />
+            <Button fx:id="btn_usuario_Salvar" defaultButton="true" layoutX="293.0" layoutY="345.0" mnemonicParsing="false" onAction="#salvar_Usuario" text="Salvar" />
+            <ComboBox fx:id="cbox_usuario_status" layoutX="372.0" layoutY="267.0" prefWidth="150.0" />
+            <Label layoutX="317.0" layoutY="271.0" text="Satus:" />
+            <MenuBar fx:id="menuBar_TelaInicial" prefHeight="25.0" prefWidth="686.0">
                <menus>
                   <Menu mnemonicParsing="false" text="Cadastro">
                      <items>
@@ -33,36 +52,24 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Relatórios">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem fx:id="menuItem_RelatAcessos" mnemonicParsing="false" onAction="#gotoRelatAcessos" text="Relatório de Acessos" />
+                        <MenuItem fx:id="menuItem_RelatClientes" mnemonicParsing="false" onAction="#gotoRelatClientes" text="Relatório por Clientes" />
+                        <MenuItem fx:id="menuItem_RelatDigitador" mnemonicParsing="false" onAction="#gotoRelatDigitador" text="Relatório de Digitador" />
                      </items>
                   </Menu>
-                  <Menu fx:id="menu_Configuracao" mnemonicParsing="false" text="Configuração">
+                  <Menu fx:id="menu_Configuracao" mnemonicParsing="false" text="Configuração" visible="false">
                      <items>
                         <MenuItem fx:id="menuItem_CadUsuarios" mnemonicParsing="false" onAction="#gotoUsuarios" text="Cadastrar Usuários" />
                         <MenuItem fx:id="menuItem_PesqUsuarios" mnemonicParsing="false" onAction="#gotoPesqUsuarios" text="Pesquisar Usuários" />
                      </items>
                   </Menu>
+                  <Menu fx:id="menu_Sair" mnemonicParsing="false" text="Sair">
+                     <items>
+                        <MenuItem fx:id="menuItem_SairSistema" mnemonicParsing="false" onAction="#gotoSair" text="Sair do Sistema" />
+                     </items>
+                  </Menu>
                </menus>
             </MenuBar>
-            <Separator layoutY="30.0" prefHeight="33.0" prefWidth="600.0" />
-            <Label layoutX="253.0" layoutY="29.0" text="Cadastro de Usuários" />
-            <TextField fx:id="txt_usuario_Id" editable="false" layoutX="34.0" layoutY="63.0" prefHeight="25.0" prefWidth="25.0" text="0" visible="false" />
-            <TextField fx:id="txt_usuario_Nome" layoutX="104.0" layoutY="101.0" prefHeight="25.0" prefWidth="303.0" />
-            <TextField fx:id="txt_usuario_Login" layoutX="104.0" layoutY="146.0" prefHeight="25.0" prefWidth="193.0" />
-            <TextField fx:id="txt_usuario_Email" layoutX="104.0" layoutY="222.0" prefHeight="25.0" prefWidth="239.0" />
-            <Label layoutX="273.0" layoutY="188.0" text="Confirmar Senha:" />
-            <Label layoutX="30.0" layoutY="150.0" prefHeight="17.0" prefWidth="33.0" text="Login:" />
-            <Label layoutX="29.0" layoutY="105.0" text="Nome:" />
-            <Label layoutX="29.0" layoutY="188.0" text="Senha:" />
-            <Label layoutX="31.0" layoutY="226.0" text="Email:" />
-            <Label layoutX="31.0" layoutY="271.0" text="Nivel de Acesso:" />
-            <PasswordField fx:id="txt_usuario_Senha" layoutX="104.0" layoutY="184.0" />
-            <PasswordField fx:id="txt_usuario_Senha2" layoutX="372.0" layoutY="184.0" />
-            <ComboBox fx:id="cbox_nivel_Acesso" layoutX="126.0" layoutY="267.0" prefWidth="150.0" />
-            <Button fx:id="btn_usuario_Limpar" layoutX="175.0" layoutY="345.0" mnemonicParsing="false" text="Limpar" />
-            <Button fx:id="btn_usuario_Salvar" layoutX="293.0" layoutY="345.0" mnemonicParsing="false" onAction="#salvar_Usuario" text="Salvar" />
-            <ComboBox fx:id="cbox_usuario_status" layoutX="372.0" layoutY="267.0" prefWidth="150.0" />
-            <Label layoutX="317.0" layoutY="271.0" text="Satus:" />
          </children>
       </AnchorPane>
    </children>

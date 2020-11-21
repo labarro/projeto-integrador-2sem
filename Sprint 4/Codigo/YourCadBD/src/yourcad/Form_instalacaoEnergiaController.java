@@ -34,76 +34,6 @@ import static yourcad.Form_CadClienteController.alterInstalacaoId;
  */
 public class Form_instalacaoEnergiaController implements Initializable {
 
-    /**
-     * @return the txt_codFiscalEnergia
-     */
-    public TextField getTxt_codFiscalEnergia() {
-        return txt_codFiscalEnergia;
-    }
-
-    /**
-     * @return the txt_codIdentificacaoEnergia
-     */
-    public TextField getTxt_codIdentificacaoEnergia() {
-        return txt_codIdentificacaoEnergia;
-    }
-
-    /**
-     * @return the txt_grupoEnergia
-     */
-    public TextField getTxt_grupoEnergia() {
-        return txt_grupoEnergia;
-    }
-
-    /**
-     * @return the txt_subgrupoEnergia
-     */
-    public TextField getTxt_subgrupoEnergia() {
-        return txt_subgrupoEnergia;
-    }
-
-    /**
-     * @return the txt_classeEnergia
-     */
-    public TextField getTxt_classeEnergia() {
-        return txt_classeEnergia;
-    }
-
-    /**
-     * @return the txt_tipofornecimentoEnergia
-     */
-    public TextField getTxt_tipofornecimentoEnergia() {
-        return txt_tipofornecimentoEnergia;
-    }
-
-    /**
-     * @return the txt_modalidadeEnergia
-     */
-    public TextField getTxt_modalidadeEnergia() {
-        return txt_modalidadeEnergia;
-    }
-
-    /**
-     * @return the txt_roteiroEnergia
-     */
-    public TextField getTxt_roteiroEnergia() {
-        return txt_roteiroEnergia;
-    }
-
-    /**
-     * @return the txt_tensaoEnergia
-     */
-    public TextField getTxt_tensaoEnergia() {
-        return txt_tensaoEnergia;
-    }
-
-    /**
-     * @return the txt_medidorEnergia
-     */
-    public TextField getTxt_medidorEnergia() {
-        return txt_medidorEnergia;
-    }
-
     @FXML
     private TextField txt_codFiscalEnergia;
     @FXML
@@ -179,17 +109,17 @@ public class Form_instalacaoEnergiaController implements Initializable {
                     inst_roteiroLeitura = resultadoBanco.getString("instalacao_energia_roteiro_leitura"); 
                     inst_medidor = resultadoBanco.getString("instalacao_energia_medidor");
                 }
-                getTxt_classeEnergia().setText(inst_classe);
-                getTxt_codFiscalEnergia().setText(inst_codFiscal);
-                getTxt_codIdentificacaoEnergia().setText(inst_codIdentificacao);
-                getTxt_grupoEnergia().setText(inst_grupo);
+                txt_classeEnergia.setText(inst_classe);
+                txt_codFiscalEnergia.setText(inst_codFiscal);
+                txt_codIdentificacaoEnergia.setText(inst_codIdentificacao);
+                txt_grupoEnergia.setText(inst_grupo);
                 txt_idInstalacao.setText(inst_id);
-                getTxt_medidorEnergia().setText(inst_medidor);
-                getTxt_modalidadeEnergia().setText(inst_modalidadeTarifa);
-                getTxt_roteiroEnergia().setText(inst_roteiroLeitura);
-                getTxt_subgrupoEnergia().setText(inst_subGrupo);
-                getTxt_tensaoEnergia().setText(inst_tensao);
-                getTxt_tipofornecimentoEnergia().setText(inst_tpFornecimento);
+                txt_medidorEnergia.setText(inst_medidor);
+                txt_modalidadeEnergia.setText(inst_modalidadeTarifa);
+                txt_roteiroEnergia.setText(inst_roteiroLeitura);
+                txt_subgrupoEnergia.setText(inst_subGrupo);
+                txt_tensaoEnergia.setText(inst_tensao);
+                txt_tipofornecimentoEnergia.setText(inst_tpFornecimento);
                                 
             }catch (Exception ex) { Logger.getLogger(Form_CadClienteController.class.getName()).log(Level.SEVERE, null, ex);}
         }
@@ -201,16 +131,16 @@ public class Form_instalacaoEnergiaController implements Initializable {
         
         int inst_id = Form_CadClienteController.alterInstalacaoId;
         
-        String codigoIdentificacao = getTxt_codIdentificacaoEnergia().getText();
-        String codigoFiscal = getTxt_codFiscalEnergia().getText();
-        String grupo = getTxt_codIdentificacaoEnergia().getText();
-        String subgrupo = getTxt_subgrupoEnergia().getText();
-        String classe = getTxt_classeEnergia().getText();
-        String tipoFornecimento = getTxt_tipofornecimentoEnergia().getText();
-        String modalidade = getTxt_modalidadeEnergia().getText();
-        String tensao = getTxt_tensaoEnergia().getText();
-        String roteiro = getTxt_roteiroEnergia().getText();
-        String medidor = getTxt_medidorEnergia().getText();
+        String codigoIdentificacao = txt_codIdentificacaoEnergia.getText();
+        String codigoFiscal = txt_codFiscalEnergia.getText();
+        String grupo = txt_codIdentificacaoEnergia.getText();
+        String subgrupo = txt_subgrupoEnergia.getText();
+        String classe = txt_classeEnergia.getText();
+        String tipoFornecimento = txt_tipofornecimentoEnergia.getText();
+        String modalidade = txt_modalidadeEnergia.getText();
+        String tensao = txt_tensaoEnergia.getText();
+        String roteiro = txt_roteiroEnergia.getText();
+        String medidor = txt_medidorEnergia.getText();
         String id_inst = txt_idInstalacao.getText();
        
         if(inst_id == 0)

@@ -34,7 +34,9 @@
                 </Menu>
                   <Menu mnemonicParsing="false" text="Relatórios">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem fx:id="menuItem_RelatAcessos" mnemonicParsing="false" onAction="#gotoRelatAcessos" text="Relatório de Acessos" />
+                        <MenuItem fx:id="menuItem_RelatClientes" mnemonicParsing="false" onAction="#gotoRelatClientes" text="Relatório por Clientes" />
+                        <MenuItem fx:id="menuItem_RelatDigitador" mnemonicParsing="false" onAction="#gotoRelatDigitador" text="Relatório de Digitador" />
                     </items>
                   </Menu>
                   <Menu fx:id="menu_Configuracao" mnemonicParsing="false" text="Configuração" visible="false">
@@ -42,6 +44,11 @@
                       <MenuItem fx:id="menuItem_CadUsuarios" mnemonicParsing="false" onAction="#gotoUsuarios" text="Cadastrar Usuários" />
                         <MenuItem fx:id="menuItem_PesqUsuarios" mnemonicParsing="false" onAction="#gotoPesqUsuarios" text="Pesquisar Usuários" />
                     </items>
+                  </Menu>
+                  <Menu fx:id="menu_Sair" mnemonicParsing="false" text="Sair">
+                     <items>
+                        <MenuItem fx:id="menuItem_SairSistema" mnemonicParsing="false" onAction="#gotoSair" text="Sair do Sistema" />
+                     </items>
                   </Menu>
               </menus>
             </MenuBar>

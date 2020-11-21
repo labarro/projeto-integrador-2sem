@@ -35,55 +35,6 @@ import static yourcad.Form_CadClienteController.clienteInstalacao;
  */
 public class Form_instalacaoAguaController implements Initializable {
 
-    /**
-     * @return the panel_instAgua
-     */
-    public Pane getPanel_instAgua() {
-        return panel_instAgua;
-    }
-
-    /**
-     * @return the txt_hidrometroAgua
-     */
-    public TextField getTxt_hidrometroAgua() {
-        return txt_hidrometroAgua;
-    }
-
-    /**
-     * @return the txt_codsabespAgua
-     */
-    public TextField getTxt_codsabespAgua() {
-        return txt_codsabespAgua;
-    }
-
-    /**
-     * @return the txt_economiasAgua
-     */
-    public TextField getTxt_economiasAgua() {
-        return txt_economiasAgua;
-    }
-
-    /**
-     * @return the txt_codclienteAgua
-     */
-    public TextField getTxt_codclienteAgua() {
-        return txt_codclienteAgua;
-    }
-
-    /**
-     * @return the txt_tipoLigacao
-     */
-    public TextField getTxt_tipoLigacao() {
-        return txt_tipoLigacao;
-    }
-
-    /**
-     * @return the txt_idInstalacao
-     */
-    public TextField getTxt_idInstalacao() {
-        return txt_idInstalacao;
-    }
-
     @FXML
     private Pane panel_instAgua;
     @FXML
@@ -96,8 +47,6 @@ public class Form_instalacaoAguaController implements Initializable {
     private TextField txt_codclienteAgua;
     @FXML
     private TextField txt_tipoLigacao;
-    @FXML
-    private TextField txt_idInstalacao;
     
     static String hidrometro;
     static String codigoCliente;
@@ -106,6 +55,8 @@ public class Form_instalacaoAguaController implements Initializable {
     static String tipoLigacao;
     @FXML
     private Button btn_salvarInstAgua;
+    @FXML
+    private TextField txt_idInstalacao;
 
     /**
      * Initializes the controller class.
@@ -146,12 +97,12 @@ public class Form_instalacaoAguaController implements Initializable {
                     inst_tpLigacao = resultadoBanco.getString("instalacao_agua_tipo_ligacao"); 
 
                 }
-                getTxt_idInstalacao().setText(inst_id);
-                getTxt_codclienteAgua().setText(inst_codCliente);
-                getTxt_codsabespAgua().setText(inst_codSabesp);
-                getTxt_economiasAgua().setText(inst_economias);
-                getTxt_hidrometroAgua().setText(inst_hidrometro);
-                getTxt_tipoLigacao().setText(inst_tpLigacao);
+                txt_idInstalacao.setText(inst_id);
+                txt_codclienteAgua.setText(inst_codCliente);
+                txt_codsabespAgua.setText(inst_codSabesp);
+                txt_economiasAgua.setText(inst_economias);
+                txt_hidrometroAgua.setText(inst_hidrometro);
+                txt_tipoLigacao.setText(inst_tpLigacao);
                 
                                 
             }catch (Exception ex) { Logger.getLogger(Form_CadClienteController.class.getName()).log(Level.SEVERE, null, ex);}
@@ -164,12 +115,12 @@ public class Form_instalacaoAguaController implements Initializable {
         
         int inst_id = Form_CadClienteController.alterInstalacaoId;
         
-        String hidrometro = getTxt_hidrometroAgua().getText();
-        String codigoCliente = getTxt_codclienteAgua().getText();
-        String codigoSabesp = getTxt_codsabespAgua().getText();
-        String economias = getTxt_economiasAgua().getText();
-        String tipoLigacao = getTxt_tipoLigacao().getText();  
-        String idInstalacao = getTxt_idInstalacao().getText();
+        String hidrometro = txt_hidrometroAgua.getText();
+        String codigoCliente = txt_codclienteAgua.getText();
+        String codigoSabesp = txt_codsabespAgua.getText();
+        String economias = txt_economiasAgua.getText();
+        String tipoLigacao = txt_tipoLigacao.getText();  
+        String idInstalacao = txt_idInstalacao.getText();
         
       if(inst_id == 0)
       {  

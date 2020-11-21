@@ -78,6 +78,16 @@ public class Form_CadContaController implements Initializable {
     private MenuItem menuItem_CadUsuarios;
     @FXML
     private MenuItem menuItem_PesqUsuarios;
+    @FXML
+    private MenuItem menuItem_RelatAcessos;
+    @FXML
+    private MenuItem menuItem_RelatClientes;
+    @FXML
+    private MenuItem menuItem_RelatDigitador;
+    @FXML
+    private Menu menu_Sair;
+    @FXML
+    private MenuItem menuItem_SairSistema;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -165,7 +175,7 @@ public class Form_CadContaController implements Initializable {
         
     }
     
-        // INICIO MENU BAR //
+     // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
     @FXML
     public void gotoCliente(ActionEvent event) throws IOException{
@@ -192,7 +202,6 @@ public class Form_CadContaController implements Initializable {
 
     @FXML
     private void gotoConcessionaria(ActionEvent event) throws IOException {
-        PesqConcessionariaController.alterConcessionariaId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConcessionaria.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -200,7 +209,6 @@ public class Form_CadContaController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
-
     @FXML
     private void gotoPesqCliente(ActionEvent event) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("PesqCliente.fxml"));
@@ -231,7 +239,8 @@ public class Form_CadContaController implements Initializable {
         app_stage.show();
     }
     
-       @FXML
+
+     @FXML
     private void gotoUsuarios(ActionEvent event) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Usuarios.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
@@ -250,8 +259,49 @@ public class Form_CadContaController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
-    
+
+    @FXML
+    private void gotoRelatAcessos(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatAcessos.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void gotoRelatClientes(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatContas.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void gotoRelatDigitador(ActionEvent event) {
+    }
+
+    @FXML
+    private void gotoSair(ActionEvent event) throws IOException 
+    {
+        Form_LoginController.usuario_Id = "";
+        Form_LoginController.usuario_Nome = "";
+        Form_LoginController.usuario_Login = "";
+        Form_LoginController.usuario_Nivel_Acesso = "";
+        Form_LoginController.usuario_Email = "";
+        
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Login.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show(); 
+    }
     // FIM MENU BAR //
+    
     static String contaInstalacaoId;
     static String contaInstalacaoNum;
     static String clienteId;

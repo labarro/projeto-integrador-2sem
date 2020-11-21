@@ -30,6 +30,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -93,6 +94,16 @@ public class Form_CadConcessionariaController implements Initializable {
     private MenuItem menuItem_CadUsuarios;
     @FXML
     private MenuItem menuItem_PesqUsuarios;
+    @FXML
+    private MenuItem menuItem_RelatAcessos;
+    @FXML
+    private MenuItem menuItem_RelatClientes;
+    @FXML
+    private MenuItem menuItem_RelatDigitador;
+    @FXML
+    private Menu menu_Sair;
+    @FXML
+    private MenuItem menuItem_SairSistema;
 
     /**
      * Initializes the controller class.
@@ -171,10 +182,10 @@ public class Form_CadConcessionariaController implements Initializable {
         }
     }    
     
-        // INICIO MENU BAR //
+     // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
     @FXML
-    public void gotoCliente(ActionEvent event) throws IOException{ 
+    public void gotoCliente(ActionEvent event) throws IOException{
         PesqClienteController.alterClienteId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadCliente.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
@@ -198,7 +209,6 @@ public class Form_CadConcessionariaController implements Initializable {
 
     @FXML
     private void gotoConcessionaria(ActionEvent event) throws IOException {
-        PesqConcessionariaController.alterConcessionariaId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConcessionaria.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -206,7 +216,6 @@ public class Form_CadConcessionariaController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
-    
     @FXML
     private void gotoPesqCliente(ActionEvent event) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("PesqCliente.fxml"));
@@ -235,9 +244,10 @@ public class Form_CadConcessionariaController implements Initializable {
         app_stage.hide();
         app_stage.setScene(home_page_scene);
         app_stage.show();
-    }    
+    }
+    
 
-      @FXML
+     @FXML
     private void gotoUsuarios(ActionEvent event) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Usuarios.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
@@ -256,7 +266,47 @@ public class Form_CadConcessionariaController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
-    
+
+    @FXML
+    private void gotoRelatAcessos(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatAcessos.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void gotoRelatClientes(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatContas.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void gotoRelatDigitador(ActionEvent event) {
+    }
+
+    @FXML
+    private void gotoSair(ActionEvent event) throws IOException 
+    {
+        Form_LoginController.usuario_Id = "";
+        Form_LoginController.usuario_Nome = "";
+        Form_LoginController.usuario_Login = "";
+        Form_LoginController.usuario_Nivel_Acesso = "";
+        Form_LoginController.usuario_Email = "";
+        
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Login.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show(); 
+    }
     // FIM MENU BAR //
     
     @FXML
@@ -278,6 +328,9 @@ public class Form_CadConcessionariaController implements Initializable {
 
     @FXML
     private void insert_Concessionaria(ActionEvent event) throws Exception {
+        boolean validar =  validacao();
+            
+        if (validar == true){
         
         if(PesqConcessionariaController.alterConcessionariaId != 0)
         {
@@ -391,8 +444,73 @@ public class Form_CadConcessionariaController implements Initializable {
             alert.showAndWait();
             btn_Limpar();
         }
+        }
+        
     }
-                    
+           @FXML
+    private void mascaraDocumento(javafx.scene.input.KeyEvent event) {
+    TextFieldFormatter tff = new TextFieldFormatter();
+        if (txtFld_CnpjConcessionaria.getText().length() == 17)
+        {
+        tff.setMask("##.###.###/####-#");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtFld_CnpjConcessionaria);
+        tff.formatter();        
+        } 
+    }
+    
+    @FXML
+    private void mascaraCEP(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        if (txtFld_CepConcessionaria.getText().length() == 7){
+        tff.setMask("#####-###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtFld_CepConcessionaria);
+        tff.formatter();        
+        }
+    }
+    
+    
+        private boolean validacao (){
+
+        
+        if ("".equals(txtFld_NomeConcessionaria.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Nome da Concessionaria não pode ser vazio");
+            alert.showAndWait();
+            txtFld_NomeConcessionaria.requestFocus();
+            return false;
+        }
+        else if ("".equals(txtFld_CnpjConcessionaria.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo CNPJ da Concessionaria não pode ser vazio");
+            alert.showAndWait();
+            txtFld_CnpjConcessionaria.requestFocus();
+            return false;
+        }
+        else if ("".equals(txtFld_EmailConcessionaria.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Email da Concessinaria não pode ser vazio");
+            alert.showAndWait();
+            txtFld_EmailConcessionaria.requestFocus();
+            return false;
+        }
+        else if ("".equals(txtFld_SiteConcessionaria.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Site da Concessionaria não pode ser vazio");
+            alert.showAndWait();
+            txtFld_SiteConcessionaria.requestFocus();
+            return false;
+        } else {return true;} 
+    }
         
 
          

@@ -1,11 +1,15 @@
 package yourcad;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
+import java.net.URLConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -28,6 +32,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -35,6 +40,7 @@ import yourcad.DBConexao.*;
 import yourcad.Cliente;
 import yourcad.Form_CadInstalacoesController;
 import static yourcad.Form_CadInstalacoesController.instalacao_id;
+import yourcad.TextFieldFormatter.*;
 
 //import yourcad.PesqClienteController.*;
 
@@ -44,6 +50,10 @@ import static yourcad.Form_CadInstalacoesController.instalacao_id;
  * @author mateu
  */
 public class Form_CadClienteController implements Initializable {
+    String logradouro;      
+    String bairro;
+    String cidade;
+    String uf;
     
     @FXML
     private MenuBar menuBar_TelaInicial;
@@ -114,24 +124,14 @@ public class Form_CadClienteController implements Initializable {
     private MenuItem menuItem_CadUsuarios;
     @FXML
     private MenuItem menuItem_PesqUsuarios;
-
-    public TextField getTxtFld_NomeCliente() {
-        return txtFld_NomeCliente;
-    }
-
-    public void setTxtFld_NomeCliente(TextField txtFld_NomeCliente) {
-        this.txtFld_NomeCliente = txtFld_NomeCliente;
-    }
-
-    public TextField getTxtFld_idCliente() {
-        return txtFld_idCliente;
-    }
-
-    public void setTxtFld_idCliente(TextField txtFld_idCliente) {
-        this.txtFld_idCliente = txtFld_idCliente;
-    }
     @FXML
     private TextField txtFld_idCliente; 
+    @FXML
+    private MenuItem menuItem_RelatAcessos;
+    @FXML
+    private MenuItem menuItem_RelatClientes;
+    @FXML
+    private MenuItem menuItem_RelatDigitador;
 
     /**
      * Initializes the controller class.
@@ -227,7 +227,7 @@ public class Form_CadClienteController implements Initializable {
         
     }    
     
-        // INICIO MENU BAR //
+     // INICIO MENU BAR //
     // FUNÇÃO PARA ABRIR TELA A PARTIR DE MENU BAR 
     @FXML
     public void gotoCliente(ActionEvent event) throws IOException{
@@ -254,7 +254,6 @@ public class Form_CadClienteController implements Initializable {
 
     @FXML
     private void gotoConcessionaria(ActionEvent event) throws IOException {
-        PesqConcessionariaController.alterConcessionariaId = 0;
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_CadConcessionaria.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
         Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
@@ -262,7 +261,6 @@ public class Form_CadClienteController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
-    
     @FXML
     private void gotoPesqCliente(ActionEvent event) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("PesqCliente.fxml"));
@@ -292,8 +290,9 @@ public class Form_CadClienteController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
+    
 
-      @FXML
+     @FXML
     private void gotoUsuarios(ActionEvent event) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Usuarios.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
@@ -311,9 +310,45 @@ public class Form_CadClienteController implements Initializable {
         app_stage.hide();
         app_stage.setScene(home_page_scene);
         app_stage.show();
-    }  
-    
-    // ---------- FIM MENU BAR ------------ ///
+    }
+
+    @FXML
+    private void gotoRelatAcessos(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatAcessos.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void gotoRelatClientes(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatContas.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+
+    private void gotoSair(ActionEvent event) throws IOException 
+    {
+        Form_LoginController.usuario_Id = "";
+        Form_LoginController.usuario_Nome = "";
+        Form_LoginController.usuario_Login = "";
+        Form_LoginController.usuario_Nivel_Acesso = "";
+        Form_LoginController.usuario_Email = "";
+        
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Login.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show(); 
+    }
+    // FIM MENU BAR //
     
     private void tableView_Instalacoes(int id) throws SQLException, Exception
     {
@@ -361,9 +396,15 @@ public class Form_CadClienteController implements Initializable {
             String cliente_bairro = txtFld_bairroCliente.getText();
             String cliente_cep = txtFld_cepCliente.getText();
             String cliente_id = txtFld_idCliente.getText();
-                
+        
+        boolean validar =  validacao();
+            
+        if (validar == true){
+            
         if(Integer.parseInt(cliente_id) != 0)
         {
+            
+            
             Connection conn = null;
             ResultSet resultadoBanco = null;
                      
@@ -433,6 +474,7 @@ public class Form_CadClienteController implements Initializable {
             btn_NovoInstalacao.setVisible(true);
             txtFld_idCliente.setText(Integer.toString(cliente));
         }
+        }
     }
 
     @FXML
@@ -481,6 +523,11 @@ public class Form_CadClienteController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
+    @FXML
+    private void gotoRelatDigitador(ActionEvent event)
+    {
+        
+    }
 
     @FXML
     private void deletarInstalacao(ActionEvent event) throws SQLException, Exception { 
@@ -526,6 +573,68 @@ public class Form_CadClienteController implements Initializable {
         // ***** Chama a função de listagem de instalações novamente
         int id = Integer.parseInt(txtFld_idCliente.getText());
         tableView_Instalacoes(id);
-    }       
+    }
+    
+        @FXML
+    private void mascaraDocumento(javafx.scene.input.KeyEvent event) {
+    TextFieldFormatter tff = new TextFieldFormatter();
+        if (txtFld_DocCliente.getText().length() == 17)
+        {
+        tff.setMask("##.###.###/####-#");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtFld_DocCliente);
+        tff.formatter();        
+        } 
+        if (txtFld_DocCliente.getText().length() == 10 ) 
+        {
+        tff.setMask("###.###.###-##");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtFld_DocCliente);
+        tff.formatter();        
+        }
+    }
+    
+    @FXML
+    private void mascaraCEP(KeyEvent event) {
+        TextFieldFormatter tff = new TextFieldFormatter();
+        if (txtFld_cepCliente.getText().length() == 7){
+        tff.setMask("#####-###");
+        tff.setCaracteresValidos("0123456789");
+        tff.setTf(txtFld_cepCliente);
+        tff.formatter();        
+        }
+    }
+
+    private boolean validacao (){
+
+        
+        if ("".equals(txtFld_NomeCliente.getText()))
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Nome do Cliente não pode ser vazio");
+            alert.showAndWait();
+            txtFld_NomeCliente.requestFocus();
+            return false;
+        }
+        else if ("".equals(txtFld_apelidoCliente.getText()))
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Apelido do Cliente não pode ser vazio");
+            alert.showAndWait();
+            txtFld_apelidoCliente.requestFocus();
+            return false;
+        }
+        else if ("".equals(txtFld_DocCliente.getText()))
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Documento do Cliente não pode ser vazio");
+            alert.showAndWait();
+            txtFld_DocCliente.requestFocus();
+            return false;
+        }else {return true;} 
+    }
     
 }

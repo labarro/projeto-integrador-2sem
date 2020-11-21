@@ -17,7 +17,7 @@
       <TextField fx:id="txt_economiasAgua" layoutX="119.0" layoutY="134.0" />
       <Label layoutX="24.0" layoutY="177.0" text="Tipo de Ligação:" />
       <TextField fx:id="txt_tipoLigacao" layoutX="119.0" layoutY="173.0" prefHeight="25.0" prefWidth="116.0" />
-      <Button fx:id="btn_salvarInstAgua" layoutX="300.0" layoutY="194.0" mnemonicParsing="false" onAction="#salvarInstAgua" text="Salvar" visible="false"  />
+      <Button fx:id="btn_salvarInstAgua" layoutX="300.0" layoutY="194.0" mnemonicParsing="false" onAction="#salvarInstAgua" text="Salvar" />
       <TextField fx:id="txt_idInstalacao" layoutX="554.0" layoutY="19.0" prefHeight="25.0" prefWidth="26.0" visible="false" />
    </children>
 </Pane>

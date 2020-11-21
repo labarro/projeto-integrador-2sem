@@ -23,7 +23,7 @@
       <Label layoutX="250.0" layoutY="196.0" text="Valor Esgoto:" />
       <TextField fx:id="txt_AguaValorEsgoto" layoutX="325.0" layoutY="192.0" />
       <Label layoutX="27.0" layoutY="240.0" text="TRCF:" />
-      <TextField fx:id="txt_AguaTrcf" layoutX="143.0" layoutY="236.0" prefHeight="25.0" prefWidth="95.0" />
+      <TextField fx:id="txt_AguaTrcf" layoutX="92.0" layoutY="236.0" prefHeight="25.0" prefWidth="141.0" />
       <Label layoutX="248.0" layoutY="240.0" text="Multa:" />
       <TextField fx:id="txt_AguaMulta" layoutX="285.0" layoutY="236.0" />
       <Label layoutX="19.0" layoutY="312.0" text="Base PIS COFINS:" />
@@ -36,7 +36,7 @@
       <Separator layoutX="-5.0" layoutY="273.0" prefHeight="3.0" prefWidth="609.0" />
       <Separator layoutX="-5.0" layoutY="292.0" prefHeight="3.0" prefWidth="609.0" />
       <Label layoutX="263.0" layoutY="275.0" text="Tributos" />
-      <Button fx:id="btn_SalvarAgua" layoutX="224.0" layoutY="348.0" mnemonicParsing="false" onAction="#SalvarAgua" text="Salvar" />
+      <Button fx:id="btn_SalvarAgua" defaultButton="true" layoutX="224.0" layoutY="348.0" mnemonicParsing="false" onAction="#SalvarAgua" text="Salvar" />
       <Button fx:id="btn_LimparAgua" layoutX="308.0" layoutY="348.0" mnemonicParsing="false" onAction="#LimparAgua" text="Limpar" />
       <TextField fx:id="txt_ContaId" layoutX="551.0" layoutY="2.0" prefHeight="25.0" prefWidth="29.0" visible="false" />
    </children>

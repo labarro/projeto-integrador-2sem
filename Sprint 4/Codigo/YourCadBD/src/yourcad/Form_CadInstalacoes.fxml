@@ -37,15 +37,22 @@
                               <MenuItem fx:id="menuItem_PesqConcessionaria" mnemonicParsing="false" onAction="#gotoPesqConcessionaria" text="Concessionaria" />
                            </items>
                         </Menu>
+                        <Menu mnemonicParsing="false" text="Relatórios">
+                           <items>
+                              <MenuItem fx:id="menuItem_RelatAcessos" mnemonicParsing="false" onAction="#gotoRelatAcessos" text="Relatório de Acessos" />
+                              <MenuItem fx:id="menuItem_RelatClientes" mnemonicParsing="false" onAction="#gotoRelatClientes" text="Relatório por Clientes" />
+                              <MenuItem fx:id="menuItem_RelatDigitador" mnemonicParsing="false" onAction="#gotoRelatDigitador" text="Relatório de Digitador" />
+                           </items>
+                        </Menu>
                         <Menu fx:id="menu_Configuracao" mnemonicParsing="false" text="Configuração" visible="false">
                            <items>
                               <MenuItem fx:id="menuItem_CadUsuarios" mnemonicParsing="false" onAction="#gotoUsuarios" text="Cadastrar Usuários" />
                               <MenuItem fx:id="menuItem_PesqUsuarios" mnemonicParsing="false" onAction="#gotoPesqUsuarios" text="Pesquisar Usuários" />
                            </items>
                         </Menu>
-                        <Menu mnemonicParsing="false" text="Relatórios">
+                        <Menu fx:id="menu_Sair" mnemonicParsing="false" text="Sair">
                            <items>
-                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                              <MenuItem fx:id="menuItem_SairSistema" mnemonicParsing="false" onAction="#gotoSair" text="Sair do Sistema" />
                            </items>
                         </Menu>
                      </menus>
@@ -64,7 +71,7 @@
             <Label layoutX="321.0" layoutY="26.0" text="Apelido:" />
             <TextField fx:id="txt_apelidoInstalacao" layoutX="371.0" layoutY="22.0" />
             <Label layoutX="24.0" layoutY="68.0" text="Tipo:" />
-            <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" prefWidth="150.0" onAction="#chama_painel" />
+            <ComboBox fx:id="cbox_tipoInstalacao" editable="true" layoutX="97.0" layoutY="64.0" prefWidth="150.0" />
             <TextField fx:id="txt_idInstalacao" layoutX="638.0" layoutY="51.0" prefHeight="25.0" prefWidth="34.0" visible="false" />
             <ComboBox fx:id="cbox_concessionariaInstalacao" disable="true" editable="true" layoutX="370.0" layoutY="64.0" prefWidth="150.0" visible="false" />
             <Label disable="true" layoutX="280.0" layoutY="68.0" text="Concessionaria:" visible="false" />

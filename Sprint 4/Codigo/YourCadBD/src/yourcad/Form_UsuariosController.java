@@ -80,6 +80,16 @@ public class Form_UsuariosController implements Initializable {
     private Button btn_usuario_Salvar;
     @FXML
     private ComboBox<String> cbox_usuario_status;
+    @FXML
+    private MenuItem menuItem_RelatAcessos;
+    @FXML
+    private MenuItem menuItem_RelatClientes;
+    @FXML
+    private MenuItem menuItem_RelatDigitador;
+    @FXML
+    private Menu menu_Sair;
+    @FXML
+    private MenuItem menuItem_SairSistema;
 
     /**
      * Initializes the controller class.
@@ -210,9 +220,9 @@ public class Form_UsuariosController implements Initializable {
         app_stage.setScene(home_page_scene);
         app_stage.show();
     }
-    // FIM MENU BAR //    // FIM MENU BAR //
-          
-    @FXML
+    
+
+     @FXML
     private void gotoUsuarios(ActionEvent event) throws IOException {
         Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Usuarios.fxml"));
         Scene home_page_scene = new Scene(home_page_parent);
@@ -233,6 +243,48 @@ public class Form_UsuariosController implements Initializable {
     }
 
     @FXML
+    private void gotoRelatAcessos(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatAcessos.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void gotoRelatClientes(ActionEvent event) throws IOException {
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("RelatContas.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show();
+    }
+
+    @FXML
+    private void gotoRelatDigitador(ActionEvent event) {
+    }
+
+    @FXML
+    private void gotoSair(ActionEvent event) throws IOException 
+    {
+        Form_LoginController.usuario_Id = "";
+        Form_LoginController.usuario_Nome = "";
+        Form_LoginController.usuario_Login = "";
+        Form_LoginController.usuario_Nivel_Acesso = "";
+        Form_LoginController.usuario_Email = "";
+        
+        Parent home_page_parent = FXMLLoader.load(getClass().getResource("Form_Login.fxml"));
+        Scene home_page_scene = new Scene(home_page_parent);
+        Stage app_stage = (Stage) menuBar_TelaInicial.getScene().getWindow();  
+        app_stage.hide();
+        app_stage.setScene(home_page_scene);
+        app_stage.show(); 
+    }
+    // FIM MENU BAR //
+
+    @FXML
     private void salvar_Usuario(ActionEvent event) throws Exception 
     {
         String usuario_Id = txt_usuario_Id.getText();
@@ -243,7 +295,9 @@ public class Form_UsuariosController implements Initializable {
         String usuario_Email = txt_usuario_Email.getText();
         String usuario_Nivel_Acesso = cbox_nivel_Acesso.getValue();
         String usuario_status = cbox_usuario_status.getValue();
-        
+        boolean validar =  validacao();
+            
+        if (validar == true){
         //Conferindo se Senha e confimação de senha correspondem
         if(!usuario_Senha.equals(usuario_Senha2))
         {
@@ -305,6 +359,7 @@ public class Form_UsuariosController implements Initializable {
                 alert.showAndWait();
             }
         }
+       }
     }
     
     private void popular_cbox_Nivel_Acesso()
@@ -321,4 +376,74 @@ public class Form_UsuariosController implements Initializable {
         cbox_usuario_status.setItems(lista);
     }
     
+    
+    private boolean validacao (){
+
+        
+        if ("".equals(txt_usuario_Nome.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Nome não pode ser vazio");
+            alert.showAndWait();
+            txt_usuario_Nome.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_usuario_Login.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Login não pode ser vazio");
+            alert.showAndWait();
+            txt_usuario_Login.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_usuario_Senha.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Senha não pode ser vazio");
+            alert.showAndWait();
+            txt_usuario_Senha.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_usuario_Senha2.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Confirmar Senha não pode ser vazio");
+            alert.showAndWait();
+            txt_usuario_Senha2.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_usuario_Email.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Email não pode ser vazio");
+            alert.showAndWait();
+            txt_usuario_Email.requestFocus();
+            return false;
+            
+        }
+        else if (cbox_nivel_Acesso.getValue() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Nivel de Acesso não pode ser vazio");
+            alert.showAndWait();
+            cbox_nivel_Acesso.requestFocus();
+            return false;
+        }
+        else if (cbox_usuario_status.getValue() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Nivel de Acesso não pode ser vazio");
+            alert.showAndWait();
+            cbox_usuario_status.requestFocus();
+            return false;
+        }
+        else {return true;} 
+    }
 }

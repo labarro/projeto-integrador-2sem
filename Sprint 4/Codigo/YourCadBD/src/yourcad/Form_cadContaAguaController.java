@@ -144,6 +144,10 @@ public class Form_cadContaAguaController implements Initializable {
         String conta_basePis = txt_AguaBaseCofins.getText();
         String conta_aliquota = txt_AguaAliquotaCofins.getText();
         String conta_Id = txt_ContaId.getText();
+        
+        boolean validar =  validacao();
+            
+        if (validar == true){
     
         if(Integer.parseInt(conta_Id) != 0)
         {
@@ -224,6 +228,7 @@ public class Form_cadContaAguaController implements Initializable {
                 LimparAgua();
         
         }
+    }
         
     }
 
@@ -241,6 +246,110 @@ public class Form_cadContaAguaController implements Initializable {
         txt_AguaValorAtual.setText("");
         txt_AguaValorEsgoto.setText("");
         txt_AguaVencimento.setText("");
+    }
+    
+    private boolean validacao (){
+
+        
+        if ("".equals(txt_AguaCompetencia.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Competencia não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaCompetencia.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaVencimento.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Vencimento não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaVencimento.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaPrevProxLeitura.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Data Previsão de Prox Leitura não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaPrevProxLeitura.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaDataLeituraAtual.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Data Leitura Atual não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaDataLeituraAtual.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaValorAtual.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Valor Atual não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaValorAtual.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaValorAgua.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Valor Agua não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaValorAgua.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaValorEsgoto.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Valor Esgoto não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaValorEsgoto.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaTrcf.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo TRCF não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaTrcf.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaMulta.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Multa não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaMulta.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaBaseCofins.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Base PIS COFINS não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaBaseCofins.requestFocus();
+            return false;
+        }
+        else if ("".equals(txt_AguaAliquotaCofins.getText()))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Campo Aliquota PIS COFINS não pode ser vazio");
+            alert.showAndWait();
+            txt_AguaAliquotaCofins.requestFocus();
+            return false;
+        }else {return true;} 
     }
     
 }
