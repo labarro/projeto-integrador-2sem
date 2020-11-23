@@ -58,3 +58,10 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
  #### Proposta:
  
  - [Story Cards para esta Sprint](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Story%20Cards/)
+ 
+  #### Entrega:
+  
+  - [Codigo-Fonte YourCad 6.8](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%204/Codigo/yourcad6.8/YourCadBD)
+  - [Arquivos Banco de Dados](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%204/Database)
+  - [Documentação](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao)
+  - [Vídeo demonstração do CRUD de Contas - YourCAD]()
