@@ -20,7 +20,7 @@ Software MySQL versão mais recente; [Link para download](https://dev.mysql.com/
 3 – Após o download acesse o arquivo "projeto-integrador-2sem-master.zip" e o extraia para uma pasta de sua preferência.
 ![](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao/Imagem%204.png?raw=true)
 ### Banco de dados:
-4 – Após download navegue até a pasta “projeto-integrador-2sem-master\Sprint 3\Database” e abra o arquivo “script3.1.sql” no bloco de notas.
+4 – Após download navegue até a pasta “projeto-integrador-2sem-master\Sprint 4\Database” e abra o arquivo “script3.7.sql” no bloco de notas.
 ![](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao/Imagem%205.png?raw=true)
 
 5 – Copie todo o conteúdo do arquivo e em sequencia abra o "MySQL Command Line Client", insira a senha padrão, cole o conteúdo anteriormente copiado e execute.
