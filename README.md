@@ -6,11 +6,11 @@ Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dado
 
 ## Integrantes:
 
-- Maximiles Barcelos - Scrum Master
-- Mateus de Senne - Project Owner
-- Lucas Aparecido
-- Luís Augusto
-- Rodrigo Amancio
+- Maximiles Barcelos - Scrum Master [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/maxx-barcelos-aaa106b2)
+- Mateus de Senne - Project Owner [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/mateus-senne-172905149)
+- Lucas Aparecido 
+- Luís Augusto [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/luisaugustosb)
+- Rodrigo Amancio [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/rodrigo-am%C3%A2ncio-do-prado-ten%C3%B3rio-a56641174)
 
 ## Proposta:
 
@@ -54,7 +54,15 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
   - [Vídeo demonstração do CRUD de Contas - YourCAD](https://youtu.be/w4OWx9PUwqo)
 
 ## Sprint 4:
-
+  Nesta quarta e ultima entrega implementamos o módulo de Relatórios, sendo eles: 
+  
+  Relatório de acessos - Onde o administrador do sistema pode ver quem acessou o programa dentro de um intervalo de datas por ele especificado;
+  Relatório de Contas por Cliente: Traz informações de quais contas foram cadastradas para cada cliente;
+  Relatório de Digitador: Permite o Supervisor monitorar quantas contas o funcionário cadastrou no periodo por ele escolhido;
+  
+  Máscaras de Campos como Data, CPF, CNPJ, tambem foram adicionadas juntamente com validações de formulários, impedindo que o usuário insira um cadastro em branco.
+  Os Niveis de acesso foram colocados através de Login, para permitir melhor controle de fluxo do programa, evitando que usuários executem funções não pertinentes ao seu cargo.
+  
  #### Proposta:
  
  - [Story Cards para esta Sprint](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Story%20Cards/)
@@ -64,4 +72,4 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
   - [Codigo-Fonte YourCad 6.8](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%204/Codigo/yourcad6.8/YourCadBD)
   - [Arquivos Banco de Dados](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%204/Database)
   - [Documentação](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao)
-  - [Vídeo demonstração do CRUD de Contas - YourCAD]()
+  - [Vídeo demonstração do CRUD de Contas - YourCAD](#)
