@@ -29,4 +29,4 @@ Software MySQL versão mais recente; [Link para download](https://dev.mysql.com/
 ### Executando o programa:
 6 - Acesse o seguinte caminho “projeto-integrador-2sem-master\Sprint 4\Codigo\YourCadBD\dist” na pasta extraída e execute o arquivo “YourCad.jar”.
 ![](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao/Imagem%207.JPG?raw=true)
-**IMPORTANTE: Na instalação inicial do sistema o unico usuário cadastrado é o administrador, seu login é "admin" e senha "123456" (sem aspas). É fortemente recomendado que na primeira utilização esta senha seja alterada.
+**IMPORTANTE: Na instalação inicial do sistema o unico usuário cadastrado é o administrador, seu login é "admin" e senha "123456" (sem aspas). É fortemente recomendado que na primeira utilização esta senha seja alterada.**
