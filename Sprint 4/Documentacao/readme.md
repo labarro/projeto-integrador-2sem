@@ -28,4 +28,4 @@ Software MySQL versão mais recente; [Link para download](https://dev.mysql.com/
 
 ### Executando o programa:
 6 - Acesse o seguinte caminho “projeto-integrador-2sem-master\Sprint 4\Codigo\YourCadBD\dist” na pasta extraída e execute o arquivo “YourCad.jar”.
-![](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao/Imagem%207.png?raw=true)
+![](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao/Imagem%207.JPG?raw=true)
