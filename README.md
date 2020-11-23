@@ -6,11 +6,11 @@ Repositório para hospedar o projeto integrador do 2º semestre de Banco de Dado
 
 ## Integrantes:
 
--[![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/maxx-barcelos-aaa106b2) Maximiles Barcelos - Scrum Master
--[![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/mateus-senne-172905149) Mateus de Senne - Project Owner 
+- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/maxx-barcelos-aaa106b2) Maximiles Barcelos - Scrum Master
+- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/mateus-senne-172905149) Mateus de Senne - Project Owner 
 - Lucas Aparecido 
--[![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/luisaugustosb) Luís Augusto 
--[![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/rodrigo-am%C3%A2ncio-do-prado-ten%C3%B3rio-a56641174) Rodrigo Amancio 
+- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/luisaugustosb) Luís Augusto 
+- [![Linkedin](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=Linkedin)](https://www.linkedin.com/in/rodrigo-am%C3%A2ncio-do-prado-ten%C3%B3rio-a56641174) Rodrigo Amancio 
 
 ## Proposta:
 
