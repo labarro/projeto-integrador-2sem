@@ -7,6 +7,7 @@ package yourcad;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -296,39 +297,68 @@ public class Form_cadContaEnergiaController implements Initializable {
             Connection conn = null;
             ResultSet resultadoBanco = null;
             conn = DBConexao.abrirConexao();
-            Statement stm = conn.createStatement();
-                        
+            
             String sql;
             sql = "UPDATE conta_energia SET "
-                    + "conta_energia_valor = '"+ conta_valor +"', "
-                    + "conta_energia_competencia = '"+ conta_competencia +"', "
-                    + "conta_energia_consumo_mes = '"+ conta_consMes +"', "
-                    + "conta_energia_vencimento = '"+ conta_Vencimento +"', "
-                    + "conta_energia_bandeira_cor = '"+ conta_bandCor +"', "
-                    + "conta_energia_bandeira_periodoini = '"+ conta_bandInicio +"', "
-                    + "conta_energia_bandeira_periodo_fim = '"+ conta_bandFim +"', "
-                    + "conta_energia_faturamento_emissao = '"+ conta_fatEmissao +"', "
-                    + "conta_energia_faturamento_leitatual = '"+ conta_fatLeitAtual +"', "
-                    + "conta_energia_faturamento_dias = '"+ conta_fatDias +"', "
-                    + "conta_energia_faturamento_cci = '"+ conta_cci +"', "
-                    + "conta_energia_faturamento_produto = '"+ conta_fatDescProduto +"', "
-                    + "conta_energia_faturamento_qtd = '"+ conta_fatQtd +"', "
-                    + "conta_energia_faturamento_tarifa = '"+ conta_fatTariAplicada +"', "
-                    + "conta_energia_faturamento_valorfornecido = '"+ conta_valorFornecido +"', "
-                    + "conta_energia_faturamento_tarifaimposto = '"+ conta_fatTariImposto +"', "
-                    + "conta_energia_faturamento_baseicms = '"+ conta_baseIcms +"', "
-                    + "conta_energia_faturamento_aliqicms = '"+ conta_aliqIcms +"', "
-                    + "conta_energia_faturamento_valoricms = '"+ conta_valorIcms +"', "
-                    + "conta_energia_faturamento_basepis = '"+ conta_basePis +"', "
-                    + "conta_energia_faturamento_aliqpis = '"+ conta_aliqPis +"', "
-                    + "conta_energia_faturamento_valorpis = '"+ conta_valorPis +"', "
-                    + "conta_energia_consumo_descricao = '"+ conta_consDescricao +"', "
-                    + "conta_energia_consumo_medidor = '"+ conta_consMedidor +"', "
-                    + "conta_energia_consumo_leitatual = '"+ conta_consLeitAtual +"', "
-                    + "conta_energia_consumo_constmult = '"+ conta_constMult +"', "
-                    + "conta_energia_consumo_kwh = '"+ conta_consKwh +"' "                  
-                    + "WHERE conta_id = "+ conta_Id +";";        
-            stm.executeUpdate(sql);
+                    + "conta_energia_valor = ?, "
+                    + "conta_energia_competencia = ?, "
+                    + "conta_energia_consumo_mes = ?, "
+                    + "conta_energia_vencimento = ?, "
+                    + "conta_energia_bandeira_cor = ?, "
+                    + "conta_energia_bandeira_periodoini = ?, "
+                    + "conta_energia_bandeira_periodo_fim = ?, "
+                    + "conta_energia_faturamento_emissao = ?, "
+                    + "conta_energia_faturamento_leitatual = ?, "
+                    + "conta_energia_faturamento_dias = ?, "
+                    + "conta_energia_faturamento_cci = ?, "
+                    + "conta_energia_faturamento_produto = ?, "
+                    + "conta_energia_faturamento_qtd = ?, "
+                    + "conta_energia_faturamento_tarifa = ?, "
+                    + "conta_energia_faturamento_valorfornecido = ?, "
+                    + "conta_energia_faturamento_tarifaimposto = ?, "
+                    + "conta_energia_faturamento_baseicms = ?, "
+                    + "conta_energia_faturamento_aliqicms = ?, "
+                    + "conta_energia_faturamento_valoricms = ?, "
+                    + "conta_energia_faturamento_basepis = ?, "
+                    + "conta_energia_faturamento_aliqpis = ?, "
+                    + "conta_energia_faturamento_valorpis = ?, "
+                    + "conta_energia_consumo_descricao = ?, "
+                    + "conta_energia_consumo_medidor = ?, "
+                    + "conta_energia_consumo_leitatual = ?, "
+                    + "conta_energia_consumo_constmult = ?, "
+                    + "conta_energia_consumo_kwh = ? "                  
+                    + "WHERE conta_id = ?";
+            
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, conta_valor);
+            pstm.setString(2, conta_competencia);
+            pstm.setString(3, conta_consMes);
+            pstm.setString(4, conta_Vencimento);
+            pstm.setString(5, conta_bandCor);
+            pstm.setString(6, conta_bandInicio);
+            pstm.setString(7, conta_bandFim);
+            pstm.setString(8, conta_fatEmissao);
+            pstm.setString(9, conta_fatLeitAtual);
+            pstm.setString(10, conta_fatDias);
+            pstm.setString(11, conta_cci);
+            pstm.setString(12, conta_fatDescProduto);
+            pstm.setString(13, conta_fatQtd);
+            pstm.setString(14, conta_fatTariAplicada);
+            pstm.setString(15, conta_valorFornecido);
+            pstm.setString(16, conta_fatTariImposto);
+            pstm.setString(17, conta_baseIcms);
+            pstm.setString(18, conta_aliqIcms);
+            pstm.setString(19, conta_valorIcms);
+            pstm.setString(20, conta_basePis);
+            pstm.setString(21, conta_aliqPis);
+            pstm.setString(22, conta_valorPis);
+            pstm.setString(23, conta_consDescricao);
+            pstm.setString(24, conta_consMedidor);
+            pstm.setString(25, conta_consLeitAtual);
+            pstm.setString(26, conta_constMult);
+            pstm.setString(27, conta_consKwh);
+            pstm.setString(28, conta_Id);
+            pstm.executeUpdate();
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Mensagem");
@@ -344,14 +374,16 @@ public class Form_cadContaEnergiaController implements Initializable {
         Connection conn = null;
         conn = DBConexao.abrirConexao();
         
-        Statement stm0 = conn.createStatement(); 
         String query0;
         query0 = "INSERT INTO conta(instalacao_id, cliente_id, conta_numero_instalacao, conta_tipo) VALUES "+
-                "("+ instalacao_id +", "
-                   + cliente_id +", '"
-                   + instalacao_numero +"', '"
-                + "Energia');";
-        stm0.executeUpdate(query0);
+                "(?, ?, ?, Energia')";
+        
+        PreparedStatement pstm0 = conn.prepareStatement(query0);
+        pstm0.setString(1, instalacao_id);
+        pstm0.setString(2, cliente_id);
+        pstm0.setString(3, instalacao_numero);
+       
+        pstm0.executeUpdate();
 
         Statement stm1 = conn.createStatement();
         String query1;
@@ -367,58 +399,61 @@ public class Form_cadContaEnergiaController implements Initializable {
         String data = format_data.format(data1); // 14/03/2016
         String hora = format_hora.format(data1);
 
-        Statement stm3 = conn.createStatement();      
         String query3;
         query3 = "INSERT INTO relatorio_digitador( usuario_id, conta_id, relat_data, relat_hora) VALUES"
-                  +  "("+ usuario_id +",'"
-                        + conta_id +"','"
-                        + data +"','"
-                        + hora +"');";
-        stm3.executeUpdate(query3);
+                  +  "(?, ?, ?, ?)";
+        
+        PreparedStatement pstm3 = conn.prepareStatement(query3);      
+        pstm3.setString(1, usuario_id);
+        pstm3.setInt(2, conta_id);
+        pstm3.setString(3, data);
+        pstm3.setString(4, hora);
+        
+        pstm3.executeUpdate();
         //*****************************************
   
-        Statement stm = conn.createStatement();      
-        String query;
-        query = "INSERT INTO conta_energia(conta_id, conta_energia_valor, conta_energia_competencia, conta_energia_consumo_mes, " +
-                    "conta_energia_vencimento, conta_energia_bandeira_cor, conta_energia_bandeira_periodoini, " +
-                    "conta_energia_bandeira_periodo_fim, conta_energia_faturamento_emissao, conta_energia_faturamento_leitatual," +
-                    "conta_energia_faturamento_dias, conta_energia_faturamento_cci, conta_energia_faturamento_produto, " +
-                    "conta_energia_faturamento_qtd, conta_energia_faturamento_tarifa, conta_energia_faturamento_valorfornecido, " +
-                    "conta_energia_faturamento_tarifaimposto, conta_energia_faturamento_baseicms, conta_energia_faturamento_aliqicms, " +
-                    "conta_energia_faturamento_valoricms, conta_energia_faturamento_basepis, conta_energia_faturamento_aliqpis, " +
-                    "conta_energia_faturamento_valorpis, conta_energia_consumo_descricao, conta_energia_consumo_medidor, " +
-                    "conta_energia_consumo_leitatual, conta_energia_consumo_constmult, conta_energia_consumo_kwh) VALUES"
-                  +  "("+ conta_id +",'"
-                        + conta_valor +"','"
-                        + conta_competencia +"','"
-                        + conta_consMes +"','"
-                        + conta_Vencimento +"','"
-                        + conta_bandCor +"','"
-                        + conta_bandInicio +"','"
-                        + conta_bandFim +"','"
-                        + conta_fatEmissao +"','"
-                        + conta_fatLeitAtual +"','"
-                        + conta_fatDias +"','"
-                        + conta_cci +"','"
-                        + conta_fatDescProduto +"','"
-                        + conta_fatQtd +"','"
-                        + conta_fatTariAplicada +"','"
-                        + conta_valorFornecido +"','"
-                        + conta_fatTariImposto +"','"
-                        + conta_baseIcms +"','"
-                        + conta_aliqIcms +"','"
-                        + conta_valorIcms +"','"
-                        + conta_basePis +"','"
-                        + conta_aliqPis +"','"
-                        + conta_valorPis +"','"
-                        + conta_consDescricao +"','"
-                        + conta_consMedidor +"','"
-                        + conta_consLeitAtual +"','"
-                        + conta_constMult +"','"
-                        + conta_consKwh +"');";
+            String query;
+            query = "INSERT INTO conta_energia(conta_id, conta_energia_valor, conta_energia_competencia, conta_energia_consumo_mes, " +
+                        "conta_energia_vencimento, conta_energia_bandeira_cor, conta_energia_bandeira_periodoini, " +
+                        "conta_energia_bandeira_periodo_fim, conta_energia_faturamento_emissao, conta_energia_faturamento_leitatual," +
+                        "conta_energia_faturamento_dias, conta_energia_faturamento_cci, conta_energia_faturamento_produto, " +
+                        "conta_energia_faturamento_qtd, conta_energia_faturamento_tarifa, conta_energia_faturamento_valorfornecido, " +
+                        "conta_energia_faturamento_tarifaimposto, conta_energia_faturamento_baseicms, conta_energia_faturamento_aliqicms, " +
+                        "conta_energia_faturamento_valoricms, conta_energia_faturamento_basepis, conta_energia_faturamento_aliqpis, " +
+                        "conta_energia_faturamento_valorpis, conta_energia_consumo_descricao, conta_energia_consumo_medidor, " +
+                        "conta_energia_consumo_leitatual, conta_energia_consumo_constmult, conta_energia_consumo_kwh) VALUES"
+                      +  "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setString(1, conta_valor);
+            pstm.setString(2, conta_competencia);
+            pstm.setString(3, conta_consMes);
+            pstm.setString(4, conta_Vencimento);
+            pstm.setString(5, conta_bandCor);
+            pstm.setString(6, conta_bandInicio);
+            pstm.setString(7, conta_bandFim);
+            pstm.setString(8, conta_fatEmissao);
+            pstm.setString(9, conta_fatLeitAtual);
+            pstm.setString(10, conta_fatDias);
+            pstm.setString(11, conta_cci);
+            pstm.setString(12, conta_fatDescProduto);
+            pstm.setString(13, conta_fatQtd);
+            pstm.setString(14, conta_fatTariAplicada);
+            pstm.setString(15, conta_valorFornecido);
+            pstm.setString(16, conta_fatTariImposto);
+            pstm.setString(17, conta_baseIcms);
+            pstm.setString(18, conta_aliqIcms);
+            pstm.setString(19, conta_valorIcms);
+            pstm.setString(20, conta_basePis);
+            pstm.setString(21, conta_aliqPis);
+            pstm.setString(22, conta_valorPis);
+            pstm.setString(23, conta_consDescricao);
+            pstm.setString(24, conta_consMedidor);
+            pstm.setString(25, conta_consLeitAtual);
+            pstm.setString(26, conta_constMult);
+            pstm.setString(27, conta_consKwh);
         
-            stm.executeUpdate(query);
-            
+            pstm.executeUpdate();  
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Mensagem");

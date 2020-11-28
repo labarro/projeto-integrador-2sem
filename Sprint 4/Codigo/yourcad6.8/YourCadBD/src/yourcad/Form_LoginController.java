@@ -73,15 +73,18 @@ public class Form_LoginController implements Initializable {
         Connection conn = null;
         ResultSet resultadoBanco = null;
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
         
         String sql;
         String sql1 = null;
-        if(!"".equals(usuario) && !"".equals(senha)){ sql1 = " WHERE usuario_login = '"+usuario+"' && usuario_senha = '"+senha+"' ";}
+        if(!"".equals(usuario) && !"".equals(senha)){ sql1 = " WHERE usuario_login = ? && usuario_senha = ? ";}
         else{sql1 = "";}
-        sql = "SELECT * FROM usuarios "+sql1+ " ;";
+        sql = "SELECT * FROM usuarios " + sql1;
         
-        resultadoBanco = stm.executeQuery(sql);       
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, usuario);
+        pstm.setString(2, senha);
+        
+        resultadoBanco = pstm.executeQuery();       
         
         if (resultadoBanco.next()) 
         {

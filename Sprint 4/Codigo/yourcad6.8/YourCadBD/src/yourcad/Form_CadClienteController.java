@@ -462,23 +462,36 @@ public class Form_CadClienteController implements Initializable {
             ResultSet resultadoBanco = null;
                      
             conn = DBConexao.abrirConexao();
-            Statement stm = conn.createStatement();
-                        
+            
             String sql;
             sql = "UPDATE cliente SET "
-                    + "cliente_nome = '"+ cliente_nome +"', "
-                    + "cliente_documento = '"+ cliente_doc +"', "
-                    + "cliente_apelido = '"+ cliente_apelido +"', "
-                    + "cliente_endereco = '"+ cliente_endereco +"', "
-                    + "cliente_complemento_endereco = '"+ cliente_complemento +"', "
-                    + "cliente_numero_endereco = '"+ cliente_numero +"', "
-                    + "cliente_bairro = '"+ cliente_bairro +"', "
-                    + "cliente_cep = '"+ cliente_cep +"', "
-                    + "cliente_cidade = '"+ cliente_cidade +"', "
-                    + "cliente_uf = '"+ cliente_uf +"' "                  
-                    + "WHERE cliente_id = "+ cliente_id +";";
+                    + "cliente_nome = ?, "
+                    + "cliente_documento = ?, "
+                    + "cliente_apelido = ?, "
+                    + "cliente_endereco = ?, "
+                    + "cliente_complemento_endereco = ?, "
+                    + "cliente_numero_endereco = ?, "
+                    + "cliente_bairro = ?, "
+                    + "cliente_cep = ?, "
+                    + "cliente_cidade = ?, "
+                    + "cliente_uf = ? "                  
+                    + "WHERE cliente_id = ?";
+            
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, cliente_nome);
+            pstm.setString(2, cliente_doc);
+            pstm.setString(3, cliente_apelido);
+            pstm.setString(4, cliente_endereco);
+            pstm.setString(5, cliente_complemento);
+            pstm.setString(6, cliente_numero);
+            pstm.setString(7, cliente_bairro);
+            pstm.setString(8, cliente_cep);
+            pstm.setString(9, cliente_cidade);
+            pstm.setString(10, cliente_uf);
+            pstm.setString(11, cliente_id);
+            
                        
-            stm.executeUpdate(sql);
+            pstm.executeUpdate();
             
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Mensagem");
@@ -490,27 +503,32 @@ public class Form_CadClienteController implements Initializable {
        
             Connection conn = null;
             conn = DBConexao.abrirConexao();
-            Statement stm = conn.createStatement();
+            
             String query;
             query = "INSERT INTO cliente(cliente_nome,\n" +
                     "cliente_documento, cliente_apelido, cliente_endereco, cliente_complemento_endereco,"
                     + " cliente_numero_endereco, cliente_uf, cliente_cidade, cliente_bairro, cliente_cep) VALUES "
-                + "('"+ cliente_nome +"','"
-                    + cliente_doc +"','"
-                    + cliente_apelido +"','"
-                    + cliente_endereco +"','"
-                    + cliente_complemento +"','"
-                    + cliente_numero +"','"
-                    + cliente_uf +"','"
-                    + cliente_cidade +"','"
-                    + cliente_bairro +"','"
-                    + cliente_cep +"');";
-            stm.executeUpdate(query);
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            PreparedStatement pstm = conn.prepareStatement(query);
+         
+            pstm.setString(1, cliente_nome);
+            pstm.setString(2, cliente_doc);
+            pstm.setString(3, cliente_apelido);
+            pstm.setString(4, cliente_endereco);
+            pstm.setString(5, cliente_complemento);
+            pstm.setString(6, cliente_numero);
+            pstm.setString(7, cliente_bairro);
+            pstm.setString(8, cliente_cep);
+            pstm.setString(9, cliente_cidade);
+            pstm.setString(10, cliente_uf);
+            
+            pstm.executeUpdate();
             
             Statement stm0 = conn.createStatement();
             String query0;
             query0 = "SELECT LAST_INSERT_ID();";
-            ResultSet resultado = stm.executeQuery(query0);
+            ResultSet resultado = stm0.executeQuery(query0);
             int cliente = 0;
             while(resultado.next())
             {

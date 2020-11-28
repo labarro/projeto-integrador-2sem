@@ -7,6 +7,7 @@ package yourcad;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -179,23 +180,36 @@ public class Form_cadContaAguaController implements Initializable {
                         Connection conn = null;
                         ResultSet resultadoBanco = null;
                         conn = DBConexao.abrirConexao();
-                        Statement stm = conn.createStatement();
-
+                        
                         String sql;
                         sql = "UPDATE conta_agua SET "
-                                + "conta_agua_mes = '"+ conta_competencia +"', "
-                                + "conta_agua_vencimento = '"+ conta_vencimento +"', "
-                                + "conta_agua_data_atual_leitura = '"+ conta_dataLeituraAtual +"', "
-                                + "conta_agua_data_previsao_proxima_leitura = '"+ conta_dataProximaLeitura +"', "
-                                + "conta_agua_valor_atual_leitura = '"+ conta_valorAtual +"', "
-                                + "conta_agua_valor_agua = '"+ conta_valorAgua +"', "
-                                + "conta_agua_valor_esgoto = '"+ conta_valorEsgoto +"', "
-                                + "conta_agua_multa = '"+ conta_multa +"', "
-                                + "conta_agua_trcf = '"+ conta_trcf +"', "
-                                + "conta_agua_base_pis_cofins = '"+ conta_basePis +"', " 
-                                + "conta_agua_aliquota_pis_cofins = '"+ conta_aliquota +"' " 
-                                + "WHERE conta_id = "+ conta_Id +";";        
-                        stm.executeUpdate(sql);
+                                + "conta_agua_mes = ?, "
+                                + "conta_agua_vencimento = ?, "
+                                + "conta_agua_data_atual_leitura = ?, "
+                                + "conta_agua_data_previsao_proxima_leitura = ?, "
+                                + "conta_agua_valor_atual_leitura = ?, "
+                                + "conta_agua_valor_agua = ?, "
+                                + "conta_agua_valor_esgoto = ?, "
+                                + "conta_agua_multa = ?, "
+                                + "conta_agua_trcf = ?, "
+                                + "conta_agua_base_pis_cofins = ?, " 
+                                + "conta_agua_aliquota_pis_cofins = ? " 
+                                + "WHERE conta_id = ?";       
+                        
+                        PreparedStatement pstm = conn.prepareStatement(sql);
+                        pstm.setString(1, conta_competencia);
+                        pstm.setString(2, conta_vencimento);
+                        pstm.setString(3, conta_dataLeituraAtual);
+                        pstm.setString(4, conta_valorAtual);
+                        pstm.setString(5, conta_valorAgua);
+                        pstm.setString(6, conta_valorEsgoto);
+                        pstm.setString(7, conta_multa);
+                        pstm.setString(8, conta_trcf);
+                        pstm.setString(9, conta_basePis);
+                        pstm.setString(10, conta_aliquota);
+                        pstm.setString(11, conta_Id);
+                        
+                        pstm.executeUpdate();
 
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Mensagem");
@@ -208,15 +222,17 @@ public class Form_cadContaAguaController implements Initializable {
 
                         Connection conn = null;
                         conn = DBConexao.abrirConexao();
-
-                        Statement stm0 = conn.createStatement(); 
+                        
                         String query0;
                         query0 = "INSERT INTO conta(instalacao_id, cliente_id, conta_numero_instalacao, conta_tipo) VALUES "+
-                                "("+ instalacao_id +", "
-                                   + cliente_id +", '"
-                                   + instalacao_numero +"', '"
-                                + "Agua e Esgoto');";
-                        stm0.executeUpdate(query0);
+                                "(?, ?, ?, 'Agua e Esgoto');";
+                        
+                        PreparedStatement pstm0 = conn.prepareStatement(query0); 
+                        pstm0.setString(1, instalacao_id);
+                        pstm0.setString(2, cliente_id);
+                        pstm0.setString(3, instalacao_numero);
+                        
+                        pstm0.executeUpdate();
 
                         Statement stm1 = conn.createStatement();
                         String query1;
@@ -232,40 +248,44 @@ public class Form_cadContaAguaController implements Initializable {
                         String data = format_data.format(data1); // 14/03/2016
                         String hora = format_hora.format(data1);
 
-                        Statement stm3 = conn.createStatement();      
                         String query3;
                         query3 = "INSERT INTO relatorio_digitador( usuario_id, conta_id, relat_data, relat_hora) VALUES"
-                                  +  "("+ usuario_id +",'"
-                                        + conta_id +"','"
-                                        + data +"','"
-                                        + hora +"');";
-                        stm3.executeUpdate(query3);
+                                  +  "(?, ?, ?, ?)";
+
+                        PreparedStatement pstm3 = conn.prepareStatement(query3);      
+                        pstm3.setString(1, usuario_id);
+                        pstm3.setInt(2, conta_id);
+                        pstm3.setString(3, data);
+                        pstm3.setString(4, hora);
+                        
+                        pstm3.executeUpdate();
                         //*****************************************
 
-                        Statement stm = conn.createStatement();      
                         String query;
                         query = "INSERT INTO conta_agua(conta_id, conta_agua_mes, conta_agua_vencimento, conta_agua_data_atual_leitura, conta_agua_data_previsao_proxima_leitura, " +
                                 "conta_agua_valor_atual_leitura, conta_agua_valor_agua, conta_agua_valor_esgoto, conta_agua_multa, conta_agua_trcf, conta_agua_base_pis_cofins, "
                                 + "conta_agua_aliquota_pis_cofins ) VALUES"
-                                  +  "("+ conta_id +",'"
-                                        + conta_competencia +"','"
-                                        + conta_vencimento +"','"
-                                        + conta_dataLeituraAtual +"','"
-                                        + conta_dataProximaLeitura +"','"
-                                        + conta_valorAtual +"','"
-                                        + conta_valorAgua +"','"
-                                        + conta_valorEsgoto +"','"
-                                        + conta_multa +"','"
-                                        + conta_trcf +"','"
-                                        + conta_basePis +"','"
-                                        + conta_aliquota +"');";
-                            stm.executeUpdate(query);
+                                  +  "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        
+                        PreparedStatement pstm = conn.prepareStatement(query); 
+                        pstm.setString(1, conta_competencia);
+                        pstm.setString(2, conta_vencimento);
+                        pstm.setString(3, conta_dataLeituraAtual);
+                        pstm.setString(4, conta_valorAtual);
+                        pstm.setString(5, conta_valorAgua);
+                        pstm.setString(6, conta_valorEsgoto);
+                        pstm.setString(7, conta_multa);
+                        pstm.setString(8, conta_trcf);
+                        pstm.setString(9, conta_basePis);
+                        pstm.setString(10, conta_aliquota);
+                        
+                        pstm.executeUpdate();
 
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Mensagem");
-                            alert.setHeaderText("Dados salvos com sucesso !");
-                            alert.showAndWait();
-                            LimparAgua();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Mensagem");
+                        alert.setHeaderText("Dados salvos com sucesso !");
+                        alert.showAndWait();
+                        LimparAgua();
 
                     }
         }

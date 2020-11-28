@@ -8,6 +8,7 @@ package yourcad;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -284,24 +285,23 @@ public class RelatAcessosController implements Initializable {
         Connection conn = null;
         ResultSet resultadoBanco = null;
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
         
         List<RelatAcesso> acessos = new ArrayList<>();
         
         String sql;
         String sql1;
-        if(!"".equals(usuario_nome)){ sql1 = " WHERE usuario_nome LIKE '%"+ usuario_nome +"%' ";}
-        else if(!"".equals(acesso_data1)&& "".equals(acesso_data2)){  sql1 = " WHERE acesso_data = '"+ acesso_data1 +"' ";}
-        else if(!"".equals(acesso_data2)&& "".equals(acesso_data1)){  sql1 = " WHERE acesso_data = '"+ acesso_data2 +"' ";}
-        else if(!"".equals(acesso_data1) && !"".equals(acesso_data2)){  sql1 = " WHERE acesso_data BETWEEN '"+acesso_data1+"' AND '"+acesso_data2+"' ";}
-        else if(!"".equals(usuario_nome) && !"".equals(acesso_data1) && !"".equals(acesso_data2)){ sql1 = " WHERE usuario_nome LIKE '%"+ usuario_nome +"%' && acesso_data BETWEEN '"+acesso_data1+"' AND '"+acesso_data2+"' ";}
-        else{sql1 = "";}
+        sql1 = " WHERE usuario_nome LIKE ? AND acesso_data BETWEEN ? AND ? ";
         sql = "SELECT acesso_id, usuario_nome, usuario_nivel_acesso, acesso_data, acesso_hora, usuario_status "
                 + " FROM usuarios "
                 + " INNER JOIN acessos ON usuarios.usuario_id = acessos.acesso_usuario_id "
-                + sql1 
-                + " ;";
-        resultadoBanco = stm.executeQuery(sql);
+                + sql1;
+        
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, "%" + usuario_nome + "%");
+        pstm.setDate(2, java.sql.Date.valueOf(acesso_data1));
+        pstm.setDate(3, java.sql.Date.valueOf(acesso_data2));
+        
+        resultadoBanco = pstm.executeQuery();
         
         txt_relatSql.setText(sql);
         

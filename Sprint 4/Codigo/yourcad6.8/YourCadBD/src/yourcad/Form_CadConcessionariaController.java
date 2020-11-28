@@ -386,8 +386,7 @@ public class Form_CadConcessionariaController implements Initializable {
             ResultSet resultadoBanco = null;
                      
             conn = DBConexao.abrirConexao();
-            Statement stm = conn.createStatement();
-           
+            
             String idconcessionaria = txt_IdConcessionaria.getText();
             String NomeConcessionaria = txtFld_NomeConcessionaria.getText();
             String CnpjConcessionaria = txtFld_CnpjConcessionaria.getText();
@@ -404,21 +403,36 @@ public class Form_CadConcessionariaController implements Initializable {
             
             String sql;
             sql = "UPDATE concessionaria SET "
-                    + "concessionaria_cnpj = '"+ CnpjConcessionaria +"', "
-                    + "concessionaria_nome = '"+ NomeConcessionaria +"', "
-                    + "concessionaria_inscricao_estadual = '"+ InscEstadualConcessionaria +"', "
-                    + "concessionaria_endereco = '"+ EndConcessionaria +"', "
-                    + "concessionaria_bairro = '"+ BairroConcessionaria +"', "
-                    + "concessionaria_numero_endereco = '"+ NumEndConcessionariaTxt +"', "
-                    + "concessionaria_complemento_endereco = '"+ CompEndConcessionaria +"', "
-                    + "concessionaria_cep = '"+ CepConcessionaria +"', "
-                    + "concessionaria_cidade = '"+ CidadeConcessionaria +"', "
-                    + "concessionaria_uf = '"+ UfEndConcessionaria +"', "
-                    + "concessionaria_email = '"+ EmailConcessionaria +"', "
-                    + "concessionaria_site = '"+ SiteConcessionaria +"' "
-                    + "WHERE concessionaria_id = "+ idconcessionaria +";";
+                    + "concessionaria_cnpj = ?, "
+                    + "concessionaria_nome = ?, "
+                    + "concessionaria_inscricao_estadual = ?, "
+                    + "concessionaria_endereco = ?, "
+                    + "concessionaria_bairro = ?, "
+                    + "concessionaria_numero_endereco = ?, "
+                    + "concessionaria_complemento_endereco = ?, "
+                    + "concessionaria_cep = ?, "
+                    + "concessionaria_cidade = ?, "
+                    + "concessionaria_uf = ?, "
+                    + "concessionaria_email = ?, "
+                    + "concessionaria_site = ? "
+                    + "WHERE concessionaria_id = ?";
+            
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, CnpjConcessionaria);
+            pstm.setString(2, NomeConcessionaria);
+            pstm.setString(3, InscEstadualConcessionaria);
+            pstm.setString(4, EndConcessionaria);
+            pstm.setString(5, BairroConcessionaria);
+            pstm.setString(6, NumEndConcessionariaTxt);
+            pstm.setString(7, CompEndConcessionaria);
+            pstm.setString(8, CepConcessionaria);
+            pstm.setString(9, CidadeConcessionaria);
+            pstm.setString(10, UfEndConcessionaria);
+            pstm.setString(11, EmailConcessionaria);
+            pstm.setString(12, SiteConcessionaria);
+            pstm.setString(13, idconcessionaria);
                        
-            stm.executeUpdate(sql);
+            pstm.executeUpdate();
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Mensagem");
@@ -457,7 +471,7 @@ public class Form_CadConcessionariaController implements Initializable {
         Connection conn = null;
         ResultSet resultSet = null;
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
+        
         String query;
         query = "INSERT INTO concessionaria(concessionaria_cnpj,\n" +
                 "concessionaria_nome,\n" +
@@ -471,20 +485,23 @@ public class Form_CadConcessionariaController implements Initializable {
                 "concessionaria_uf,\n" +
                 "concessionaria_email,\n" +
                 "concessionaria_site) VALUES "
-                + "('"+ CnpjConcessionaria +"','"
-                + NomeConcessionaria +"','"
-                + InscEstadualConcessionaria +"','"
-                + EndConcessionaria +"','"
-                + BairroConcessionaria +"','"
-                + NumEndConcessionaria +"','"
-                + CompEndConcessionaria +"','"
-                + CepConcessionaria +"','"
-                + CidadeConcessionaria +"','"
-                + UfEndConcessionaria +"','"
-                + EmailConcessionaria +"','"
-                + SiteConcessionaria +"');";
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-        stm.executeUpdate(query);
+        PreparedStatement pstm = conn.prepareStatement(query);
+        pstm.setString(1, CnpjConcessionaria);
+            pstm.setString(2, NomeConcessionaria);
+            pstm.setString(3, InscEstadualConcessionaria);
+            pstm.setString(4, EndConcessionaria);
+            pstm.setString(5, BairroConcessionaria);
+            pstm.setString(6, NumEndConcessionariaTxt);
+            pstm.setString(7, CompEndConcessionaria);
+            pstm.setString(8, CepConcessionaria);
+            pstm.setString(9, CidadeConcessionaria);
+            pstm.setString(10, UfEndConcessionaria);
+            pstm.setString(11, EmailConcessionaria);
+            pstm.setString(12, SiteConcessionaria);
+        
+        pstm.executeUpdate();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Mensagem");
@@ -495,7 +512,8 @@ public class Form_CadConcessionariaController implements Initializable {
         }
         
     }
-           @FXML
+    
+    @FXML
     private void mascaraDocumento(javafx.scene.input.KeyEvent event) {
     TextFieldFormatter tff = new TextFieldFormatter();
         if (txtFld_CnpjConcessionaria.getText().length() == 13)

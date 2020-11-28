@@ -8,6 +8,7 @@ package yourcad;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -289,33 +290,31 @@ public class RelatDigitadorController implements Initializable {
         Connection conn = null;
         ResultSet resultadoBanco = null;
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
         
-        
-        if (validacaoData(digitador_data1) == false) { txt_relatData1.requestFocus(); }
-        else if (validacaoData(digitador_data2) == false) { txt_relatData2.requestFocus(); }
-        else { 
         List<RelatDigitador> digitador = new ArrayList<>();
         
         String sql;
         String sql1;
-        if(!"".equals(digitador_login)){ sql1 = " WHERE usuario_login LIKE '%"+ digitador_login +"%' ";}
-        else if(!"".equals(digitador_nome)){ sql1 = " WHERE usuario_nome LIKE '%"+ digitador_nome +"%' ";}
-        else if(!"".equals(digitador_data1)&& "".equals(digitador_data2)){  sql1 = " WHERE relat_data = '"+ digitador_data1 +"' ";}
-        else if(!"".equals(digitador_data2)&& "".equals(digitador_data1)){  sql1 = " WHERE relat_data = '"+ digitador_data2 +"' ";}
-        else if(!"".equals(digitador_data1)&& !"".equals(digitador_data2)){  sql1 = " WHERE relat_data BETWEEN '"+digitador_data1+"' AND '"+digitador_data2+"' ";}
-        else if(!"".equals(digitador_login) && !"".equals(digitador_nome) && !"".equals(digitador_data1) && !"".equals(digitador_data2))
-        { sql1 = " WHERE usuario_login LIKE '%"+ digitador_login +"%' && usuario_nome LIKE '%"+ digitador_nome +"%' && relat_data BETWEEN '"+digitador_data1+"' AND '"+digitador_data2+"' ";}
-        else{sql1 = "";}
+        sql1 = " WHERE usuario_login LIKE ? AND usuario_nome LIKE ? AND relat_data BETWEEN ? AND ? ";
         sql = "SELECT relat_id, usuarios.usuario_nome, cliente.cliente_nome, conta.conta_numero_instalacao, conta.conta_tipo, relat_data, "
                 + " relat_hora, usuarios.usuario_nivel_acesso, usuarios.usuario_login, usuarios.usuario_status, usuarios.usuario_email "
                 + " FROM relatorio_digitador "
                 + " INNER JOIN usuarios ON usuarios.usuario_id = relatorio_digitador.usuario_id "
                 + " INNER JOIN conta ON conta.conta_id = relatorio_digitador.conta_id "
                 + " INNER JOIN cliente ON cliente.cliente_id = conta.cliente_id "
-                + sql1 
-                + " ;";
-        resultadoBanco = stm.executeQuery(sql);
+                + sql1;
+        
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, "%" + digitador_login + "%");
+        pstm.setString(2, "%" + digitador_nome + "%");
+        pstm.setDate(3, java.sql.Date.valueOf(digitador_data1));
+        pstm.setDate(4, java.sql.Date.valueOf(digitador_data2));
+        
+        if (validacaoData(digitador_data1) == false) { txt_relatData1.requestFocus(); }
+        else if (validacaoData(digitador_data2) == false) { txt_relatData2.requestFocus(); }
+        else { 
+       
+        resultadoBanco = pstm.executeQuery();
         
         txt_relatSql.setText(sql);
         

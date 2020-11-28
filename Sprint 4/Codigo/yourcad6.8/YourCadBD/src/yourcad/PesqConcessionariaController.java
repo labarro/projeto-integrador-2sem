@@ -295,23 +295,21 @@ public class PesqConcessionariaController implements Initializable {
         ResultSet resultadoBanco = null;
         
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
-        
-        //List<Concessionaria> concessionaria = new ArrayList<>();
-        
         
         String sql;
         String sql1 = null;
-        if(!"".equals(nome_concessionaria)){ sql1 = " WHERE concessionaria_nome LIKE '%"+ nome_concessionaria +"%' ";}
-        else if(!"".equals(doc_concessionaria)){ sql1 = " WHERE concessionaria_cnpj LIKE '%"+ doc_concessionaria +"%' ";}
-        else if(!"".equals(nome_concessionaria) && !"".equals(doc_concessionaria)){ sql1 = " WHERE concessionaria_nome LIKE '%"+nome_concessionaria+"%' && concessionaria_cnpj LIKE '%"+ doc_concessionaria +"%' ";}
-        else{sql1 = "";}
+        sql1 = " WHERE concessionaria_nome LIKE ? AND concessionaria_cnpj LIKE ? ";
         sql = "SELECT * FROM concessionaria "
-                + sql1 
-                + " ;";
+                + sql1;
+        
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, "%" + nome_concessionaria + "%");
+        pstm.setString(2, "%" + doc_concessionaria + "%");
+        
+        //List<Concessionaria> concessionaria = new ArrayList<>();
 
-        resultadoBanco = stm.executeQuery(sql);
-
+        resultadoBanco = pstm.executeQuery(sql);
+         
        
         linhas_banco = FXCollections.observableArrayList();
         

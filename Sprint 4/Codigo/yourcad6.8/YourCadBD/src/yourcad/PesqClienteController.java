@@ -291,23 +291,23 @@ public class PesqClienteController implements Initializable {
         Connection conn = null;
         ResultSet resultadoBanco = null;
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
         
         List<Cliente> clientes = new ArrayList<>();
         
         String sql;
         String sql1 = null;
-        if(!"".equals(nome_cliente)){ sql1 = " WHERE cliente_nome LIKE '%"+ nome_cliente +"%' ";}
-        else if(!"".equals(doc_cliente)){ sql1 = " WHERE cliente_documento LIKE '%"+ doc_cliente +"%' ";}
-        else if(!"".equals(nome_cliente) && !"".equals(doc_cliente)){ sql1 = " WHERE cliente_nome LIKE '%"+nome_cliente+"%' && cliente_documento LIKE '%"+ doc_cliente +"%' ";}
-        else{sql1 = "";}
+        sql1 = " WHERE cliente_nome LIKE ? AND cliente_documento LIKE ? ";
+ 
         sql = "SELECT cliente_id, cliente_nome, cliente_documento, cliente_apelido,"
                 + " cliente_endereco, cliente_complemento_endereco, cliente_numero_endereco, cliente_bairro,"
                 + " cliente_cep, cliente_cidade, cliente_uf FROM cliente "
-                + sql1 
-                + " ;";
+                + sql1;
         
-        resultadoBanco = stm.executeQuery(sql);
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        pstm.setString(1, "%" + nome_cliente + "%");
+        pstm.setString(2, "%" + doc_cliente + "%");
+        
+        resultadoBanco = pstm.executeQuery(sql);
        
         linhas_banco = FXCollections.observableArrayList();
         

@@ -8,6 +8,7 @@ package yourcad;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -343,11 +344,12 @@ public class Form_CadContaController implements Initializable {
         Connection conn = null;
         ResultSet resultadoBanco = null;
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
-                
         String sql0;
-        sql0 = "SELECT * FROM instalacao WHERE instalacao_numero = " + numInstalacao +";";
-        resultadoBanco = stm.executeQuery(sql0);
+        sql0 = "SELECT * FROM instalacao WHERE instalacao_numero = ?";
+        PreparedStatement pstm = conn.prepareStatement(sql0);
+        pstm.setString(1, numInstalacao);
+                
+        resultadoBanco = pstm.executeQuery();
         String inst_apelido = null;
         String inst_tipo = null;
         String inst_id = null;

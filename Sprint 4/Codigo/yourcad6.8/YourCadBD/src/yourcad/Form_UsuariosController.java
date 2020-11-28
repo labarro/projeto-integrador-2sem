@@ -8,6 +8,7 @@ package yourcad;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -328,17 +329,19 @@ public class Form_UsuariosController implements Initializable {
                 ResultSet resultadoBanco = null;
                 conn = DBConexao.abrirConexao();
 
-                Statement stm = conn.createStatement();
                 String query;
                 query = "INSERT INTO usuarios(usuario_nome, usuario_login, usuario_senha, usuario_email, usuario_nivel_acesso, usuario_status) VALUES "
-                       + "('"+ usuario_Nome +"','"
-                        + usuario_Login +"','"
-                        + usuario_Senha +"','"
-                        + usuario_Email +"','"
-                        + usuario_Nivel_Acesso +"','"
-                        + usuario_status +"');";
-
-                stm.executeUpdate(query);
+                       + "(?, ?, ?, ?, ?, ?)";
+                
+                PreparedStatement pstm = conn.prepareStatement(query);
+                pstm.setString(1, usuario_Nome);
+                pstm.setString(2, usuario_Login);
+                pstm.setString(3, usuario_Senha);
+                pstm.setString(4, usuario_Email);
+                pstm.setString(5, usuario_Nivel_Acesso);
+                pstm.setString(6, usuario_status);
+                
+                pstm.executeUpdate();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Mensagem");
@@ -351,19 +354,26 @@ public class Form_UsuariosController implements Initializable {
                 ResultSet resultadoBanco = null;
                 conn = DBConexao.abrirConexao();
 
-                Statement stm = conn.createStatement();
-                String query;
-                
                 String sql;
                 sql = "UPDATE usuarios SET "
-                    + "usuario_nivel_acesso = '"+ usuario_Nivel_Acesso +"', "
-                    + "usuario_nome = '"+ usuario_Nome +"', "
-                    + "usuario_login = '"+ usuario_Login +"', "
-                    + "usuario_senha = '"+ usuario_Senha +"', "
-                    + "usuario_email = '"+ usuario_Email +"', "
-                    + "usuario_status = '"+ usuario_status +"' "    
-                    + "WHERE usuario_id = "+ usuario_Id +";";
-                stm.executeUpdate(sql);
+                    + "usuario_nivel_acesso = ?, "
+                    + "usuario_nome = ?, "
+                    + "usuario_login = ?, "
+                    + "usuario_senha = ?, "
+                    + "usuario_email = ?, "
+                    + "usuario_status = ? "    
+                    + "WHERE usuario_id = ?";
+                
+                PreparedStatement pstm = conn.prepareStatement(sql);
+                pstm.setString(1, usuario_Nome);
+                pstm.setString(2, usuario_Login);
+                pstm.setString(3, usuario_Senha);
+                pstm.setString(4, usuario_Email);
+                pstm.setString(5, usuario_Nivel_Acesso);
+                pstm.setString(6, usuario_status);
+                pstm.setString(7, usuario_Id);
+                
+                pstm.executeUpdate();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Mensagem");

@@ -8,6 +8,7 @@ package yourcad;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -350,23 +351,21 @@ public class PesqUsuariosController implements Initializable {
         Connection conn = null;
         ResultSet resultadoBanco = null;
         conn = DBConexao.abrirConexao();
-        Statement stm = conn.createStatement();
         
         List<Usuario> usuarios = new ArrayList<>();
         
         String sql;
-        String sql1 = null;
-        if(!"".equals(usuario_nome)){ sql1 = " WHERE usuario_nome LIKE '%"+ usuario_nome +"%' ";}
-        else if(!"".equals(usuario_NivelAcesso)){ sql1 = " WHERE usuario_nivel_acesso LIKE '%"+ usuario_NivelAcesso +"%' ";}
-        else if(!"".equals(usuario_status)){ sql1 = " WHERE usuario_status LIKE '%"+ usuario_status +"%' ";}
-        else if(!"".equals(usuario_nome) && !"".equals(usuario_NivelAcesso) && !"".equals(usuario_status))
-        { sql1 = " WHERE usuario_nome LIKE '%"+usuario_nome+"%' && usuario_nivel_acesso LIKE '%"+ usuario_NivelAcesso +"%'  && usuario_status LIKE '%"+ usuario_status +"%' ";}
-        else{sql1 = "";}
+        String sql1 = " WHERE usuario_nome LIKE ? AND usuario_nivel_acesso LIKE ? AND usuario_status LIKE ? ";
         sql = "SELECT usuario_id, usuario_nome, usuario_login, usuario_senha, usuario_email, usuario_nivel_acesso, usuario_status FROM usuarios "
-                + sql1 
-                + " ;";
+                + sql1;
         
-        resultadoBanco = stm.executeQuery(sql);
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        
+        pstm.setString(1, "%" + usuario_nome + "%");
+        pstm.setString(2, "%" + usuario_NivelAcesso + "%");
+        pstm.setString(3, "%" + usuario_status + "%");
+        
+        resultadoBanco = pstm.executeQuery();
 
         linhas_banco = FXCollections.observableArrayList();
 
