@@ -73,4 +73,4 @@ Tambem foi criado o modelo do banco de dados que iremos utilizar no projeto fina
   - [Arquivos Banco de Dados](https://github.com/labarro/projeto-integrador-2sem/tree/master/Sprint%204/Database)
   - [Documentação](https://github.com/labarro/projeto-integrador-2sem/blob/master/Sprint%204/Documentacao)
   - [Vídeo demonstração dos níveis de usuário - YourCAD](https://youtu.be/Pq7vcj9324A)
-  - [Vídeo de apresentação final PI 2020-2](https://youtu.be/6uBOdLgStXY)
+  - [Vídeo de apresentação final PI 2020-2](https://youtu.be/L9lXQWsGDdo)
